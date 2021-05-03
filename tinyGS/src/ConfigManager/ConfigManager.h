@@ -64,6 +64,12 @@ constexpr auto configVersion = "0.05"; //max 4 chars
 #define MQTT_DEFAULT_PORT  "8883"
 #define MODEM_DEFAULT "{\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250.0,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}"
 
+#ifdef SOPHY
+// Add Sophy Parameter 
+  #define MQTT_SOPHY_SERVER "localhost"
+  #define MQTT_SOPHY_PORT  "1883"
+#endif
+
 constexpr auto AP_TIMEOUT_MS = "300000";
 
 enum boardNum {
@@ -223,8 +229,8 @@ private:
   char mqttPass[MQTT_PASS_LENGTH] = "";
 #ifdef SOPHY
 // MQTT SOPHYAI
-  char mqttServer_sophy[MQTT_SERVER_LENGTH] = MQTT_DEFAULT_SERVER;
-  char mqttPort_sophy[MQTT_PORT_LENGTH] = MQTT_DEFAULT_PORT;
+  char mqttServer_sophy[MQTT_SERVER_LENGTH] = MQTT_SOPHY_SERVER;
+  char mqttPort_sophy[MQTT_PORT_LENGTH] = MQTT_SOPHY_PORT;
   char mqttUser_sophy[MQTT_USER_LENGTH] = "";
   char mqttPass_sophy[MQTT_PASS_LENGTH] = "";
 #endif
@@ -251,9 +257,9 @@ private:
   iotwebconf2::TextParameter mqttPassParam = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass", mqttPass, MQTT_PASS_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
 #ifdef SOPHY
 // MQTT SophyAI
-  iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("Sophy MQTT credentials" , "MQTT credentials (get them <a href='https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q'>here</a>)");
-  iotwebconf2::TextParameter mqttServerParam_sophy = iotwebconf2::TextParameter("Server address", "mqtt_server_sophy", mqttServer_sophy, MQTT_SERVER_LENGTH, MQTT_DEFAULT_SERVER, MQTT_DEFAULT_SERVER, "required type=\"text\" maxlength=30");
-  iotwebconf2::NumberParameter mqttPortParam_sophy = iotwebconf2::NumberParameter("Server Port", "mqtt_port_sophy", mqttPort_sophy, MQTT_PORT_LENGTH, MQTT_DEFAULT_PORT, MQTT_DEFAULT_PORT, "required min=\"0\" max=\"65536\" step=\"1\"");
+  iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("Sophy MQTT credentials" , "MQTT credentials (your local Broker)");
+  iotwebconf2::TextParameter mqttServerParam_sophy = iotwebconf2::TextParameter("Server address", "mqtt_server_sophy", mqttServer_sophy, MQTT_SERVER_LENGTH, MQTT_SOPHY_SERVER, MQTT_SOPHY_SERVER, "required type=\"text\" maxlength=30");
+  iotwebconf2::NumberParameter mqttPortParam_sophy = iotwebconf2::NumberParameter("Server Port", "mqtt_port_sophy", mqttPort_sophy, MQTT_PORT_LENGTH, MQTT_SOPHY_PORT, MQTT_SOPHY_PORT, "required min=\"0\" max=\"65536\" step=\"1\"");
   iotwebconf2::TextParameter mqttUserParam_sophy = iotwebconf2::TextParameter("MQTT Username", "mqtt_user_sophy", mqttUser_sophy, MQTT_USER_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
   iotwebconf2::TextParameter mqttPassParam_sophy = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass_sophy", mqttPass_sophy, MQTT_PASS_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
 #endif 
