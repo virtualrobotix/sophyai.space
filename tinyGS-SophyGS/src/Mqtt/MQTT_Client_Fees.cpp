@@ -54,8 +54,8 @@ void MQTT_Client_Fees::loop() {
 
   if (connectionAtempts > connectionTimeout)
   {
-    Log::console(PSTR("Unable to connect to local MQTT Server after many atempts. Restarting..."));
-    // ESP.restart();
+    Log::console(PSTR("Unable to connect to MQTT Server after many atempts. Restarting..."));
+    ESP.restart();
   }
 
   PubSubClient::loop();
@@ -82,14 +82,27 @@ void MQTT_Client_Fees::reconnect()
   Log::console(PSTR("Attempting local MQTT connection..."));
   Log::console(PSTR("If local MQTT reconnect is taking more time than expected, \n         connect to the config panel on the ip: %s to review the local MQTT connection credentials."), WiFi.localIP().toString().c_str());
   if (connect(clientId, configManager.getMqttUser_Sophy(), configManager.getMqttPass_Sophy(), buildTopic(teleTopic, topicStatus).c_str(), 2, false, "0")) {
+    yield();
     Log::console(PSTR("Connected to local MQTT!"));
     status_sophy.mqtt_connected = true;
     subscribeToAll();
     sendWelcome();
   }
   else {
-    status_sophy.mqtt_connected = false;
-    Log::console(PSTR("failed, rc=%i"), state());
+    status.mqtt_connected = false;
+
+    if (state() == -2) // first attempt
+    {
+      //if (usingNewCert)
+       // espClient.setCACert(DSTroot_CA);
+      //else
+      //  espClient.setCACert(newRoot_CA);
+      usingNewCert = !usingNewCert;
+    }
+    else
+    {
+      Log::console(PSTR("failed, rc=%i"), state());
+    }
   }
 }
 
@@ -138,9 +151,12 @@ void MQTT_Client_Fees::sendWelcome()
   doc["test"] = configManager.getTestMode();
   doc["unix_GS_time"] = now;
   doc["autoUpdate"] = configManager.getAutoUpdate();
-  doc["local_ip"]= WiFi.localIP().toString().c_str();
+  doc["local_ip"]= WiFi.localIP().toString();
   doc["modem_conf"].set(configManager.getModemStartup());
   doc["boardTemplate"].set(configManager.getBoardTemplate());
+ if (configManager.getLowPower())
+    doc["lp"].set(configManager.getLowPower());
+	
   doc["userid"].set(configManager.getMqttUser_Sophy());
   doc["stationname"].set(configManager.getThingName());
   char buffer[1048];
@@ -501,6 +517,13 @@ void MQTT_Client_Fees::manageMQTTDataFees(char *topic, uint8_t *payload, unsigne
     result = 0;
   }
 
+  // Satellite_Filter [1,0,51]   (lenght,position,byte1,byte2,byte3,byte4)
+  if (!strcmp(command, commandSatFilter))
+  {
+    remoteSatFilter((char*)payload, length);
+    result = 0;
+  }
+
   // GOD MODE  With great power comes great responsibility!
   // SPIsetRegValue  (only sx1278) [1,2,3,4,5]
   if (!strcmp(command, commandSPIsetRegValue))
@@ -579,6 +602,9 @@ void MQTT_Client_Fees::manageMQTTDataFees(char *topic, uint8_t *payload, unsigne
       else if (!strcmp(key, commandSat))
         remoteSatCmnd(value, len);
 
+      else if (!strcmp(key, commandSatFilter))
+        remoteSatFilter(value, len);
+
       else if (!strcmp(key, commandSPIsetRegValue))
         result = radio.remote_SPIsetRegValue(value, len);
 
@@ -615,6 +641,29 @@ void MQTT_Client_Fees::remoteSatCmnd(char* payload, size_t payload_len)
 
   Log::debug(PSTR("Listening Satellite: %s NORAD: %u"), status_sophy.modeminfo.satellite, NORAD);
 }
+
+void MQTT_Client_Fees::remoteSatFilter(char* payload, size_t payload_len)
+{
+  DynamicJsonDocument doc(256);
+  deserializeJson(doc, payload, payload_len);
+  uint8_t filter_size = doc.size();
+  Serial.println("");
+
+  status.modeminfo.filter[0]=doc[0];
+  status.modeminfo.filter[1]=doc[1];
+
+  Serial.print(F("Set Sat Filter Size ")); Serial.println(status.modeminfo.filter[0]);
+  Serial.print(F("Set Sat Filter POS ")); Serial.println(status.modeminfo.filter[1]);
+  
+  Serial.print(F("-> "));
+    for (uint8_t filter_pos=2; filter_pos<filter_size;filter_pos++)
+  {
+    status.modeminfo.filter[filter_pos]=doc[filter_pos];
+    Serial.print(F(" 0x"));Serial.print(status.modeminfo.filter[filter_pos],HEX);Serial.print(F(", "));
+  }
+  Log::debug(PSTR("Sat packets Filter enabled"));
+}
+
 
 // Helper class to use as a callback
 void manageMQTTDataCallbackFees(char *topic, uint8_t *payload, unsigned int length)

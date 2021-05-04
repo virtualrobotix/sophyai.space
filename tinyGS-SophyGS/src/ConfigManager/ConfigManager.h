@@ -19,8 +19,10 @@
 #ifndef ConfigManager_h
 #define ConfigManager_h
 
-#define IOTWEBCONF_DEBUG_DISABLED 1
 #include "IotWebConf2.h"
+#if IOTWEBCONF_DEBUG_DISABLED == 0  && !PLATFORMIO
+#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /IotWebCong2/src/IotWebConf2Settings.h and add this line at the beggining of the file #define IOTWEBCONF_DEBUG_DISABLED 1"
+#endif
 #include "logos.h"
 #include <Wire.h>
 #include "html.h"
@@ -117,6 +119,7 @@ typedef struct {
 typedef struct {
   bool flipOled = true;
   bool dnOled = true;
+  bool lowPower = false;
 } AdvancedConfig;
 
 
@@ -171,6 +174,7 @@ public:
   board_type getBoardConfig(){ return boards[getBoard()]; }
   bool getFlipOled(){ return advancedConf.flipOled; }
   bool getDayNightOled(){ return advancedConf.dnOled; }
+  bool getLowPower(){ return advancedConf.lowPower; }
 
 
 private:

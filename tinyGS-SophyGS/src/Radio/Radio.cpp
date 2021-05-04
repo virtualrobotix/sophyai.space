@@ -88,9 +88,10 @@ void Radio::init()
 
 int16_t Radio::begin()
 {
+  status.radio_ready = false;
   board_type board = ConfigManager::getInstance().getBoardConfig();
   const char* modemConfig = ConfigManager::getInstance().getModemStartup();
-  size_t size = JSON_ARRAY_SIZE(10) + 10*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(15) + JSON_ARRAY_SIZE(8) + 60;
+  size_t size = JSON_ARRAY_SIZE(10) + 10*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(16) + JSON_ARRAY_SIZE(8) + JSON_ARRAY_SIZE(8) +64;
   DynamicJsonDocument doc(size);
   DeserializationError error = deserializeJson(doc, modemConfig);
 
@@ -191,6 +192,17 @@ int16_t Radio::begin()
   }
   
   
+  // packets Filter    
+  uint8_t filterSize = doc["filter"].size();
+    for (int i=0; i<8; i++) 
+    {
+      if (i < filterSize)
+        status.modeminfo.filter[i] = doc["filter"][i];
+      else
+        status.modeminfo.filter[i] = 0;
+    }
+  
+
   if (state == ERR_NONE)
   {
     Log::console(PSTR("success!"));
@@ -230,7 +242,7 @@ int16_t Radio::begin()
     return state;
   }
 
-  ready = true;
+  status.radio_ready = true;
   return state;
 }
 
@@ -253,6 +265,19 @@ void Radio::enableInterrupt()
 void Radio::disableInterrupt()
 {
   eInterrupt = false;
+}
+
+void Radio::startRx()
+{
+    // put module back to listen mode
+  if (ConfigManager::getInstance().getBoardConfig().L_SX127X)
+    ((SX1278*)lora)->startReceive();
+  else
+    ((SX1268*)lora)->startReceive();
+ 
+  // we're ready to receive more packets,
+  // enable interrupt service routine
+  enableInterrupt();
 }
 
 int16_t Radio::sendTx(uint8_t* data, size_t length)
@@ -337,6 +362,7 @@ uint8_t Radio::listen()
   {
     Log::console(PSTR("Interrupt triggered but no new data available. Check wiring and electrical interferences."));
     delete[] respFrame;
+    startRx();
     return 4;
   }
 
@@ -344,31 +370,67 @@ uint8_t Radio::listen()
   status.lastPacketInfo.snr = newPacketInfo.snr;
   status.lastPacketInfo.frequencyerror = newPacketInfo.frequencyerror;
 
-  if (state == ERR_NONE)
+    // print RSSI (Received Signal Strength Indicator)
+  Log::console(PSTR("[SX12x8] RSSI:\t\t%f dBm\n[SX12x8] SNR:\t\t%f dB\n[SX12x8] Frequency error:\t%f Hz"), status.lastPacketInfo.rssi, status.lastPacketInfo.snr, status.lastPacketInfo.frequencyerror);
+
+  if (state == ERR_NONE && respLen > 0)
   {
     // read optional data
-    Log::console(PSTR("Packet Recived (%u bytes):"), respLen);
-    char* byteStr = new char[respLen*2+1];
+    Log::console(PSTR("Packet (%u bytes):"), respLen);
+    uint16_t buffSize = respLen*2+1;
+    if (buffSize > 255) buffSize = 255;
+    char* byteStr = new char[buffSize];
     for(int i = 0; i < respLen; i++)
     {
-      sprintf(byteStr+i*2, "%02x", respFrame[i]);
+      sprintf(byteStr + i*2 % (buffSize-1), "%02x", respFrame[i]);
+      if (i*2 % buffSize == buffSize-3 || i == respLen-1)
+        Log::console(PSTR("%s"), byteStr); // print before the buffer is going to loop back
     }
-    Log::console(PSTR("%s"), byteStr);
     delete[] byteStr;
+
+       	// if Filter enabled filter the received packet
+	  if (status.modeminfo.filter[0]!=0)
+	  {
+      bool filter_flag = false;
+      uint8_t filter_size = status.modeminfo.filter[0];
+      uint8_t filter_ini = status.modeminfo.filter[1];
+   
+  	  for (uint8_t filter_pos=0; filter_pos<filter_size;filter_pos++)
+	      {
+	        if (status.modeminfo.filter[2+filter_pos] != respFrame[filter_ini+filter_pos]) filter_flag= true;
+  	      }	
+
+        // if the msg start with tiny (test packet) remove filter 
+      if (respFrame[0]==0x54 && respFrame[1]==0x69 && respFrame[2]==0x6e && respFrame[3]==0x79) filter_flag=false;
+
+      if (filter_flag)
+        {
+          Log::console(PSTR("Filter enabled, doesn't looks like the expected satellite packet"));
+	        delete[] respFrame;
+          startRx();
+	        return 5;
+        }
+   
+	  }
 
     status.lastPacketInfo.crc_error = false;
     String encoded = base64::encode(respFrame, respLen); 
     MQTT_Client::getInstance().sendRx(encoded, noisyInterrupt);
-    MQTT_Client_Fees::getInstance().sendRx(encoded, noisyInterrupt);
-    
   }
   else if (state == ERR_CRC_MISMATCH) 
   {
-    // packet was received, but is malformed
-    status.lastPacketInfo.crc_error = true;
-    String error_encoded = base64::encode("Error_CRC");
-    MQTT_Client::getInstance().sendRx(error_encoded, noisyInterrupt);
-    MQTT_Client_Fees::getInstance().sendRx(error_encoded, noisyInterrupt);
+         // if filter is active, filter the CRC errors
+    if (status.modeminfo.filter[0]==0) {
+         // packet was received, but is malformed
+      status.lastPacketInfo.crc_error = true;
+      String error_encoded = base64::encode("Error_CRC");
+      MQTT_Client::getInstance().sendRx(error_encoded, noisyInterrupt);
+      }  else {
+        Log::console(PSTR("Filter enabled, Error CRC filtered"));
+	      delete[] respFrame;
+        startRx();
+	      return 5;
+      }
   } 
 
   delete[] respFrame;
@@ -395,20 +457,11 @@ uint8_t Radio::listen()
     status.lastPacketInfo.time = thisTime;
   }
 
-  // print RSSI (Received Signal Strength Indicator)
-  Log::console(PSTR("[SX12x8] RSSI:\t\t%f dBm\n[SX12x8] SNR:\t\t%f dB\n[SX12x8] Frequency error:\t%f Hz"), status.lastPacketInfo.rssi, status.lastPacketInfo.snr, status.lastPacketInfo.frequencyerror);
-
-
-  // put module back to listen mode
-  if (ConfigManager::getInstance().getBoardConfig().L_SX127X)
-    ((SX1278*)lora)->startReceive();
-  else
-    ((SX1268*)lora)->startReceive();
 
   noisyInterrupt = false;
-  // we're ready to receive more packets,
-  // enable interrupt service routine
-  enableInterrupt();
+
+    // put module back to listen mode
+  startRx();
 
   if (state == ERR_NONE)
   {
@@ -949,16 +1002,16 @@ int16_t Radio::remote_SPIsetRegValue(char* payload, size_t payload_len)
 
 double Radio::_atof(const char* buff, size_t length)
 {
-  char* str = new char[length+1];
+  char str[length+1];
   memcpy(str, buff, length);
-  str[length] = '\n';
+  str[length] = '\0';
   return atof(str);
 }
 
 int Radio::_atoi(const char* buff, size_t length)
 {
-  char* str = new char[length+1];
+  char str[length+1];
   memcpy(str, buff, length);
-  str[length] = '\n';
+  str[length] = '\0';
   return atoi(str);
 }

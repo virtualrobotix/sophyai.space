@@ -24,6 +24,9 @@
 #define ARDUINOJSON_USE_LONG_LONG 1
 #define SOPHY
 #include "ArduinoJson.h"
+#if ARDUINOJSON_USE_LONG_LONG == 0 && !PLATFORMIO
+#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /ArduinoJson/src/ArduinoJson/Configuration.hpp and amend to #define ARDUINOJSON_USE_LONG_LONG 1 around line 68"
+#endif
 
 ConfigManager::ConfigManager()
 : IotWebConf2(thingName, &dnsServer, &server, initialApPassword, configVersion)
@@ -153,9 +156,8 @@ void ConfigManager::handleDashboard()
   s += F("</table></div><div class=\"card\"><h3>Groundstation Status</h3><table>");
   s += "<tr><td>Name </td><td>" + String(getThingName()) + "</td></tr>";
   s += "<tr><td>Version </td><td>" + String(status.version) + "</td></tr>";
-  s += "<tr><td>WiFi </td><td>" + String(WiFi.isConnected()?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
-  s += "<tr><td>MQTT Server local</td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  s += "<tr><td>WiFi </td><td>" + String(WiFi.isConnected()?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>Radio </td><td>" + String(Radio::getInstance().isReady()?"<span class='G'>READY</span>":"<span class='R'>NOT READY</span>") + "</td></tr>";
   s += "<tr><td>Test Mode </td><td>" + String(getTestMode()?"ENABLED":"DISABLED") + "</td></tr>";
   //s += "<tr><td>Uptime </td><td>" + // process and update in js + "</td></tr>";
@@ -371,6 +373,9 @@ void ConfigManager::resetAllConfig()
   telemetry3rd[0]  = '\0';
   testMode[0]  = '\0';
   autoUpdate[0]  = '\0';
+  boardTemplate[0]  = '\0';
+  modemStartup[0]  = '\0';
+  advancedConfig[0]  = '\0';
 
   saveConfig();
 }
@@ -469,6 +474,8 @@ void ConfigManager::configSavedCallback()
     ESP.restart();
   }
 
+  forceApMode(false);
+
   parseAdvancedConf();
   MQTT_Client::getInstance().scheduleRestart();
   
@@ -498,5 +505,10 @@ void ConfigManager::parseAdvancedConf()
   if (doc.containsKey(F("dnOled")))
   {
     advancedConf.dnOled = doc["dnOled"];
+  }
+
+  if (doc.containsKey(F("lowPower")))
+  {
+    advancedConf.lowPower = doc["lowPower"];
   }
 }
