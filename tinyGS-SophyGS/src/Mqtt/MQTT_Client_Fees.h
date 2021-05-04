@@ -87,7 +87,7 @@ private:
   // tele
   const char* topicWelcome PROGMEM = "welcome";
   const char* topicPing PROGMEM= "ping";
-  const char* topicPingExt PROGMEM= "ping";
+  const char* topicPingExt PROGMEM= "pingext";
   const char* topicStatus PROGMEM = "status";
   const char* topicRx PROGMEM= "rx";
 
