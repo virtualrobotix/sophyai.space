@@ -1,69 +1,7 @@
-/***********************************************************************
-  tinyGS.ini - GroundStation firmware
-  
-  Copyright (C) 2020 -2021 @G4lile0, @gmag12 and @dev_4m1g0
-
-  This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation, either version 3 of the License, or
-  (at your option) any later version.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-  ***********************************************************************
-
-  TinyGS is an open network of Ground Stations distributed around the
-  world to receive and operate LoRa satellites, weather probes and other
-  flying objects, using cheap and versatile modules.
-
-  This project is based on ESP32 boards and is compatible with sx126x and
-  sx127x you can build you own board using one of these modules but most
-  of us use a development board like the ones listed in the Supported
-  boards section.
-
-  Supported boards
-    Heltec WiFi LoRa 32 V1 (433MHz & 863-928MHz versions)
-    Heltec WiFi LoRa 32 V2 (433MHz & 863-928MHz versions)
-    TTGO LoRa32 V1 (433MHz & 868-915MHz versions)
-    TTGO LoRa32 V2 (433MHz & 868-915MHz versions)
-    TTGO LoRa32 V2 (Manually swapped SX1267 to SX1278)
-    T-BEAM + OLED (433MHz & 868-915MHz versions)
-    T-BEAM V1.0 + OLED
-    FOSSA 1W Ground Station (433MHz & 868-915MHz versions)
-    ESP32 dev board + SX126X with crystal (Custom build, OLED optional)
-    ESP32 dev board + SX126X with TCXO (Custom build, OLED optional)
-    ESP32 dev board + SX127X (Custom build, OLED optional)
-
-  Supported modules
-    sx126x
-    sx127x
-
-    Web of the project: https://tinygs.com/
-    Github: https://github.com/G4lile0/tinyGS
-    Main community chat: https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q
-
-    In order to onfigure your Ground Station please open a private chat to get your credentials https://t.me/tinygs_personal_bot
-    Data channel (station status and received packets): https://t.me/tinyGS_Telemetry
-    Test channel (simulator packets received by test groundstations): https://t.me/TinyGS_Test
-
-    Developers:
-      @gmag12       https://twitter.com/gmag12
-      @dev_4m1g0    https://twitter.com/dev_4m1g0
-      @g4lile0      https://twitter.com/G4lile0
-
-====================================================
-  IMPORTANT:
-    - Follow this guide to get started: https://github.com/G4lile0/tinyGS/wiki/Quick-Start
-    - Arduino IDE is NOT recommended, please use Platformio: https://github.com/G4lile0/tinyGS/wiki/Platformio
-
-**************************************************************************/
-
+# 1 "C:\\Users\\SOPHYA~1\\AppData\\Local\\Temp\\tmpsshj_een"
+#include <Arduino.h>
+# 1 "D:/Lavoro/Progetti 2021/sophyai.space/tinyGS-SophyGS/Tiny-SophyGS.ino"
+# 67 "D:/Lavoro/Progetti 2021/sophyai.space/tinyGS-SophyGS/Tiny-SophyGS.ino"
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
@@ -80,24 +18,24 @@
 #include <ESPNtpClient.h>
 #include "src/Logger/Logger.h"
 
-#if  RADIOLIB_VERSION_MAJOR != (0x04) || RADIOLIB_VERSION_MINOR != (0x02) || RADIOLIB_VERSION_PATCH != (0x01) || RADIOLIB_VERSION_EXTRA != (0x00)
+#if RADIOLIB_VERSION_MAJOR != (0x04) || RADIOLIB_VERSION_MINOR != (0x02) || RADIOLIB_VERSION_PATCH != (0x01) || RADIOLIB_VERSION_EXTRA != (0x00)
 #error "You are not using the correct version of RadioLib please copy TinyGS/lib/RadioLib on Arduino/libraries"
 #endif
 
 #if RADIOLIB_GODMODE == 0 && !PLATFORMIO
-#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /RadioLib/src/BuildOpt.h and uncomment #define RADIOLIB_GODMODE around line 367" 
+#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /RadioLib/src/BuildOpt.h and uncomment #define RADIOLIB_GODMODE around line 367"
 #endif
 
 ConfigManager& configManager = ConfigManager::getInstance();
 MQTT_Client& mqtt = MQTT_Client::getInstance();
 MQTT_Client_Fees& mqtt_sophygs = MQTT_Client_Fees::getInstance();
- 
+
 Radio& radio = Radio::getInstance();
 
 const char* ntpServer = "time.cloudflare.com";
 void printLocalTime();
 
-// Global status
+
 Status status;
 Status status_sophy;
 
@@ -106,13 +44,19 @@ void printControls();
 void switchTestmode();
 void checkButton();
 void setupNTP();
-
+void ntp_cb (NTPEvent_t e);
+void configured();
+void wifiConnected();
+void setup();
+void loop();
+void handleSerial();
+#line 110 "D:/Lavoro/Progetti 2021/sophyai.space/tinyGS-SophyGS/Tiny-SophyGS.ino"
 void ntp_cb (NTPEvent_t e)
 {
   switch (e.event) {
     case timeSyncd:
     case partlySync:
-      //Serial.printf ("[NTP Event] %s\n", NTP.ntpEvent2str (e));
+
       status.time_offset = e.info.offset;
       break;
     default:
@@ -132,20 +76,20 @@ void wifiConnected()
   configManager.setWifiConnectionCallback(NULL);
   setupNTP();
   displayShowConnected();
-  configManager.delay(100); // finish animation
+  configManager.delay(100);
 
   if (configManager.getLowPower())
   {
     Log::debug(PSTR("Set low power CPU=80Mhz"));
-    setCpuFrequencyMhz(80); //Set CPU clock to 80MHz
+    setCpuFrequencyMhz(80);
   }
 
-  configManager.delay(400); // wait to show the connected screen and stabilize frequency
+  configManager.delay(400);
   radio.init();
 }
 
 void setup()
-{ 
+{
   setCpuFrequencyMhz(240);
   Serial.begin(115200);
   delay(100);
@@ -160,7 +104,7 @@ void setup()
     configManager.forceApMode(true);
     return;
   }
-  // make sure to call doLoop at least once before starting to use the configManager
+
   configManager.doLoop();
   pinMode (configManager.getBoardConfig().PROG__BUTTON, INPUT_PULLUP);
   displayInit();
@@ -168,7 +112,7 @@ void setup()
   configManager.delay(1000);
   mqtt.begin();
   mqtt_sophygs.begin();
- 
+
 
   if (configManager.getOledBright() == 0)
   {
@@ -178,7 +122,7 @@ void setup()
   printControls();
 }
 
-void loop() {  
+void loop() {
   configManager.doLoop();
   if (configManager.isFailSafeActive())
     return;
@@ -187,12 +131,12 @@ void loop() {
   handleSerial();
   checkButton();
 
-  if (configManager.getState() < 2) // not ready or not configured
+  if (configManager.getState() < 2)
   {
     displayShowApMode();
     return;
   }
-  // configured and no connection
+
   if (radio.isReady())
   {
     status.radio_ready = true;
@@ -202,13 +146,13 @@ void loop() {
     status.radio_ready = false;
   }
 
-  if (configManager.getState() < 4) // connection or ap mode
+  if (configManager.getState() < 4)
   {
     displayShowStaMode(configManager.isApMode());
     return;
   }
 
-  // connected
+
 
   mqtt.loop();
   mqtt_sophygs.loop();
@@ -218,17 +162,17 @@ void loop() {
 
 void setupNTP()
 {
-  NTP.setInterval (120); // Sync each 2 minutes
-  NTP.setTimeZone (configManager.getTZ ()); // Get TX from config manager
-  NTP.onNTPSyncEvent (ntp_cb); // Register event callback
-  NTP.setMinSyncAccuracy (2000); // Sync accuracy target is 2 ms
-  NTP.settimeSyncThreshold (1000); // Sync only if calculated offset absolute value is greater than 1 ms
-  NTP.setMaxNumSyncRetry (2); // 2 resync trials if accuracy not reached
-  NTP.begin (ntpServer); // Start NTP client
+  NTP.setInterval (120);
+  NTP.setTimeZone (configManager.getTZ ());
+  NTP.onNTPSyncEvent (ntp_cb);
+  NTP.setMinSyncAccuracy (2000);
+  NTP.settimeSyncThreshold (1000);
+  NTP.setMaxNumSyncRetry (2);
+  NTP.begin (ntpServer);
   Serial.printf ("NTP started");
-  
+
   time_t startedSync = millis ();
-  while (NTP.syncStatus() != syncd && millis() - startedSync < 5000) // Wait 5 seconds to get sync
+  while (NTP.syncStatus() != syncd && millis() - startedSync < 5000)
   {
     configManager.delay(100);
   }
@@ -246,7 +190,7 @@ void checkButton()
     {
       buttPressedStart = millis();
     }
-    else if (millis() - buttPressedStart > RESET_BUTTON_TIME) // long press
+    else if (millis() - buttPressedStart > RESET_BUTTON_TIME)
     {
       Log::console(PSTR("Rescue mode forced by button long press!"));
       Log::console(PSTR("Connect to the WiFi AP: %s and open a web browser on ip 192.168.4.1 to configure your station and manually reboot when you finish."), configManager.getThingName());
@@ -257,7 +201,7 @@ void checkButton()
   }
   else {
     unsigned long elapsedTime = millis() - buttPressedStart;
-    if (elapsedTime > 30 && elapsedTime < 1000) // short press
+    if (elapsedTime > 30 && elapsedTime < 1000)
       displayNextFrame();
     buttPressedStart = 0;
   }
@@ -269,19 +213,19 @@ void handleSerial()
   {
     radio.disableInterrupt();
 
-    // get the first character
+
     char serialCmd = Serial.read();
 
-    // wait for a bit to receive any trailing characters
+
     configManager.delay(50);
 
-    // dump the serial buffer
+
     while(Serial.available())
     {
       Serial.read();
     }
 
-    // process serial command
+
     switch(serialCmd) {
       case 'e':
         configManager.resetAllConfig();
@@ -306,7 +250,7 @@ void handleSerial()
           Log::console(PSTR("Please wait a few seconds to send another test packet."));
           break;
         }
-        
+
         radio.sendTestPacket();
         lastTestPacketTime = millis();
         Log::console(PSTR("Sending test packet to nearby stations!"));
@@ -321,7 +265,7 @@ void handleSerial()
 }
 
 void switchTestmode()
-{  
+{
   if (configManager.getTestMode())
   {
       configManager.setTestMode(false);
@@ -342,13 +286,13 @@ void printLocalTime()
         return;
     }
     struct tm* timeinfo;
-    
+
     timeinfo = localtime (&currenttime);
-  
+
   Serial.println(timeinfo, "%A, %B %d %Y %H:%M:%S");
 }
 
-// function to print controls
+
 void printControls()
 {
   Log::console(PSTR("------------- Controls -------------"));
