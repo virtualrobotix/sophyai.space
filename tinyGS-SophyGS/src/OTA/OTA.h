@@ -27,7 +27,7 @@
 
 constexpr auto MIN_TIME_BEFORE_UPDATE = 20000;
 constexpr auto TIME_BETTWEN_UPDATE_CHECK = 3600000;
-constexpr auto OTA_URL = "";//"https://api.tinygs.com/updates/tinygs.bin";
+constexpr auto OTA_URL = "https://github.com/virtualrobotix/sophyai.space/raw/main/release/sophyaigs-ota.bin";//"https://api.tinygs.com/updates/tinygs.bin";
 
 #ifdef SECURE_OTA
     static const char DSTroot_CA_update[] PROGMEM = R"EOF(
