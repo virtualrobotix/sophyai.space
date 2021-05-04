@@ -51,6 +51,7 @@ constexpr auto CB_SELECTED_STR = "selected";
 constexpr auto ROOT_URL = "/";
 constexpr auto CONFIG_URL = "/config";
 constexpr auto DASHBOARD_URL = "/dashboard";
+constexpr auto BOARDSTATUS_URL = "/boardstatus";
 constexpr auto UPDATE_URL = "/firmware";
 constexpr auto RESTART_URL = "/restart";
 constexpr auto REFRESH_CONSOLE_URL = "/cs";
@@ -261,7 +262,7 @@ private:
   iotwebconf2::TextParameter mqttPassParam = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass", mqttPass, MQTT_PASS_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
 #ifdef SOPHY
 // MQTT SophyAI
-  iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("Sophy MQTT credentials" , "MQTT credentials (Sophyai.Space or local Broker)");
+  iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("Sophy MQTT credentials" , "MQTT credentials (your local Broker)");
   iotwebconf2::TextParameter mqttServerParam_sophy = iotwebconf2::TextParameter("Server address", "mqtt_server_sophy", mqttServer_sophy, MQTT_SERVER_LENGTH, MQTT_SOPHY_SERVER, MQTT_SOPHY_SERVER, "required type=\"text\" maxlength=30");
   iotwebconf2::NumberParameter mqttPortParam_sophy = iotwebconf2::NumberParameter("Server Port", "mqtt_port_sophy", mqttPort_sophy, MQTT_PORT_LENGTH, MQTT_SOPHY_PORT, MQTT_SOPHY_PORT, "required min=\"0\" max=\"65536\" step=\"1\"");
   iotwebconf2::TextParameter mqttUserParam_sophy = iotwebconf2::TextParameter("MQTT Username", "mqtt_user_sophy", mqttUser_sophy, MQTT_USER_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
