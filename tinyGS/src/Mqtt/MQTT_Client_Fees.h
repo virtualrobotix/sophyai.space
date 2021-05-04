@@ -57,7 +57,8 @@ OPY8ODmTO7ZiAVOjLwdqErzGCXUotbioSlc6v+9YlOfOnw07gIRYhcuJ1yXhunil
 #include <WiFiClient.h>
 #endif
 
-extern Status status;
+// Global status (status_sophy)
+extern Status status_sophy;
 
 class MQTT_Client_Fees : public PubSubClient {
 public:
@@ -107,7 +108,7 @@ private:
   // tele
   const char* topicWelcome PROGMEM = "welcome";
   const char* topicPing PROGMEM= "ping";
-  const char* topicPingExt PROGMEM= "pingext";
+  const char* topicPingExt PROGMEM= "ping";
   const char* topicStatus PROGMEM = "status";
   const char* topicRx PROGMEM= "rx";
 

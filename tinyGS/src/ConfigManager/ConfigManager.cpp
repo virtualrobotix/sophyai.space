@@ -77,15 +77,17 @@ ConfigManager::ConfigManager()
   groupMqtt.addItem(&mqttPortParam);
   groupMqtt.addItem(&mqttUserParam);
   groupMqtt.addItem(&mqttPassParam);
-  //addParameterGroup(&groupMqtt);
+  addParameterGroup(&groupMqtt);
+
 #ifdef SOPHY
 // Add Sophy Parameter 
-groupMqtt.addItem(&mqttServerParam_sophy);
-  groupMqtt.addItem(&mqttPortParam_sophy);
-  groupMqtt.addItem(&mqttUserParam_sophy);
-  groupMqtt.addItem(&mqttPassParam_sophy);
-  addParameterGroup(&groupMqtt);
+  groupMqtt_Sophy.addItem(&mqttServerParam_sophy);
+  groupMqtt_Sophy.addItem(&mqttPortParam_sophy);
+  groupMqtt_Sophy.addItem(&mqttUserParam_sophy);
+  groupMqtt_Sophy.addItem(&mqttPassParam_sophy);
+  addParameterGroup(&groupMqtt_Sophy);
 #endif
+
   groupBoardConfig.addItem(&boardParam);
   groupBoardConfig.addItem(&oledBrightParam);
   groupBoardConfig.addItem(&AllowTxParam);
@@ -151,8 +153,9 @@ void ConfigManager::handleDashboard()
   s += F("</table></div><div class=\"card\"><h3>Groundstation Status</h3><table>");
   s += "<tr><td>Name </td><td>" + String(getThingName()) + "</td></tr>";
   s += "<tr><td>Version </td><td>" + String(status.version) + "</td></tr>";
-  s += "<tr><td>MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>WiFi </td><td>" + String(WiFi.isConnected()?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  s += "<tr><td>MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  s += "<tr><td>MQTT Server local</td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>Radio </td><td>" + String(Radio::getInstance().isReady()?"<span class='G'>READY</span>":"<span class='R'>NOT READY</span>") + "</td></tr>";
   s += "<tr><td>Test Mode </td><td>" + String(getTestMode()?"ENABLED":"DISABLED") + "</td></tr>";
   //s += "<tr><td>Uptime </td><td>" + // process and update in js + "</td></tr>";

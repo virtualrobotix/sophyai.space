@@ -118,6 +118,8 @@ void printLocalTime();
 
 // Global status
 Status status;
+Status status_sophy;
+
 
 void printControls();
 void switchTestmode();
