@@ -29,30 +29,7 @@
 #include <PubSubClient.h>
 #ifdef SECURE_MQTT_FEES
 #include <WiFiClientSecure.h>
-
-static const char DSTroot_CA_FEEES[] PROGMEM = R"EOF(
------BEGIN CERTIFICATE-----
-MIIDnTCCAoWgAwIBAgIUc6Ua9ifFTZV4Pq59gUGujjwnlXEwDQYJKoZIhvcNAQEL
-BQAwXTELMAkGA1UEBhMCSVQxEDAOBgNVBAgMB0JlcmdhbW8xITAfBgNVBAoMGElu
-dGVybmV0IFdpZGdpdHMgUHR5IEx0ZDEZMBcGA1UEAwwQc29waHlhaV9zYXRfbXF0
-dDAgFw0yMTA0MjIxMjE2MThaGA8yMTIxMDMyOTEyMTYxOFowXTELMAkGA1UEBhMC
-SVQxEDAOBgNVBAgMB0JlcmdhbW8xITAfBgNVBAoMGEludGVybmV0IFdpZGdpdHMg
-UHR5IEx0ZDEZMBcGA1UEAwwQc29waHlhaV9zYXRfbXF0dDCCASIwDQYJKoZIhvcN
-AQEBBQADggEPADCCAQoCggEBALJbLWWmtQ/jE4gNANbFsoUkm3m1AOA0u9Btmg1g
-sq7C8L7xOALHmRkcjGhuVBZz1Tg93UWT83hjTW43YSA/EnOEwdB6if+kH2dbR4p6
-bfVcznB43AY+3yK8HAf+20H+TkKkpWxqjRdLL8QbGCTEXz9lLTPpJ1812RtsYzPS
-VJ9XarJWSI69K7+M4KwgIcTuYvy7XAulNtLsSyfKB2WTtSFlqyp4pr4Akiwq/+PF
-sAT1gdX/xYWQj68DRvr1ipCdBgIkCVJ6DrAPGWpypm6yCaFUs9n9+FtWGT0Ahdxx
-RLHeKblDkusIqz3pgimqFFbqs7fxJAvKE8v+4ttIOVZw8FECAwEAAaNTMFEwHQYD
-VR0OBBYEFFueHEHzm+8BBX9Ndz4unOjr7vmpMB8GA1UdIwQYMBaAFFueHEHzm+8B
-BX9Ndz4unOjr7vmpMA8GA1UdEwEB/wQFMAMBAf8wDQYJKoZIhvcNAQELBQADggEB
-AGSDno8bayOmdUigoNu1SRaPOmg1M5vFLWx2+0JIBaTI1SmrISdz1kJGelv3+qbj
-0SpQx/3gqOcg9IglSbA1P5PGtfdT+o7/lTTRRgS87AAZHYvBveTk8LjjbDSrht/n
-AXb0Xn/lH/rR3Bj2bjzawXl2T+XcCEU7JRF1l/+L6+C/ME8NongN30vR3zW2ZX64
-BceW2XpuSxmsWHqK9OoK9tWNU/hAh8ccWNN5qqNSN34Za4HJoQOpjP9pKgApZtSE
-OPY8ODmTO7ZiAVOjLwdqErzGCXUotbioSlc6v+9YlOfOnw07gIRYhcuJ1yXhunil
-6ZtQv+jVf4o9g3SOBjxqjwA=
------END CERTIFICATE-----)EOF";
+#include "../certs.h"
 #else
 #include <WiFiClient.h>
 #endif
@@ -90,7 +67,9 @@ private:
   void subscribeToAll();
   void manageSatPosOled(char* payload, size_t payload_len);
   void remoteSatCmnd(char* payload, size_t payload_len);
+  void remoteSatFilter(char* payload, size_t payload_len);
 
+  bool usingNewCert = false;
   unsigned long lastPing = 0;
   unsigned long lastConnectionAtempt = 0;
   uint8_t connectionAtempts = 0;
@@ -108,7 +87,7 @@ private:
   // tele
   const char* topicWelcome PROGMEM = "welcome";
   const char* topicPing PROGMEM= "ping";
-  const char* topicPingExt PROGMEM= "ping";
+  const char* topicPingExt PROGMEM= "pingext";
   const char* topicStatus PROGMEM = "status";
   const char* topicRx PROGMEM= "rx";
 
@@ -142,6 +121,7 @@ private:
   const char* commandRemotetelemetry3rd PROGMEM= "telemetry3rd";
   const char* commandLog PROGMEM= "log";
   const char* commandTx PROGMEM= "tx";
+  const char* commandSatFilter PROGMEM= "filter";
   const char* commandTxB64 PROGMEM= "txB64";
   // GOD MODE  With great power comes great responsibility!
   const char* commandSPIsetRegValue PROGMEM= "SPIsetRegValue";

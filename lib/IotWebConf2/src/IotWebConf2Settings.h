@@ -46,8 +46,9 @@
 
 // -- mDNS should allow you to connect to this device with a hostname provided
 // by the device. E.g. mything.local
+// (This is not very likely to work, and MDNS is not very well documented.)
 #ifndef IOTWEBCONF_CONFIG_DONT_USE_MDNS
-# define IOTWEBCONF_CONFIG_USE_MDNS
+# define IOTWEBCONF_CONFIG_USE_MDNS 80
 #endif
 
 // -- Logs progress information to Serial if enabled.
@@ -72,6 +73,24 @@
 
 #ifndef IOTWEBCONF_DNS_PORT
 # define IOTWEBCONF_DNS_PORT 53
+#endif
+
+// Failsafe
+// -- EEPROM config starts with a special prefix of length defined here.
+#ifndef IOTWEBCONF_FAILSAFE_LENGTH
+# define IOTWEBCONF_FAILSAFE_LENGTH 1
+#endif
+
+#ifndef IOTWEBCONF_FAILSAFE_BOOT_COUNT
+# define IOTWEBCONF_FAILSAFE_BOOT_COUNT 10
+#endif
+
+#ifndef IOTWEBCONF_FAILSAFE_RESET_TIME
+# define IOTWEBCONF_FAILSAFE_RESET_TIME 10000
+#endif
+
+#ifndef IOTWEBCONF_FAILSAFE_RESCUE_TIME
+# define IOTWEBCONF_FAILSAFE_RESCUE_TIME 900000
 #endif
 
 #endif

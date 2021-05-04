@@ -104,6 +104,7 @@ public:
 
   const String hostHeader() const override { return this->_server->hostHeader(); };
   IPAddress localIP() override { return this->_server->client().localIP(); };
+  uint16_t localPort() override { return this->_server->client().localPort(); };
   const String uri() const { return this->_server->uri(); };
   bool authenticate(const char * username, const char * password) override
     { return this->_server->authenticate(username, password); };
@@ -161,7 +162,6 @@ public:
 class IotWebConf2
 {
 public:
-  IotWebConf2() { };
   /**
    * Create a new configuration handler.
    *   @thingName - Initial value for the thing name. Used in many places like AP name, can be changed by the user.
@@ -274,6 +274,12 @@ public:
    * Should be called before init()!
    */
   void setWifiConnectionCallback(std::function<void()> func);
+
+  /**
+   * Specify a callback method, that will be called upon first config is saved.
+   * Should be called before init()!
+   */
+  void setConfiguredCallback(std::function<void()> func);
 
   /**
    * Specify a callback method, that will be called when settings is being changed.
@@ -464,10 +470,22 @@ public:
    * By default IotWebConf2 will continue startup in WiFi mode, when no configuration request arrived
    * in AP mode. With this method holding the AP mode can be forced.
    * Further more, instant AP mode can forced even when we are currently in WiFi mode.
-   *   @value - When parameter is TRUE AP mode is forced/entered.
-   *     When value is FALSE normal operation will continue.
+   *   @value - When TRUE, AP mode is forced/entered.
+   *     When FALSE, AP mode is released, normal operation will continue.
    */
   void forceApMode(bool value);
+
+    /**
+   * By default IotWebConf2 will set the thing password as the AP password when connecting in AP mode
+   * With this method a default AP can be set to recover settings.
+   * In combination with forceApMode, instan AP mode with default password can be triggered
+   *   @value - When parameter is TRUE the AP mode does not ask for password
+   *     When value is FALSE normal operation will continue.
+   */
+  void forceDefaultPassword(bool value)
+  {
+    this->_forceDefaultPassword = value;
+  }
 
   /**
    * Get internal parameters, for manual handling.
@@ -531,6 +549,8 @@ public:
     return this->htmlFormatProvider;
   }
 
+  bool isFailSafeActive() { return _failsafeTriggered; }
+
 private:
   const char* _initialApPassword = NULL;
   const char* _configVersion;
@@ -570,6 +590,7 @@ private:
   unsigned long _apStartTimeMs = 0;
   byte _apConnectionStatus = IOTWEBCONF_AP_CONNECTION_STATE_NC;
   std::function<void()> _wifiConnectionCallback = NULL;
+  std::function<void()> _configuredCallback = NULL;
   std::function<void(int)> _configSavingCallback = NULL;
   std::function<void()> _configSavedCallback = NULL;
   std::function<bool(WebRequestWrapper* webRequestWrapper)> _formValidator = NULL;
@@ -591,6 +612,12 @@ private:
   WifiAuthInfo _wifiAuthInfo;
   HtmlFormatProvider htmlFormatProviderInstance;
   HtmlFormatProvider* htmlFormatProvider = &htmlFormatProviderInstance;
+
+  // Failsafe
+  uint8_t _bootCount = 0;
+  bool _failsafeTriggered = false;
+  void loadFailSafeCounter();
+  void resetFailSafeCounter();
 
   int initConfig();
   bool testConfigVersion();
@@ -632,3 +659,4 @@ private:
 using iotwebconf2::IotWebConf2;
 
 #endif
+

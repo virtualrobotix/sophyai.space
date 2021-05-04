@@ -69,6 +69,7 @@ void IotWebConf2::setStatusPin(int statusPin, int statusOnLevel)
 
 bool IotWebConf2::init()
 {
+  loadFailSafeCounter();
   // -- Setup pins.
   if (this->_configPin >= 0)
   {
@@ -100,7 +101,7 @@ bool IotWebConf2::init()
 #endif
 #ifdef IOTWEBCONF_CONFIG_USE_MDNS
   MDNS.begin(this->_thingName);
-  MDNS.addService("http", "tcp", 80);
+  MDNS.addService("http", "tcp", IOTWEBCONF_CONFIG_USE_MDNS);
 #endif
 
   return validConfig;
@@ -143,7 +144,7 @@ bool IotWebConf2::loadConfig()
 {
   int size = this->initConfig();
   EEPROM.begin(
-    IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size);
+    IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size + IOTWEBCONF_FAILSAFE_LENGTH);
 
   if (this->testConfigVersion())
   {
@@ -181,7 +182,7 @@ void IotWebConf2::saveConfig()
     this->_configSavingCallback(size);
   }
   EEPROM.begin(
-    IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size);
+    IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size + IOTWEBCONF_FAILSAFE_LENGTH);
 
   this->saveConfigVersion();
   int start = IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH;
@@ -244,6 +245,11 @@ void IotWebConf2::saveConfigVersion()
 void IotWebConf2::setWifiConnectionCallback(std::function<void()> func)
 {
   this->_wifiConnectionCallback = func;
+}
+
+void IotWebConf2::setConfiguredCallback(std::function<void()> func)
+{
+  this->_configuredCallback = func;
 }
 
 void IotWebConf2::setConfigSavingCallback(std::function<void(int size)> func)
@@ -472,10 +478,12 @@ bool IotWebConf2::handleCaptivePortal(WebRequestWrapper* webRequestWrapper)
     Serial.print("Request for ");
     Serial.print(host);
     Serial.print(" redirected to ");
-    Serial.println(webRequestWrapper->localIP());
+    Serial.print(webRequestWrapper->localIP());
+    Serial.print(":");
+    Serial.println(webRequestWrapper->localPort());
 #endif
     webRequestWrapper->sendHeader(
-      "Location", String("http://") + toStringIp(webRequestWrapper->localIP()), true);
+      "Location", String("http://") + toStringIp(webRequestWrapper->localIP()) + ":" + webRequestWrapper->localPort(), true);
     webRequestWrapper->send(302, "text/plain", ""); // Empty content inhibits Content-length header so we have to close the socket ourselves.
     webRequestWrapper->stop(); // Stop is needed because we sent no content length
     return true;
@@ -489,7 +497,7 @@ bool IotWebConf2::isIp(String str)
   for (size_t i = 0; i < str.length(); i++)
   {
     int c = str.charAt(i);
-    if (c != '.' && (c < '0' || c > '9'))
+    if (c != '.' && c != ':' && (c < '0' || c > '9'))
     {
       return false;
     }
@@ -525,6 +533,14 @@ void IotWebConf2::delay(unsigned long m)
 
 void IotWebConf2::doLoop()
 {
+  if (millis() > IOTWEBCONF_FAILSAFE_RESET_TIME && _bootCount > 0)
+  {
+    resetFailSafeCounter();
+  }
+
+  if (isFailSafeActive() && millis() > IOTWEBCONF_FAILSAFE_RESCUE_TIME)
+    ESP.restart();
+  
   doBlink();
   yield(); // -- Yield should not be necessary, but cannot hurt either.
   if (this->_state == IOTWEBCONF_STATE_BOOT)
@@ -647,6 +663,11 @@ void IotWebConf2::stateChanged(byte oldState, byte newState)
       {
         this->blinkInternal(300, 50);
       }
+      if ((oldState == IOTWEBCONF_STATE_CONNECTING) ||
+        (oldState == IOTWEBCONF_STATE_ONLINE))
+      {
+        WiFi.disconnect(true);
+      }
       setupAp();
       if (this->_updateServerSetupFunction != NULL)
       {
@@ -684,6 +705,14 @@ void IotWebConf2::stateChanged(byte oldState, byte newState)
 #endif
       break;
     case IOTWEBCONF_STATE_CONNECTING:
+      if (oldState == IOTWEBCONF_STATE_BOOT ||
+          oldState == IOTWEBCONF_STATE_NOT_CONFIGURED)
+      {
+        if (this->_configuredCallback != NULL)
+        {
+          this->_configuredCallback();
+        }
+      }
       if ((oldState == IOTWEBCONF_STATE_AP_MODE) ||
           (oldState == IOTWEBCONF_STATE_NOT_CONFIGURED))
       {
@@ -923,7 +952,6 @@ void IotWebConf2::forceApMode(bool doForce)
     if (this->_state != IOTWEBCONF_STATE_AP_MODE)
     {
       IOTWEBCONF_DEBUG_LINE(F("Start forcing AP mode"));
-      WiFi.disconnect(true);
       this->changeState(IOTWEBCONF_STATE_AP_MODE);
     }
   }
@@ -940,7 +968,6 @@ void IotWebConf2::forceApMode(bool doForce)
         IOTWEBCONF_DEBUG_LINE(F("Stopping AP mode force."));
         this->changeState(IOTWEBCONF_STATE_CONNECTING);
       }
-
     }
   }
 }
@@ -956,6 +983,34 @@ void IotWebConf2::connectWifi(const char* ssid, const char* password)
 WifiAuthInfo* IotWebConf2::handleConnectWifiFailure()
 {
   return NULL;
+}
+
+void IotWebConf2::loadFailSafeCounter()
+{
+  int size = this->_allParameters.getStorageSize();
+  EEPROM.begin(IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size + IOTWEBCONF_FAILSAFE_LENGTH);
+  uint16_t start = IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size;
+  _bootCount = EEPROM.read(start) + 1;
+  EEPROM.write(start, _bootCount);
+  EEPROM.end();
+
+#ifdef IOTWEBCONF_DEBUG_TO_SERIAL
+  Serial.print(F("Boot count: "));
+  Serial.println(_bootCount);
+#endif
+
+  if (_bootCount >= IOTWEBCONF_FAILSAFE_BOOT_COUNT)
+    _failsafeTriggered = true;
+}
+
+void IotWebConf2::resetFailSafeCounter()
+{
+  int size = this->_allParameters.getStorageSize();
+  EEPROM.begin(IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size + IOTWEBCONF_FAILSAFE_LENGTH);
+  uint16_t start = IOTWEBCONF_CONFIG_START + IOTWEBCONF_CONFIG_VERSION_LENGTH + size;
+  _bootCount = 0;
+  EEPROM.write(start, _bootCount);
+  EEPROM.end();
 }
 
 } // end namespace

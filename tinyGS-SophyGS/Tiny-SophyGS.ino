@@ -44,7 +44,6 @@
     sx126x
     sx127x
 
-    World Map with active Ground Stations and satellite stimated position 
     Web of the project: https://tinygs.com/
     Github: https://github.com/G4lile0/tinyGS
     Main community chat: https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q
@@ -60,8 +59,8 @@
 
 ====================================================
   IMPORTANT:
-    - Change libraries/PubSubClient/src/PubSubClient.h
-        #define MQTT_MAX_PACKET_SIZE 1000
+    - Follow this guide to get started: https://github.com/G4lile0/tinyGS/wiki/Quick-Start
+    - Arduino IDE is NOT recommended, please use Platformio: https://github.com/G4lile0/tinyGS/wiki/Platformio
 
 **************************************************************************/
 
@@ -79,39 +78,21 @@
 #include "src/ArduinoOTA/ArduinoOTA.h"
 #include "src/OTA/OTA.h"
 #include <ESPNtpClient.h>
-#include <FailSafe.h>
 #include "src/Logger/Logger.h"
-
-#define MQTT_SOPHY
-#define MQTT_TINY
-
-#if MQTT_MAX_PACKET_SIZE != 1000
-"Remeber to change libraries/PubSubClient/src/PubSubClient.h"
-        "#define MQTT_MAX_PACKET_SIZE 1000"
-#endif
 
 #if  RADIOLIB_VERSION_MAJOR != (0x04) || RADIOLIB_VERSION_MINOR != (0x02) || RADIOLIB_VERSION_PATCH != (0x01) || RADIOLIB_VERSION_EXTRA != (0x00)
 #error "You are not using the correct version of RadioLib please copy TinyGS/lib/RadioLib on Arduino/libraries"
 #endif
 
-#ifndef RADIOLIB_GODMODE
-#error "Seems you are using Arduino IDE, edit /RadioLib/src/BuildOpt.h and uncomment #define RADIOLIB_GODMODE around line 367" 
+#if RADIOLIB_GODMODE == 0 && !PLATFORMIO
+#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /RadioLib/src/BuildOpt.h and uncomment #define RADIOLIB_GODMODE around line 367" 
 #endif
-
-
-const int MAX_CONSECUTIVE_BOOT = 10; // Number of rapid boot cycles before enabling fail safe mode
-const time_t BOOT_FLAG_TIMEOUT = 10000; // Time in ms to reset fail safe mode activation flag
 
 ConfigManager& configManager = ConfigManager::getInstance();
-#ifdef MQTT_TINY
 MQTT_Client& mqtt = MQTT_Client::getInstance();
-#endif
-#ifdef MQTT_SOPHY 
-MQTT_Client_Fees& mqtt_fees = MQTT_Client_Fees::getInstance();
-#endif 
+MQTT_Client_Fees& mqtt_sophygs = MQTT_Client_Fees::getInstance();
+ 
 Radio& radio = Radio::getInstance();
-
-TaskHandle_t dispUpdate_handle;
 
 const char* ntpServer = "time.cloudflare.com";
 void printLocalTime();
@@ -123,6 +104,8 @@ Status status_sophy;
 
 void printControls();
 void switchTestmode();
+void checkButton();
+void setupNTP();
 
 void ntp_cb (NTPEvent_t e)
 {
@@ -137,14 +120,103 @@ void ntp_cb (NTPEvent_t e)
   }
 }
 
-void displayUpdate_task (void* arg)
+void configured()
 {
-  for (;;){
-      displayUpdate ();
-  }
+  configManager.setConfiguredCallback(NULL);
+  configManager.printConfig();
+  radio.init();
 }
 
 void wifiConnected()
+{
+  configManager.setWifiConnectionCallback(NULL);
+  setupNTP();
+  displayShowConnected();
+  configManager.delay(100); // finish animation
+
+  if (configManager.getLowPower())
+  {
+    Log::debug(PSTR("Set low power CPU=80Mhz"));
+    setCpuFrequencyMhz(80); //Set CPU clock to 80MHz
+  }
+
+  configManager.delay(400); // wait to show the connected screen and stabilize frequency
+  radio.init();
+}
+
+void setup()
+{ 
+  setCpuFrequencyMhz(240);
+  Serial.begin(115200);
+  delay(100);
+
+  Log::console(PSTR("TinyGS-SophyAI.space Version %d - %s"), status.version, status.git_version);
+  configManager.setWifiConnectionCallback(wifiConnected);
+  configManager.setConfiguredCallback(configured);
+  configManager.init();
+  if (configManager.isFailSafeActive())
+  {
+    Log::console(PSTR("FATAL ERROR: The board is in a boot loop, rescue mode launched. Connect to the WiFi AP: %s, and open a web browser on ip 192.168.4.1 to fix your configuration problem or upload a new firmware."), configManager.getThingName());
+    configManager.forceApMode(true);
+    return;
+  }
+  // make sure to call doLoop at least once before starting to use the configManager
+  configManager.doLoop();
+  pinMode (configManager.getBoardConfig().PROG__BUTTON, INPUT_PULLUP);
+  displayInit();
+  displayShowInitialCredits();
+  configManager.delay(1000);
+  mqtt.begin();
+  mqtt_sophygs.begin();
+ 
+
+  if (configManager.getOledBright() == 0)
+  {
+    displayTurnOff();
+  }
+
+  printControls();
+}
+
+void loop() {  
+  configManager.doLoop();
+  if (configManager.isFailSafeActive())
+    return;
+
+  ArduinoOTA.handle();
+  handleSerial();
+  checkButton();
+
+  if (configManager.getState() < 2) // not ready or not configured
+  {
+    displayShowApMode();
+    return;
+  }
+  // configured and no connection
+  if (radio.isReady())
+  {
+    status.radio_ready = true;
+    radio.listen();
+  }
+  else {
+    status.radio_ready = false;
+  }
+
+  if (configManager.getState() < 4) // connection or ap mode
+  {
+    displayShowStaMode(configManager.isApMode());
+    return;
+  }
+
+  // connected
+
+  mqtt.loop();
+  mqtt_sophygs.loop();
+  OTA::loop();
+  if (configManager.getOledBright() != 0) displayUpdate();
+}
+
+void setupNTP()
 {
   NTP.setInterval (120); // Sync each 2 minutes
   NTP.setTimeZone (configManager.getTZ ()); // Get TX from config manager
@@ -158,127 +230,41 @@ void wifiConnected()
   time_t startedSync = millis ();
   while (NTP.syncStatus() != syncd && millis() - startedSync < 5000) // Wait 5 seconds to get sync
   {
-    delay (100);
+    configManager.delay(100);
   }
 
   printLocalTime();
-
-  configManager.printConfig();
-  arduino_ota_setup();
-  displayShowConnected();
-
-  radio.init();
-  if (!radio.isReady())
-  {
-    Serial.println("LoRa initialization failed. Please connect to " + WiFi.localIP().toString() + " and make sure the board selected matches your hardware.");
-    displayShowLoRaError();
-  }
-
-  configManager.delay(1000); // wait to show the connected screen
-#ifdef MQTT_TINY
-  mqtt.begin();
-#endif
-#ifdef MQTT_SOPHY
-  mqtt_fees.begin();
-#endif 
-
-  // TODO: Make this beautiful
-  displayShowWaitingMqttConnection();
-  printControls();
 }
 
-void setup()
+void checkButton()
 {
-  Serial.begin(115200);
-  delay(299);
-
-  //FailSafe.checkBoot (MAX_CONSECUTIVE_BOOT); // Parameters are optional
-  //if (FailSafe.isActive ()) // Skip all user setup if fail safe mode is activated
-  //  return;
-
-  Log::console(PSTR("SophyGS-TinyGS Version %d - %s"), status.version, status.git_version);
-  configManager.setWifiConnectionCallback(wifiConnected);
-  configManager.init();
-  // make sure to call doLoop at least once before starting to use the configManager
-  configManager.doLoop();
-  pinMode (configManager.getBoardConfig().PROG__BUTTON, INPUT_PULLUP);
-  displayInit();
-  displayShowInitialCredits();
-  configManager.printConfig();
-#define WAIT_FOR_BUTTON 3000
-#define RESET_BUTTON_TIME 5000
-  unsigned long start_waiting_for_button = millis ();
-  unsigned long button_pushed_at;
-  Log::debug(PSTR("Waiting for reset config button"));
-  bool button_pushed = false;
-  while (millis () - start_waiting_for_button < WAIT_FOR_BUTTON)
+  #define RESET_BUTTON_TIME 8000
+  static unsigned long buttPressedStart = 0;
+  if (!digitalRead (configManager.getBoardConfig().PROG__BUTTON))
   {
-	  if (!digitalRead (configManager.getBoardConfig().PROG__BUTTON))
+    if (!buttPressedStart)
     {
-		  button_pushed = true;
-		  button_pushed_at = millis ();
-		  Log::debug(PSTR("Reset button pushed"));
-		  while (millis () - button_pushed_at < RESET_BUTTON_TIME)
-      {
-			  if (digitalRead (configManager.getBoardConfig().PROG__BUTTON))
-        {
-				  Log::debug(PSTR("Reset button released"));
-				  button_pushed = false;
-				  break;
-			  }
-		  }
-		  if (button_pushed)
-      {
-			  Log::debug(PSTR("Reset config triggered"));
-			  WiFi.begin ("0", "0");
-			  WiFi.disconnect ();
-		  }
-	  }
+      buttPressedStart = millis();
+    }
+    else if (millis() - buttPressedStart > RESET_BUTTON_TIME) // long press
+    {
+      Log::console(PSTR("Rescue mode forced by button long press!"));
+      Log::console(PSTR("Connect to the WiFi AP: %s and open a web browser on ip 192.168.4.1 to configure your station and manually reboot when you finish."), configManager.getThingName());
+      configManager.forceDefaultPassword(true);
+      configManager.forceApMode(true);
+      buttPressedStart = 0;
+    }
   }
-
-  if (button_pushed)
-  {
-    configManager.resetAPConfig();
-    ESP.restart();
+  else {
+    unsigned long elapsedTime = millis() - buttPressedStart;
+    if (elapsedTime > 30 && elapsedTime < 1000) // short press
+      displayNextFrame();
+    buttPressedStart = 0;
   }
-  
-  if (configManager.isApMode())
-    displayShowApMode();
-  else 
-    displayShowStaMode(false);
-  
-  delay(500);  
 }
 
-void loop() {
-  static bool startDisplayTask = true;
-    
-  FailSafe.loop (BOOT_FLAG_TIMEOUT); // Use always this line
-  if (FailSafe.isActive ()) // Skip all user loop code if Fail Safe mode is active
-    return;
-    
-  configManager.doLoop();
-
-  static bool wasConnected = false;
-  if (!configManager.isConnected())
-  {
-    if (configManager.isApMode() && wasConnected)
-      displayShowApMode();
-    else 
-      displayShowStaMode(configManager.isApMode());
-
-    return;
-  }
-  wasConnected = true;
-  #ifdef MQTT_TINY
-  mqtt.loop();
-  #endif 
-  #ifdef MQTT_SOPHY
-  mqtt_fees.loop();
-  #endif 
-  ArduinoOTA.handle();
-  OTA::loop();
-  
+void handleSerial()
+{
   if(Serial.available())
   {
     radio.disableInterrupt();
@@ -287,7 +273,7 @@ void loop() {
     char serialCmd = Serial.read();
 
     // wait for a bit to receive any trailing characters
-    delay(50);
+    configManager.delay(50);
 
     // dump the serial buffer
     while(Serial.available())
@@ -332,27 +318,6 @@ void loop() {
 
     radio.enableInterrupt();
   }
-
-  if (!radio.isReady())
-  {
-    displayShowLoRaError();
-    return;
-  }
-
-  if (startDisplayTask)
-  {
-    startDisplayTask = false;
-    xTaskCreateUniversal (
-            displayUpdate_task,           // Display loop function
-            "Display Update",             // Task name
-            4096,                         // Stack size
-            NULL,                         // Function argument, not needed
-            1,                            // Priority, running higher than 1 causes errors on MQTT comms
-            &dispUpdate_handle,           // Task handle
-            CONFIG_ARDUINO_RUNNING_CORE); // Running core, should be 1
-  }
-
-  radio.listen();
 }
 
 void switchTestmode()
