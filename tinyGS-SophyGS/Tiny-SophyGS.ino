@@ -141,7 +141,7 @@ void wifiConnected()
   }
 
   configManager.delay(400); // wait to show the connected screen and stabilize frequency
-  radio.init();
+  //radio.init();
 }
 
 void setup()
