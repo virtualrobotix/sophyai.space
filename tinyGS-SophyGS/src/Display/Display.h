@@ -32,5 +32,5 @@ void displayTurnOff();
 void displayNextFrame();
 
 extern Status status;
-
+extern Status status_sophy;
   

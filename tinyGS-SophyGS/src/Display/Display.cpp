@@ -233,7 +233,7 @@ void drawFrame5(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
   display->fillRect(83,0,128,11);
   display->setFont(ArialMT_Plain_10);
  
-  if (status.satPos[0] == 0 && status.satPos[1] == 0)
+  if (status_sophy.satPos[0] == 0 && status_sophy.satPos[1] == 0)
   {
     String msg = F("Waiting for Sat Pos");
     display->drawString( 65+x,  49+y+(x/2), msg );
@@ -253,13 +253,13 @@ void drawFrame5(OLEDDisplay *display, OLEDDisplayUiState* state, int16_t x, int1
       else if (graphVal <= 1) { delta = +1; tick_timing=100; } // ramp up value
     }
 
-    display->fillCircle(status.satPos[0]+x, status.satPos[1]+y, graphVal+1);
+    display->fillCircle(status_sophy.satPos[0]+x, status_sophy.satPos[1]+y, graphVal+1);
     display->setColor(WHITE);
-    display->drawCircle(status.satPos[0]+x, status.satPos[1]+y, graphVal);
+    display->drawCircle(status_sophy.satPos[0]+x, status_sophy.satPos[1]+y, graphVal);
     display->setColor(BLACK);
-    display->drawCircle(status.satPos[0]+x, status.satPos[1]+y, (graphVal/3)+1);
+    display->drawCircle(status_sophy.satPos[0]+x, status_sophy.satPos[1]+y, (graphVal/3)+1);
     display->setColor(WHITE);
-    display->drawCircle(status.satPos[0]+x, status.satPos[1]+y, graphVal/3);
+    display->drawCircle(status_sophy.satPos[0]+x, status_sophy.satPos[1]+y, graphVal/3);
   }
 }
 
