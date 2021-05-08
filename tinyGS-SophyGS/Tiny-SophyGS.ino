@@ -99,9 +99,9 @@ const char *tlel2   = "2 25544  51.6422 176.3402 0001360 345.7469  23.7758 15.52
 //const char *tlel2   = "2 43700   0.0182 271.8232 0001691 166.1779 354.2495  1.00270105  1678";
 
 
-const char  *pcMyName = "DL9SEC";    // Observer name
-double       dMyLAT   =  48.661563;  // Latitude (Breitengrad): N -> +, S -> -
-double       dMyLON   =   9.779416;  // Longitude (Längengrad): E -> +, W -> -
+const char  *pcMyName = "IU2IOL";    // Observer name
+double       dMyLAT   =  45.3043;  // Latitude (Breitengrad): N -> +, S -> -
+double       dMyLON   =   9.5050;  // Longitude (Längengrad): E -> +, W -> -
 double       dMyALT   = 386.0;       // Altitude ASL (m)
 
 double       dfreqRX  = 145.800;     // Nominal downlink frequency
@@ -200,9 +200,14 @@ void wifiConnected()
   configManager.delay(400); // wait to show the connected screen and stabilize frequency
   //radio.init();
 }
-void check_azel()
+void check_azel(double check_time)
 
 {
+static double last_check;
+if (millis() - last_check > check_time)
+{
+       
+  last_check = millis();
   time_t currenttime = time (NULL);
     if (currenttime < 0) {
         Log::error (PSTR ("Failed to obtain time: %d"), currenttime);
@@ -215,27 +220,29 @@ void check_azel()
   //Log::console("tv.sec",tv.tv_sec);
 
   P13Sun Sun;                                                       // Create object for the sun
-  P13DateTime MyTime(ti->tm_year,ti->tm_mon, ti->tm_mday, ti->tm_hour, ti->tm_min, ti->tm_sec); // Set start time for the prediction
-  P13Observer MyQTH(pcMyName, 45, 9, 0);              // Set observer coordinates
+  P13DateTime MyTime(2021,5, ti->tm_mday, ti->tm_hour-2, ti->tm_min, ti->tm_sec); // Set start time for the prediction
+//  P13Observer MyQTH(pcMyName, 45, 9, 0);              // Set observer coordinates
+  P13Observer MyQTH(pcMyName, dMyLAT, dMyLON, dMyALT);              // Set observer coordinates
 
   P13Satellite MySAT(tleName, tlel1, tlel2);                        // Create ISS data from TLE
   
- 
-  latlon2xy(ixQTH, iyQTH, dMyLAT, dMyLON, MAP_MAXX, MAP_MAXY);      // Get x/y for the pixel map 
+  
+  latlon2xy(ixQTH, iyQTH, dMyLAT, dMyLON, 128, 64);      // Get x/y for the pixel map 128x64 EPS32 Display dimension1 
   
   /*  For UNO instead of Serial.printf
   sprintf(buf, "\r\n\Prediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
   Serial.print(buf);
   */
-  Log::debug("\r\n\Prediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
+  Log::debug("\r\nPrediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
 
-  MyTime.ascii(acBuffer);             // Get time for prediction as ASCII string
+   MyTime.ascii(acBuffer);             // Get time for prediction as ASCII string
   MySAT.predict(MyTime);              // Predict ISS for specific time
   MySAT.latlon(dSatLAT, dSatLON);     // Get the rectangular coordinates
   MySAT.elaz(MyQTH, dSatEL, dSatAZ);  // Get azimut and elevation for MyQTH
-
-  latlon2xy(ixSAT, iySAT, dSatLAT, dSatLON, MAP_MAXX, MAP_MAXY);  // Get x/y for the pixel map
- 
+  latlon2xy(ixSAT, iySAT, dSatLAT, dSatLON, 128, 64);  // Get x/y for the pixel map
+  status_sophy.satPos[0]=ixSAT;
+  status_sophy.satPos[1]=iySAT;
+  
   Log::console("%s -> Lat: %.4f Lon: %.4f (MAP %dx%d: x = %d,y = %d) Az: %.2f El: %.2f\r\n\r\n", acBuffer, dSatLAT, dSatLON, MAP_MAXX, MAP_MAXY, ixSAT, iySAT, dSatAZ, dSatEL);
 
  /* 
@@ -252,7 +259,7 @@ void check_azel()
     Log::console("%2d: x = %d, y = %d\r\n", iz, aiSatFP[iz][0], aiSatFP[iz][1]);
   }
 */
-
+}
 }
 
 void setup()
@@ -323,11 +330,12 @@ void loop() {
   }
 
   // connected
-
+  check_azel(1000);
   mqtt.loop();
   mqtt_sophygs.loop();
   OTA::loop();
   if (configManager.getOledBright() != 0) displayUpdate();
+
 }
 
 void setupNTP()
@@ -398,7 +406,7 @@ void handleSerial()
     // process serial command
     switch(serialCmd) {
       case 'a':
-        check_azel();
+        check_azel(2000);
         break;
       case 'e':
         configManager.resetAllConfig();
