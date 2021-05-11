@@ -416,6 +416,7 @@ uint8_t Radio::listen()
     status.lastPacketInfo.crc_error = false;
     String encoded = base64::encode(respFrame, respLen); 
     MQTT_Client::getInstance().sendRx(encoded, noisyInterrupt);
+    MQTT_Client_Fees::getInstance().sendRx(encoded, noisyInterrupt);
   }
   else if (state == ERR_CRC_MISMATCH) 
   {
@@ -425,6 +426,7 @@ uint8_t Radio::listen()
       status.lastPacketInfo.crc_error = true;
       String error_encoded = base64::encode("Error_CRC");
       MQTT_Client::getInstance().sendRx(error_encoded, noisyInterrupt);
+      MQTT_Client_Fees::getInstance().sendRx(error_encoded, noisyInterrupt);
       }  else {
         Log::console(PSTR("Filter enabled, Error CRC filtered"));
 	      delete[] respFrame;

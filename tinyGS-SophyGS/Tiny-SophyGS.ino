@@ -233,7 +233,7 @@ if (millis() - last_check > check_time)
   sprintf(buf, "\r\n\Prediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
   Serial.print(buf);
   */
-  Log::debug("\r\nPrediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
+  Log::console("\r\nPrediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
 
    MyTime.ascii(acBuffer);             // Get time for prediction as ASCII string
   MySAT.predict(MyTime);              // Predict ISS for specific time
@@ -330,7 +330,7 @@ void loop() {
   }
 
   // connected
-  check_azel(1000);
+  check_azel(10000);
   mqtt.loop();
   mqtt_sophygs.loop();
   OTA::loop();
