@@ -2,7 +2,7 @@
 <img src="/doc/images/TinyGS_logo.png" width="600">
 </p>
 
-TinyGS is an open network of Ground Stations distributed around the world to receive and operate LoRa satellites, weather probes and other flying objects, using cheap and versatile modules.
+SophyGS is an open source firmware fork of TinyGS . It's connected to an open network of Ground Stations distributed around the world to rtx and operate LoRa satellites, weather probes and other flying objects, using cheap and versatile modules. Our revision of firmware connect TinyGS network and share info with this network and sophyai.space network that is a specific network for realtime rtx comunication with lora satellite as FEES cubesat.
 
 # Hardware
 
@@ -25,23 +25,23 @@ Currently we are officially supporting the following proven LoRa boards:
 However, any ESP32 board with sx126x or sx127x módule can be configured using templates. You can find more info about them [here](https://github.com/G4lile0/tinyGS/wiki/Board-Templates).
 
 # Install
-The first time you flash your board you can use the [one click uploader](https://github.com/G4lile0/tinyGS/wiki/Quick-Start) available for Linux, Windows and Mac. You can find instrictions [here](https://github.com/G4lile0/tinyGS/wiki/Quick-Start).
+The first time you flash your board you can use the [one click uploader](https://github.com/iw2lsi/SophyaiGS-Uploader) available for Linux, Windows and Mac. You can find instrictions [here](https://github.com/G4lile0/tinyGS/wiki/Quick-Start).
 
-You can also download the latest [release](https://github.com/G4lile0/tinyGS/releases) and flash it with PlatformIO. If you dont know PlatformIO here you have our [PlatformIO guide](https://github.com/G4lile0/tinyGS/wiki/Platformio).
+You can also download the latest [release](https://github.com/virtualrobotix/sophyai.space/tree/main/release) and flash it with PlatformIO. If you dont know PlatformIO here you have our [PlatformIO guide](https://github.com/virtualrobotix/sophyai.space/wiki/Platformio).
 
-Later you can update your Ground Station via [local web OTA or auto update method](https://github.com/G4lile0/tinyGS/wiki/OTA-Update).
+Later you can update your Ground Station via [local web OTA or auto update method](https://github.com/virtualrobotix/sophyai.space/wiki/OTA-Update).
 
-You can also use Arduino IDE, but is a longer and hard path, because you need to install all dependencies. [Arduino guide](https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE)
+You can also use Arduino IDE, but is a longer and hard path, because you need to install all dependencies. [Arduino guide](https://github.com/virtualrobotix/sophyai.space/wiki/Arduino-IDE)
 
 # Configuration
 
-Check our wiki [configuration page](https://github.com/G4lile0/tinyGS/wiki/Ground-Station-configuration)
+Check our wiki [configuration page](https://github.com/virtualrobotix/sophyai.space/wiki/Ground-Station-configuration)
 
 # Main data website
 
 All data received by TinyGS Ground Stations are showed at our TinyGS website
 
-[https://tinygs.com/](https://tinygs.com/)
+[http://rp.lasernavigation.it:6015/](http://rp.lasernavigation.it:6015/)
 
 At this web you can see:
 
