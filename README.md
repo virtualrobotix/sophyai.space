@@ -1,7 +1,7 @@
-<p align="left">
+<p align="right">
 <img src="/doc/images/TinyGS_logo.png" width="400">
 </p>
-<p align="right">
+<p align="left">
 <img src="/doc/images/SophyAI Final.jpg" width="400">
 </p>
 
