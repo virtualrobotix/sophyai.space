@@ -1,6 +1,10 @@
-<p align="center">
-<img src="/doc/images/TinyGS_logo.png" width="600">
+<p align="left">
+<img src="/doc/images/TinyGS_logo.png" width="400">
 </p>
+<p align="right">
+<img src="/doc/images/SophyAI Final.jpg" width="400">
+</p>
+
 
 SophyGS is an open source firmware fork of TinyGS . It's connected to an open network of Ground Stations distributed around the world to rtx and operate LoRa satellites, weather probes and other flying objects, using cheap and versatile modules. Our revision of firmware connect TinyGS network and share info with this network and sophyai.space network that is a specific network for realtime rtx comunication with lora satellite as FEES cubesat.
 
@@ -25,7 +29,7 @@ Currently we are officially supporting the following proven LoRa boards:
 However, any ESP32 board with sx126x or sx127x módule can be configured using templates. You can find more info about them [here](https://github.com/G4lile0/tinyGS/wiki/Board-Templates).
 
 # Install
-The first time you flash your board you can use the [one click uploader](https://github.com/iw2lsi/SophyaiGS-Uploader) available for Linux, Windows and Mac. You can find instrictions [here](https://github.com/G4lile0/tinyGS/wiki/Quick-Start).
+The first time you flash your board you can use the [one click uploader](https://github.com/iw2lsi/SophyaiGS-Uploader) available for Linux, Windows and Mac. You can find instrictions [here](https://github.com/iw2lsi/SophyaiGS-Uploader).
 
 You can also download the latest [release](https://github.com/virtualrobotix/sophyai.space/tree/main/release) and flash it with PlatformIO. If you dont know PlatformIO here you have our [PlatformIO guide](https://github.com/virtualrobotix/sophyai.space/wiki/Platformio).
 
@@ -37,37 +41,13 @@ You can also use Arduino IDE, but is a longer and hard path, because you need to
 
 Check our wiki [configuration page](https://github.com/virtualrobotix/sophyai.space/wiki/Ground-Station-configuration)
 
-# Main data website
 
-All data received by TinyGS Ground Stations are showed at our TinyGS website
+# Main data website sophyai.space
+All data recived in realtime are share in our alfa version of DashBoard 
 
 [http://rp.lasernavigation.it:6015/](http://rp.lasernavigation.it:6015/)
 
-At this web you can see:
 
-- [Ground Stations list](https://tinygs.com/stations)
-- [Supported satellites](https://tinygs.com/satellites)
-- [All data packets received by the community in real time](https://tinygs.com/packets)
-
-At your personal area you can edit some parameters of your Ground Stations remotely.
-
-This is the main data recovery system, but we are developing an API to access data.
-
-# Local data access
-
-You can access to your Ground Station data and configuration via local website at your
-
-<p align="center">
-<img src="/doc/images/TinyGS_dashboard.png" width="300">
-</p>
-
-Also you can use the serial port of your board to see the basic console.
-
-# TinyGS network architecture
-
-<p align="center">
-<img src="/doc/images/TinyGS_architecture.png" width="300">
-</p>
 
 # OTA update and Auto Tuning
 
@@ -85,26 +65,16 @@ We are using Telegram as the main communication channel for the project. There a
 - [Data channel](https://t.me/tinyGS_Telemetry) station status and received packets
 - [Test channel](https://t.me/TinyGS_Test) RX packets by groundstations in test mode
 
-# History
+# SophyAI.space GS History
+In 2016 we decide to develop our first cubesat . The name of cubesat is Fees . It derive of my experience 12 year of experience in Ardupilot drone. 
+Fees was launch in March 2021 . After some days in space we understand that 1 gs is not enought for control our satellite . So decide to implement our bi directional realtime global ground station . We start from idea of TinyGS project they did a great job , but we need a realtime network and reliable uplink around the world. 
+So we decide to start with this great project. 
 
-Initially TinyGS was born under the name ESP32 Fossa Groundstation, it was developed as a "weekend" project for the FossaSAT-1 LoRa satellite. We are passionate about space and created this project to be able to track and use the satellites and to learn and experiment about radio. Currently the network is open to any LoRa satellite and we also support other flying objects that have a compatible radio modulation with our hardware such as FSK, GFSK, MSK, GMSK, LoRa and OOK. And the project was renamed to TinyGS.
 
-Even though we have no relation with the Fossa team, they inspired this project and we are excited to support their new launched satellites into our network.
-
-This are the more important moments of the project:
-
-- Nov 28, 2019 ESP32-OLED-Fossa-GroundStation project born.
-- Dec 6, 2019 FossaSAT-1 deployed with an Electron rocket by Rocket Lab.
-- Dec 10,2019 YL3CT&#39;s GS receive the fist LoRa packet from FossaSAT-1
-- Sep 28,2020 6U Norby LoRa satellite is deployed with a Soyuz-2-1b launcher
-- Oct 11, 2020 KA9ETC&#39;s GS receive the first LoRa packet from Norby
-- Jan 24, 2021 3x V-R3x sat deployed with a Falcon-9
-- Jan 25, 2021 KA9ETC&#39;S GS receive the first LoRa packet from V-R3x
-- Feb 14, 2021 New name and web tinyGS.com with a new Beta firmware.
 
 # Contribute
 
-You can contribute to TinyGS by
+You can contribute to SophyAIGS by
 
 - Providing Pull Requests (Features, Proof of Concepts, Language files or Fixes)
 - Testing new released features and report issues
@@ -125,22 +95,15 @@ This project relies on several third party libraries:
 - PubSubClient
 - ESPNTPClient
 - FailSafeMode
+- TinyGS 
 
-You might also want to check out the other parts of this project:
- * The web application: https://github.com/4m1g0/tinyGS-webapp
- * The decoder modules: https://github.com/4m1g0/tinygs-decoders
 
-# TinyGS team
+# Sophyai.space Team
+- [Roberto Iu2IOL](https://github.com/virtualrobotix)
+- [Iw2LSI](https://github.com/iw2lsi)
 
-The main TinyGS developer team is:
-
-- [4m1g0](https://github.com/4m1g0)
-- [G4lile0](https://github.com/G4lile0)
-- [gmag11](https://github.com/gmag11)
-
-# Contributors
-There are many people that contributed to this project in many different forms. We have a great active community in our Telegram group and we would really like to thank all the community support from contributions to the project to useful tips on the group. And, if your are still not part of it we would like to invite you to join it on [Telegram](https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q).
-
+# Contributors SophyAIGS
+Join us at our Discord channel this is the link : https://discord.gg/ZvaRrRuTFC we need arduino developer , and Radio Ham with regular licence for try the connection (RTX) with satellite in our network , and user for recive the radio packet from lora satellite around the globe.
 
 # License
 
