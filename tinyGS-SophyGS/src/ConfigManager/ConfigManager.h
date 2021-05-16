@@ -69,8 +69,8 @@ constexpr auto configVersion = "0.05"; //max 4 chars
 
 #ifdef SOPHY
 // Add Sophy Parameter 
-  #define MQTT_SOPHY_SERVER "localhost"
-  #define MQTT_SOPHY_PORT  "1883"
+  #define MQTT_SOPHY_SERVER "rp.lasernavigation.it"
+  #define MQTT_SOPHY_PORT  "6016"
 #endif
 
 constexpr auto AP_TIMEOUT_MS = "300000";
@@ -255,14 +255,14 @@ private:
   iotwebconf2::SelectParameter tzParam = iotwebconf2::SelectParameter("Time Zone", "tz", tz, TZ_LENGTH, (char*)TZ_VALUES, (char*)TZ_NAMES, sizeof(TZ_VALUES) / TZ_LENGTH, TZ_NAME_LENGTH);
 
 // MQTT TINYGS
-  iotwebconf2::ParameterGroup groupMqtt = iotwebconf2::ParameterGroup("MQTT credentials" , "MQTT credentials (get them <a href='https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q'>here</a>)");
+  iotwebconf2::ParameterGroup groupMqtt = iotwebconf2::ParameterGroup("TinyGS MQTT" , "TinyGS MQTT (<a href='https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q'>get Username and Password</a>)");
   iotwebconf2::TextParameter mqttServerParam = iotwebconf2::TextParameter("Server address", "mqtt_server", mqttServer, MQTT_SERVER_LENGTH, MQTT_DEFAULT_SERVER, MQTT_DEFAULT_SERVER, "required type=\"text\" maxlength=30");
   iotwebconf2::NumberParameter mqttPortParam = iotwebconf2::NumberParameter("Server Port", "mqtt_port", mqttPort, MQTT_PORT_LENGTH, MQTT_DEFAULT_PORT, MQTT_DEFAULT_PORT, "required min=\"0\" max=\"65536\" step=\"1\"");
   iotwebconf2::TextParameter mqttUserParam = iotwebconf2::TextParameter("MQTT Username", "mqtt_user", mqttUser, MQTT_USER_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
   iotwebconf2::TextParameter mqttPassParam = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass", mqttPass, MQTT_PASS_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
 #ifdef SOPHY
 // MQTT SophyAI
-  iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("Sophy MQTT credentials" , "MQTT credentials (your local Broker)");
+  iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("Sophy MQTT" , "Sophy MQTT (<a href='https://discord.com/channels/838704721162141716/839479426160525312'>get Username and Password</a>)");
   iotwebconf2::TextParameter mqttServerParam_sophy = iotwebconf2::TextParameter("Server address", "mqtt_server_sophy", mqttServer_sophy, MQTT_SERVER_LENGTH, MQTT_SOPHY_SERVER, MQTT_SOPHY_SERVER, "required type=\"text\" maxlength=30");
   iotwebconf2::NumberParameter mqttPortParam_sophy = iotwebconf2::NumberParameter("Server Port", "mqtt_port_sophy", mqttPort_sophy, MQTT_PORT_LENGTH, MQTT_SOPHY_PORT, MQTT_SOPHY_PORT, "required min=\"0\" max=\"65536\" step=\"1\"");
   iotwebconf2::TextParameter mqttUserParam_sophy = iotwebconf2::TextParameter("MQTT Username", "mqtt_user_sophy", mqttUser_sophy, MQTT_USER_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
