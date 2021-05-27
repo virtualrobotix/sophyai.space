@@ -97,6 +97,11 @@ This project relies on several third party libraries:
 - FailSafeMode
 - TinyGS 
 
+# TinyGS team
+The main TinyGS developer team is:
+- 4m1g0
+- G4lile0
+- gmag11
 
 # Sophyai.space Team
 - [Roberto Iu2IOL](https://github.com/virtualrobotix)
