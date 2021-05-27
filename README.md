@@ -45,7 +45,7 @@ Check our wiki [configuration page](https://github.com/virtualrobotix/sophyai.sp
 # Main data website sophyai.space
 All data recived in realtime are share in our alfa version of DashBoard 
 
-[http://rp.lasernavigation.it:6015/](http://rp.lasernavigation.it:6015/)
+[http://rp.lasernavigation.it:6015/worldmap/](http://rp.lasernavigation.it:6015/worldmap/)
 
 
 
