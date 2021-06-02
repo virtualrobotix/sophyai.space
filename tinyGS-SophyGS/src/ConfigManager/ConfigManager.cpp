@@ -180,8 +180,8 @@ void ConfigManager::handleDashboard()
   s += F("</table></div><div class=\"card\"><h3>Groundstation Status</h3><table>");
   s += "<tr><td>Name </td><td>" + String(getThingName()) + "</td></tr>";
   s += "<tr><td>Version </td><td>" + String(status.version) + "</td></tr>";
-  s += "<tr><td>MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
-  s += "<tr><td>MQTT Server local</td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>"+str_discon+"</span>") + "</td></tr>";
+  s += "<tr><td>TinyGS MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  s += "<tr><td>SophyAI MQTT Server </td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>"+str_discon+"</span>") + "</td></tr>";
   //s += "<tr><td>MQTT Server local</td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>Radio </td><td>" + String(Radio::getInstance().isReady()?"<span class='G'>READY</span>":"<span class='R'>NOT READY</span>") + "</td></tr>";
   s += "<tr><td>Test Mode </td><td>" + String(getTestMode()?"ENABLED":"DISABLED") + "</td></tr>";
@@ -484,8 +484,8 @@ void ConfigManager::boardDetection()
 
 void ConfigManager::printConfig()
 {
-  Log::console(PSTR("MQTT Port: %u\nMQTT Server: %s\nMQTT USER: %s\nMQTT Pass: %s\nLatitude: %f\nLongitude: %f"), getMqttPort(), getMqttServer(), getMqttUser(), getMqttPass(), getLatitude(), getLongitude());
-  Log::console(PSTR("SOPHY MQTT Port: %u\nSOPHY MQTT Server: %s\nSophy MQTT USER: %s\nSOPHY MQTT Pass: %s"), getMqttPort_Sophy(), getMqttServer_Sophy(), getMqttUser_Sophy(), getMqttPass_Sophy());
+  Log::console(PSTR("TinyGS MQTT Port: %u\nTinyGS MQTT Server: %s\nTinyGS MQTT USER: %s\nTinyGS MQTT Pass: %s\nLatitude: %f\nLongitude: %f"), getMqttPort(), getMqttServer(), getMqttUser(), getMqttPass(), getLatitude(), getLongitude());
+  Log::console(PSTR("SophyAI MQTT Port: %u\nSophyAI MQTT Server: %s\nSophyAI MQTT USER: %s\nSophyAI MQTT Pass: %s"), getMqttPort_Sophy(), getMqttServer_Sophy(), getMqttUser_Sophy(), getMqttPass_Sophy());
   Log::console(PSTR("tz: %s\nboard: %u --> %s\nOLED Bright: %u\nTX %s"),getTZ(), getBoard(), boards[getBoard()].BOARD.c_str(), getOledBright(), getAllowTx() ? "Enable" : "Disable");
   Log::console(PSTR("Remote Tune %\nSend telemetry to third party %s"), getRemoteTune() ? "Allowed" : "Blocked", getTelemetry3rd() ? "Allowed" : "Blocked"); 
   Log::console(PSTR("Test mode %s\nAuto Update %s"), getTestMode()  ? "Enable" : "Disable", getAutoUpdate()  ? "Enable" : "Disable");

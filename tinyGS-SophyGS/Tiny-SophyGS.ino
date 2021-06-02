@@ -200,8 +200,8 @@ void wifiConnected()
   configManager.delay(400); // wait to show the connected screen and stabilize frequency
   //radio.init();
 }
-void check_azel(double check_time)
 
+void check_azel(double check_time)
 {
 static double last_check;
 if (millis() - last_check > check_time)
@@ -220,14 +220,16 @@ if (millis() - last_check > check_time)
   //Log::console("tv.sec",tv.tv_sec);
 
   P13Sun Sun;                                                       // Create object for the sun
-  P13DateTime MyTime(2021,5, ti->tm_mday, ti->tm_hour-2, ti->tm_min, ti->tm_sec); // Set start time for the prediction
+  P13DateTime MyTime(ti->tm_year, ti->tm_mon, ti->tm_mday, ti->tm_hour-2, ti->tm_min, ti->tm_sec); // Set start time for the prediction
 //  P13Observer MyQTH(pcMyName, 45, 9, 0);              // Set observer coordinates
-  P13Observer MyQTH(pcMyName, dMyLAT, dMyLON, dMyALT);              // Set observer coordinates
+//  P13Observer MyQTH(pcMyName, dMyLAT, dMyLON, dMyALT);              // Set observer coordinates
+  P13Observer MyQTH("SophyGS", configManager.getLatitude(), configManager.getLongitude(), dMyALT);              // Set observer coordinates
 
-  P13Satellite MySAT(tleName, tlel1, tlel2);                        // Create ISS data from TLE
+  P13Satellite MySAT(tleName, tlel1, tlel2);                        // Create satellite data from TLE
   
   
-  latlon2xy(ixQTH, iyQTH, dMyLAT, dMyLON, 128, 64);      // Get x/y for the pixel map 128x64 EPS32 Display dimension1 
+//  latlon2xy(ixQTH, iyQTH, dMyLAT, dMyLON, 128, 64);      // Get x/y for the pixel map 128x64 EPS32 Display dimension1 
+  latlon2xy(ixQTH, iyQTH, configManager.getLatitude(), configManager.getLongitude(), 128, 64);      // Get x/y for the pixel map 128x64 EPS32 Display dimension1 
   
   /*  For UNO instead of Serial.printf
   sprintf(buf, "\r\n\Prediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
@@ -235,8 +237,8 @@ if (millis() - last_check > check_time)
   */
   Log::console("\r\nPrediction for %s at %s (MAP %dx%d: x = %d,y = %d):\r\n\r\n", MySAT.name, MyQTH.name, MAP_MAXX, MAP_MAXY, ixQTH, iyQTH);
 
-   MyTime.ascii(acBuffer);             // Get time for prediction as ASCII string
-  MySAT.predict(MyTime);              // Predict ISS for specific time
+  MyTime.ascii(acBuffer);             // Get time for prediction as ASCII string
+  MySAT.predict(MyTime);              // Predict satellite for specific time
   MySAT.latlon(dSatLAT, dSatLON);     // Get the rectangular coordinates
   MySAT.elaz(MyQTH, dSatEL, dSatAZ);  // Get azimut and elevation for MyQTH
   latlon2xy(ixSAT, iySAT, dSatLAT, dSatLON, 128, 64);  // Get x/y for the pixel map
@@ -341,7 +343,7 @@ void loop() {
 void setupNTP()
 {
   NTP.setInterval (120); // Sync each 2 minutes
-  NTP.setTimeZone (configManager.getTZ ()); // Get TX from config manager
+  NTP.setTimeZone (configManager.getTZ()); // Get TX from config manager
   NTP.onNTPSyncEvent (ntp_cb); // Register event callback
   NTP.setMinSyncAccuracy (2000); // Sync accuracy target is 2 ms
   NTP.settimeSyncThreshold (1000); // Sync only if calculated offset absolute value is greater than 1 ms

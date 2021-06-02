@@ -77,11 +77,11 @@ void MQTT_Client::reconnect()
   char clientId[13];
   sprintf(clientId, "%04X%08X",(uint16_t)(chipId>>32), (uint32_t)chipId);
 
-  Log::console(PSTR("Attempting MQTT connection..."));
+  Log::console(PSTR("Attempting TinyGS MQTT connection..."));
   Log::console(PSTR("If this is taking more than expected, connect to the config panel on the ip: %s to review the MQTT connection credentials."), WiFi.localIP().toString().c_str());
   if (connect(clientId, configManager.getMqttUser(), configManager.getMqttPass(), buildTopic(teleTopic, topicStatus).c_str(), 2, false, "0")) {
     yield();
-    Log::console(PSTR("Connected to MQTT!"));
+    Log::console(PSTR("Connected to TinyGS MQTT!"));
     status.mqtt_connected = true;
     subscribeToAll();
     sendWelcome();
