@@ -159,24 +159,78 @@ public:
   bool getTelemetry3rd() { return !strcmp(telemetry3rd, CB_SELECTED_STR); }
   bool getTestMode() { return !strcmp(testMode, CB_SELECTED_STR); }
   bool getAutoUpdate() { return !strcmp(autoUpdate, CB_SELECTED_STR); }
-  void setAllowTx(bool status) { if (status) strcpy(allowTx, CB_SELECTED_STR); else allowTx[0] = '\0'; this->saveConfig(); }
-  void setRemoteTune(bool status) { if (status) strcpy(remoteTune, CB_SELECTED_STR); else remoteTune[0] = '\0'; this->saveConfig(); }
-  void setTelemetry3rd(bool status) { if (status) strcpy(telemetry3rd, CB_SELECTED_STR); else telemetry3rd[0] = '\0'; this->saveConfig(); }
-  void setTestMode(bool status) { if (status) strcpy(testMode, CB_SELECTED_STR); else testMode[0] = '\0'; this->saveConfig(); }
-  void setAutoUpdate(bool status) { if (status) strcpy(autoUpdate, CB_SELECTED_STR); else autoUpdate[0] = '\0'; this->saveConfig(); }
-  const char* getModemStartup() { return modemStartup; }
-  void setModemStartup(const char* modemStr) { strcpy(modemStartup, modemStr); this->saveConfig(); }
-  const char* getBoardTemplate() { return boardTemplate; }
-  void setBoardTemplate(const char* boardTemplateStr) { strcpy(boardTemplate, boardTemplateStr); this->saveConfig(); }
+  void setAllowTx(bool status)
+  {
+    if (status)
+      strcpy(allowTx, CB_SELECTED_STR);
+    else
+      allowTx[0] = '\0';
+    this->saveConfig();
+  }
+  void setRemoteTune(bool status)
+  {
+    if (status)
+      strcpy(remoteTune, CB_SELECTED_STR);
+    else
+      remoteTune[0] = '\0';
+    this->saveConfig();
+  }
+  void setTelemetry3rd(bool status)
+  {
+    if (status)
+      strcpy(telemetry3rd, CB_SELECTED_STR);
+    else
+      telemetry3rd[0] = '\0';
+    this->saveConfig();
+  }
+  void setTestMode(bool status)
+  {
+    if (status)
+      strcpy(testMode, CB_SELECTED_STR);
+    else
+      testMode[0] = '\0';
+    this->saveConfig();
+  }
+  void setAutoUpdate(bool status)
+  {
+    if (status)
+      strcpy(autoUpdate, CB_SELECTED_STR);
+    else
+      autoUpdate[0] = '\0';
+    this->saveConfig();
+  }
+  const char *getModemStartup() { return modemStartup; }
+  void setModemStartup(const char *modemStr)
+  {
+    strcpy(modemStartup, modemStr);
+    this->saveConfig();
+    parseModemStartup();
+  }
+  const char *getAvancedConfig() { return advancedConfig; }
+  void setAvancedConfig(const char *adv_prmStr)
+  {
+    strcpy(advancedConfig, adv_prmStr);
+    this->saveConfig();
+  }
+  const char *getBoardTemplate() { return boardTemplate; }
+  void setBoardTemplate(const char *boardTemplateStr)
+  {
+    strcpy(boardTemplate, boardTemplateStr);
+    this->saveConfig();
+  }
 
   const char* getWiFiSSID() { return getWifiSsidParameter()->valueBuffer; }
   bool isConnected() { return getState() == IOTWEBCONF_STATE_ONLINE; };
   bool isApMode() { return (getState() != IOTWEBCONF_STATE_CONNECTING && getState() != IOTWEBCONF_STATE_ONLINE); }
-  board_type getBoardConfig(){ return boards[getBoard()]; }
-  bool getFlipOled(){ return advancedConf.flipOled; }
-  bool getDayNightOled(){ return advancedConf.dnOled; }
-  bool getLowPower(){ return advancedConf.lowPower; }
-
+  board_type getBoardConfig() { return boards[getBoard()]; }
+  bool getFlipOled() { return advancedConf.flipOled; }
+  bool getDayNightOled() { return advancedConf.dnOled; }
+  bool getLowPower() { return advancedConf.lowPower; }
+  void saveConfig()
+  {
+    remoteSave = true;
+    IotWebConf2::saveConfig();
+  };
 
 private:
   
@@ -187,15 +241,13 @@ private:
   protected:
     String getScriptInner() override
     {
-      return
-        iotwebconf2::HtmlFormatProvider::getScriptInner();
-        //String(FPSTR(CUSTOMHTML_SCRIPT_INNER));
+      return iotwebconf2::HtmlFormatProvider::getScriptInner();
+      //String(FPSTR(CUSTOMHTML_SCRIPT_INNER));
     }
     String getBodyInner() override
     {
-      return
-        String(FPSTR(LOGO)) +
-        iotwebconf2::HtmlFormatProvider::getBodyInner();
+      return String(FPSTR(LOGO)) +
+             iotwebconf2::HtmlFormatProvider::getBodyInner();
     }
 
     ConfigManager& configManager;
@@ -210,8 +262,9 @@ private:
   void boardDetection();
   void configSavedCallback();
   void parseAdvancedConf();
-  
-  std::function<boolean(iotwebconf2::WebRequestWrapper*)> formValidatorStd;
+  void parseModemStartup();
+
+  std::function<boolean(iotwebconf2::WebRequestWrapper *)> formValidatorStd;
   DNSServer dnsServer;
   WebServer server;
 #ifdef ESP8266
@@ -220,9 +273,10 @@ private:
   HTTPUpdateServer httpUpdater;
 #endif
   GSConfigHtmlFormatProvider gsConfigHtmlFormatProvider;
-  board_type boards[NUM_BOARDS]; 
+  board_type boards[NUM_BOARDS];
   AdvancedConfig advancedConf;
   char savedThingName[IOTWEBCONF_WORD_LEN] = "";
+  bool remoteSave = false;
 
   char latitude[COORDINATE_LENGTH] = "";
   char longitude[COORDINATE_LENGTH] = "";
@@ -250,9 +304,9 @@ private:
   char modemStartup[MODEM_LEN] = MODEM_DEFAULT;
   char advancedConfig[ADVANCED_LEN] = "";
 
-  iotwebconf2::NumberParameter latitudeParam = iotwebconf2::NumberParameter("Latitude (will be public)", "lat", latitude, COORDINATE_LENGTH, NULL, NULL, "required min='-180' max='180' step='0.001'");
-  iotwebconf2::NumberParameter longitudeParam = iotwebconf2::NumberParameter("Longitude (will be public)", "lng", longitude, COORDINATE_LENGTH, NULL, NULL, "required min='-180' max='180' step='0.001'");
-  iotwebconf2::SelectParameter tzParam = iotwebconf2::SelectParameter("Time Zone", "tz", tz, TZ_LENGTH, (char*)TZ_VALUES, (char*)TZ_NAMES, sizeof(TZ_VALUES) / TZ_LENGTH, TZ_NAME_LENGTH);
+  iotwebconf2::NumberParameter latitudeParam = iotwebconf2::NumberParameter("Latitude (3 decimals, will be public)", "lat", latitude, COORDINATE_LENGTH, NULL, "0.000", "required min='-180' max='180' step='0.001'");
+  iotwebconf2::NumberParameter longitudeParam = iotwebconf2::NumberParameter("Longitude (3 decimals, will be public)", "lng", longitude, COORDINATE_LENGTH, NULL, "-0.000", "required min='-180' max='180' step='0.001'");
+  iotwebconf2::SelectParameter tzParam = iotwebconf2::SelectParameter("Time Zone", "tz", tz, TZ_LENGTH, (char *)TZ_VALUES, (char *)TZ_NAMES, sizeof(TZ_VALUES) / TZ_LENGTH, TZ_NAME_LENGTH);
 
 // MQTT TINYGS
   iotwebconf2::ParameterGroup groupMqtt = iotwebconf2::ParameterGroup("MQTT credentials" , "MQTT credentials (get them <a href='https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q'>here</a>)");
@@ -271,16 +325,16 @@ private:
   iotwebconf2::ParameterGroup groupBoardConfig = iotwebconf2::ParameterGroup("Board config" , "Board config");
   iotwebconf2::SelectParameter boardParam = iotwebconf2::SelectParameter("Board type", "board", board, BOARD_LENGTH, (char*)BOARD_VALUES, (char*)BOARD_NAMES, sizeof(BOARD_VALUES) / BOARD_LENGTH, BOARD_NAME_LENGTH);
   iotwebconf2::NumberParameter oledBrightParam = iotwebconf2::NumberParameter("OLED Bright", "oled_bright", oledBright, NUMBER_LEN, "100", "0..100", "min='0' max='100' step='1'");
-  iotwebconf2::CheckboxParameter AllowTxParam  = iotwebconf2::CheckboxParameter("Enable TX (HAM licence/ no preamp)", "tx", allowTx, CHECKBOX_LENGTH, true);
-  iotwebconf2::CheckboxParameter remoteTuneParam = iotwebconf2::CheckboxParameter("Allow Automatic Tunning","remote_tune",remoteTune, CHECKBOX_LENGTH, true);
-  iotwebconf2::CheckboxParameter telemetry3rdParam = iotwebconf2::CheckboxParameter("Allow sending telemetry to third party","telemetry3rd",telemetry3rd, CHECKBOX_LENGTH, true);
-  iotwebconf2::CheckboxParameter testParam = iotwebconf2::CheckboxParameter("Test mode","test",testMode, CHECKBOX_LENGTH, false);
-  iotwebconf2::CheckboxParameter autoUpdateParam = iotwebconf2::CheckboxParameter("Automatic Firmware Update","auto_update",autoUpdate, CHECKBOX_LENGTH, true);
+  iotwebconf2::CheckboxParameter AllowTxParam = iotwebconf2::CheckboxParameter("Enable TX (HAM licence/ no preamp)", "tx", allowTx, CHECKBOX_LENGTH, true);
+  iotwebconf2::CheckboxParameter remoteTuneParam = iotwebconf2::CheckboxParameter("Allow Automatic Tuning", "remote_tune", remoteTune, CHECKBOX_LENGTH, true);
+  iotwebconf2::CheckboxParameter telemetry3rdParam = iotwebconf2::CheckboxParameter("Allow sending telemetry to third party", "telemetry3rd", telemetry3rd, CHECKBOX_LENGTH, true);
+  iotwebconf2::CheckboxParameter testParam = iotwebconf2::CheckboxParameter("Test mode", "test", testMode, CHECKBOX_LENGTH, false);
+  iotwebconf2::CheckboxParameter autoUpdateParam = iotwebconf2::CheckboxParameter("Automatic Firmware Update", "auto_update", autoUpdate, CHECKBOX_LENGTH, true);
 
   iotwebconf2::ParameterGroup groupAdvanced = iotwebconf2::ParameterGroup("Advanced config" , "Advanced Config (do not modify unless you know what you are doing)");
   iotwebconf2::TextParameter boardTemplateParam = iotwebconf2::TextParameter("Board Template (requires manual restart)", "board_template", boardTemplate, TEMPLATE_LEN, NULL, NULL, "type=\"text\" maxlength=255");
   iotwebconf2::TextParameter modemParam = iotwebconf2::TextParameter("Modem startup", "modem_startup", modemStartup, MODEM_LEN, MODEM_DEFAULT, MODEM_DEFAULT, "type=\"text\" maxlength=255");
-  iotwebconf2::TextParameter advancedConfigParam = iotwebconf2::TextParameter("Avanced parameters", "advanced_config", advancedConfig, ADVANCED_LEN, NULL, NULL, "type=\"text\" maxlength=255");
+  iotwebconf2::TextParameter advancedConfigParam = iotwebconf2::TextParameter("Advanced parameters", "advanced_config", advancedConfig, ADVANCED_LEN, NULL, NULL, "type=\"text\" maxlength=255");
 };
 
 #endif
