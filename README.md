@@ -45,7 +45,7 @@ Check our wiki [configuration page](https://github.com/virtualrobotix/sophyai.sp
 # Main data website sophyai.space
 All data recived in realtime are share in our alfa version of DashBoard 
 
-[http://rp.lasernavigation.it:6015/](http://rp.lasernavigation.it:6015/)
+[http://sophyai.space:1880/worldmap/](http://sophyai.space:1880/worldmap/)
 
 
 
@@ -97,6 +97,11 @@ This project relies on several third party libraries:
 - FailSafeMode
 - TinyGS 
 
+# TinyGS team
+The main TinyGS developer team is:
+- 4m1g0
+- G4lile0
+- gmag11
 
 # Sophyai.space Team
 - [Roberto Iu2IOL](https://github.com/virtualrobotix)
