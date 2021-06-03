@@ -149,8 +149,8 @@ public:
   const char* getMqttUser_Sophy() { return mqttUser_sophy; }
   const char* getMqttPass_Sophy() { return mqttPass_sophy; }
 #endif
-  float getLatitude() { return atof(latitude); }
-  float getLongitude() { return atof(longitude); }
+  double getLatitude() { return atof(latitude); }
+  double getLongitude() { return atof(longitude); }
   const char* getTZ() { return tz + 3; } // +3 removes the first 3 digits used for time zone deduplication
   uint8_t getBoard() { return atoi(board); }
   uint8_t getOledBright() { return atoi(oledBright); }
