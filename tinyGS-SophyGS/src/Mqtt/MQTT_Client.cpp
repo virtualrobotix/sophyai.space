@@ -225,7 +225,7 @@ void  MQTT_Client::sendRx(String packet, bool noisy)
 
   char buffer[1536];
   serializeJson(doc, buffer);
-  Log::debug(PSTR("%s"), buffer);
+  Log::console(PSTR("%s"), buffer);
   publish(buildTopic(teleTopic, topicRx).c_str(), buffer, false);
 }
 
