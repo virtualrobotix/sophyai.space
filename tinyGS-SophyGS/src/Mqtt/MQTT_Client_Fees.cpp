@@ -221,32 +221,32 @@ void  MQTT_Client_Fees::sendRx(String packet, bool noisy)
   doc["userid"].set(configManager.getMqttUser_Sophy());
   doc["stationname"].set(configManager.getThingName());
   doc["mac"] = clientId;
-  doc["mode"] = status_sophy.modeminfo.modem_mode;
-  doc["frequency"] = status_sophy.modeminfo.frequency;
-  doc["satellite"] = status_sophy.modeminfo.satellite;
+  doc["mode"] = status.modeminfo.modem_mode;
+  doc["frequency"] = status.modeminfo.frequency;
+  doc["satellite"] = status.modeminfo.satellite;
  
-  if (String(status_sophy.modeminfo.modem_mode)=="LoRa")
+  if (String(status.modeminfo.modem_mode)=="LoRa")
   {
-    doc["sf"] = status_sophy.modeminfo.sf;
-    doc["cr"] = status_sophy.modeminfo.cr;
-    doc["bw"] = status_sophy.modeminfo.bw;
+    doc["sf"] = status.modeminfo.sf;
+    doc["cr"] = status.modeminfo.cr;
+    doc["bw"] = status.modeminfo.bw;
   }
   else
   {
-    doc["bitrate"] = status_sophy.modeminfo.bitrate;
-    doc["freqdev"] = status_sophy.modeminfo.freqDev;
-    doc["rxBw"] = status_sophy.modeminfo.bw;
+    doc["bitrate"] = status.modeminfo.bitrate;
+    doc["freqdev"] = status.modeminfo.freqDev;
+    doc["rxBw"] = status.modeminfo.bw;
   }
 
-  doc["rssi"] = status_sophy.lastPacketInfo.rssi;
-  doc["snr"] = status_sophy.lastPacketInfo.snr;
-  doc["frequency_error"] = status_sophy.lastPacketInfo.frequencyerror;
+  doc["rssi"] = status.lastPacketInfo.rssi;
+  doc["snr"] = status.lastPacketInfo.snr;
+  doc["frequency_error"] = status.lastPacketInfo.frequencyerror;
   doc["unix_GS_time"] = now;
   doc["usec_time"] = (int64_t)tv.tv_usec + tv.tv_sec * 1000000ll;
-  doc["time_offset"] = status_sophy.time_offset;
-  doc["crc_error"] = status_sophy.lastPacketInfo.crc_error;
+  doc["time_offset"] = status.time_offset;
+  doc["crc_error"] = status.lastPacketInfo.crc_error;
   doc["data"] = packet.c_str();
-  doc["NORAD"] = status_sophy.modeminfo.NORAD;
+  doc["NORAD"] = status.modeminfo.NORAD;
   doc["test"] = configManager.getTestMode();
   doc["noisy"] = noisy;
 
@@ -276,36 +276,36 @@ void  MQTT_Client_Fees::sendStatus()
   doc["telemetry3d"] = configManager.getTelemetry3rd();
   doc["test"] = configManager.getTestMode();
 
-  doc["mode"] = status_sophy.modeminfo.modem_mode;
-  doc["frequency"] = status_sophy.modeminfo.frequency;
-  doc["satellite"] = status_sophy.modeminfo.satellite;
-  doc["NORAD"] = status_sophy.modeminfo.NORAD;
+  doc["mode"] = status.modeminfo.modem_mode;
+  doc["frequency"] = status.modeminfo.frequency;
+  doc["satellite"] = status.modeminfo.satellite;
+  doc["NORAD"] = status.modeminfo.NORAD;
  
-  if (String(status_sophy.modeminfo.modem_mode)=="LoRa")
+  if (String(status.modeminfo.modem_mode)=="LoRa")
   {
-    doc["sf"] = status_sophy.modeminfo.sf;
-    doc["cr"] = status_sophy.modeminfo.cr;
-    doc["bw"] = status_sophy.modeminfo.bw;
+    doc["sf"] = status.modeminfo.sf;
+    doc["cr"] = status.modeminfo.cr;
+    doc["bw"] = status.modeminfo.bw;
   }
   else
   {
-    doc["bitrate"] = status_sophy.modeminfo.bitrate;
-    doc["freqdev"] = status_sophy.modeminfo.freqDev;
-    doc["rxBw"] = status_sophy.modeminfo.bw;
+    doc["bitrate"] = status.modeminfo.bitrate;
+    doc["freqdev"] = status.modeminfo.freqDev;
+    doc["rxBw"] = status.modeminfo.bw;
   }
 
-  doc["pl"] = status_sophy.modeminfo.preambleLength;
-  doc["CRC"] = status_sophy.modeminfo.crc;
-  doc["FLDRO"] = status_sophy.modeminfo.fldro;
-  doc["OOK"] = status_sophy.modeminfo.OOK;
+  doc["pl"] = status.modeminfo.preambleLength;
+  doc["CRC"] = status.modeminfo.crc;
+  doc["FLDRO"] = status.modeminfo.fldro;
+  doc["OOK"] = status.modeminfo.OOK;
 
-  doc["rssi"] = status_sophy.lastPacketInfo.rssi;
-  doc["snr"] = status_sophy.lastPacketInfo.snr;
-  doc["frequency_error"] = status_sophy.lastPacketInfo.frequencyerror;
-  doc["crc_error"] = status_sophy.lastPacketInfo.crc_error;
+  doc["rssi"] = status.lastPacketInfo.rssi;
+  doc["snr"] = status.lastPacketInfo.snr;
+  doc["frequency_error"] = status.lastPacketInfo.frequencyerror;
+  doc["crc_error"] = status.lastPacketInfo.crc_error;
   doc["unix_GS_time"] = now;
   doc["usec_time"] = (int64_t)tv.tv_usec + tv.tv_sec * 1000000ll;
-  doc["time_offset"] = status_sophy.time_offset;
+  doc["time_offset"] = status.time_offset;
     
   char buffer[1024];
   serializeJson(doc, buffer);
@@ -378,24 +378,24 @@ void MQTT_Client_Fees::manageMQTTDataFees(char *topic, uint8_t *payload, unsigne
     uint8_t frameNumber = atoi(strtok(NULL, "/"));
     DynamicJsonDocument doc(JSON_ARRAY_SIZE(5) * 15 + JSON_ARRAY_SIZE(15));
     deserializeJson(doc, payload, length);
-    status_sophy.remoteTextFrameLength[frameNumber] = doc.size();
-    Log::debug(PSTR("Received frame: %u"), status_sophy.remoteTextFrameLength[frameNumber]);
+    status.remoteTextFrameLength[frameNumber] = doc.size();
+    Log::debug(PSTR("Received frame: %u"), status.remoteTextFrameLength[frameNumber]);
   
-    for (uint8_t n=0; n<status_sophy.remoteTextFrameLength[frameNumber];n++)
+    for (uint8_t n=0; n<status.remoteTextFrameLength[frameNumber];n++)
     {
-      status_sophy.remoteTextFrame[frameNumber][n].text_font = doc[n][0];
-      status_sophy.remoteTextFrame[frameNumber][n].text_alignment = doc[n][1];
-      status_sophy.remoteTextFrame[frameNumber][n].text_pos_x = doc[n][2];
-      status_sophy.remoteTextFrame[frameNumber][n].text_pos_y = doc[n][3];
+      status.remoteTextFrame[frameNumber][n].text_font = doc[n][0];
+      status.remoteTextFrame[frameNumber][n].text_alignment = doc[n][1];
+      status.remoteTextFrame[frameNumber][n].text_pos_x = doc[n][2];
+      status.remoteTextFrame[frameNumber][n].text_pos_y = doc[n][3];
       String text = doc[n][4];
-      status_sophy.remoteTextFrame[frameNumber][n].text = text;  
+      status.remoteTextFrame[frameNumber][n].text = text;  
       
       Log::debug(PSTR("Text: %u Font: %u Alig: %u Pos x: %u Pos y: %u -> %s"), n, 
-                                      status_sophy.remoteTextFrame[frameNumber][n].text_font, 
-                                      status_sophy.remoteTextFrame[frameNumber][n].text_alignment, 
-                                      status_sophy.remoteTextFrame[frameNumber][n].text_pos_x,
-                                      status_sophy.remoteTextFrame[frameNumber][n].text_pos_y,
-                                      status_sophy.remoteTextFrame[frameNumber][n].text.c_str());
+                                      status.remoteTextFrame[frameNumber][n].text_font, 
+                                      status.remoteTextFrame[frameNumber][n].text_alignment, 
+                                      status.remoteTextFrame[frameNumber][n].text_pos_x,
+                                      status.remoteTextFrame[frameNumber][n].text_pos_y,
+                                      status.remoteTextFrame[frameNumber][n].text.c_str());
     }
 
     result = 0;
@@ -635,11 +635,11 @@ void MQTT_Client_Fees::remoteSatCmnd(char* payload, size_t payload_len)
 {
   DynamicJsonDocument doc(256);
   deserializeJson(doc, payload, payload_len);
-  strcpy(status_sophy.modeminfo.satellite, doc[0]);
+  strcpy(status.modeminfo.satellite, doc[0]);
   uint32_t NORAD = doc[1];
-  status_sophy.modeminfo.NORAD = NORAD;
+  status.modeminfo.NORAD = NORAD;
 
-  Log::debug(PSTR("Listening Satellite: %s NORAD: %u"), status_sophy.modeminfo.satellite, NORAD);
+  Log::debug(PSTR("Listening Satellite: %s NORAD: %u"), status.modeminfo.satellite, NORAD);
 }
 
 void MQTT_Client_Fees::remoteSatFilter(char* payload, size_t payload_len)

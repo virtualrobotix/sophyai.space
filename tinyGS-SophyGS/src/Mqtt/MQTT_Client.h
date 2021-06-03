@@ -25,8 +25,10 @@
 
 #include "../ConfigManager/ConfigManager.h"
 #include "../Status.h"
-#define MQTT_MAX_PACKET_SIZE 1000
 #include <PubSubClient.h>
+#if MQTT_MAX_PACKET_SIZE != 1000  && !PLATFORMIO
+#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /PubSubClient/src/PubSubClient.h  and set #define MQTT_MAX_PACKET_SIZE 1000"
+#endif
 #ifdef SECURE_MQTT
 #include <WiFiClientSecure.h>
 #include "../certs.h"
@@ -49,6 +51,7 @@ public:
   void sendRx(String packet, bool noisy);
   void manageMQTTData(char *topic, uint8_t *payload, unsigned int length);
   void sendStatus();
+  void sendAdvParameters();
   void scheduleRestart() { scheduledRestart = true; };
 
 protected:
@@ -66,6 +69,8 @@ private:
   void manageSatPosOled(char* payload, size_t payload_len);
   void remoteSatCmnd(char* payload, size_t payload_len);
   void remoteSatFilter(char* payload, size_t payload_len);
+  void remoteGoToSleep(char* payload, size_t payload_len);
+  void remoteSetFreqOffset(char* payload, size_t payload_len);
 
   bool usingNewCert = false;
   unsigned long lastPing = 0;
@@ -87,6 +92,7 @@ private:
   const char* topicPing PROGMEM= "ping";
   const char* topicStatus PROGMEM = "status";
   const char* topicRx PROGMEM= "rx";
+  const char* topicGet_adv_prm PROGMEM = "get_adv_prm";
 
   // command
   const char* commandBatchConf PROGMEM= "batch_conf";
@@ -102,7 +108,8 @@ private:
   const char* commandFldro PROGMEM= "fldro";
   const char* commandAldro PROGMEM= "aldro";
   const char* commandPl PROGMEM= "pl";
-  const char* commandBegin PROGMEM= "begin";
+  const char* commandBegine PROGMEM= "begine";
+  const char* commandBeginp PROGMEM= "beginp";
   const char* commandBeginLora PROGMEM= "begin_lora";
   const char* commandBeginFSK PROGMEM= "begin_fsk";
   const char* commandBr PROGMEM= "br";
@@ -119,6 +126,10 @@ private:
   const char* commandLog PROGMEM= "log";
   const char* commandTx PROGMEM= "tx";
   const char* commandSatFilter PROGMEM= "filter";
+  const char* commandGoToSleep PROGMEM= "sleep";
+  const char* commandSetFreqOffset PROGMEM= "foff";
+  const char* commandSetAdvParameters PROGMEM= "set_adv_prm";
+  const char* commandGetAdvParameters PROGMEM= "get_adv_prm";
     // GOD MODE  With great power comes great responsibility!
   const char* commandSPIsetRegValue PROGMEM= "SPIsetRegValue";
   const char* commandSPIwriteRegister PROGMEM= "SPIwriteRegister";

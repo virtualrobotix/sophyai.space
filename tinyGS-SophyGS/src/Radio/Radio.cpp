@@ -18,8 +18,10 @@
 */
 
 #include "Radio.h"
-#define ARDUINOJSON_USE_LONG_LONG 1
 #include "ArduinoJson.h"
+#if ARDUINOJSON_USE_LONG_LONG == 0 && !PLATFORMIO
+#error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or /ArduinoJson/src/ArduinoJson/Configuration.hpp and amend to #define ARDUINOJSON_USE_LONG_LONG 1 around line 68"
+#endif
 #include <base64.h>
 #include "../Logger/Logger.h"
 
@@ -44,7 +46,7 @@ void Radio::init()
     DynamicJsonDocument doc(size);
     DeserializationError error = deserializeJson(doc, ConfigManager::getInstance().getBoardTemplate());
 
-    if (error.code() != DeserializationError::Ok || doc.containsKey("aADDR"))
+    if (error.code() != DeserializationError::Ok || !doc.containsKey("radio"))
     {
       Log::console(PSTR("Error: Your Board template is not valid. Unable to init radio."));
       return;
@@ -90,41 +92,14 @@ int16_t Radio::begin()
 {
   status.radio_ready = false;
   board_type board = ConfigManager::getInstance().getBoardConfig();
-  const char* modemConfig = ConfigManager::getInstance().getModemStartup();
-  size_t size = JSON_ARRAY_SIZE(10) + 10*JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(16) + JSON_ARRAY_SIZE(8) + JSON_ARRAY_SIZE(8) +64;
-  DynamicJsonDocument doc(size);
-  DeserializationError error = deserializeJson(doc, modemConfig);
-
-  if (error.code() != DeserializationError::Ok || !doc.containsKey("mode"))
-  {
-    Log::console(PSTR("ERROR: Your modem config is invalid. Resetting to default"));
-    ConfigManager::getInstance().resetModemConfig();
-    return -1;
-  }
-
-  ModemInfo& m = status.modeminfo;
-  m.modem_mode = doc["mode"].as<String>();
-  strcpy(m.satellite, doc["sat"].as<char*>());
-  m.NORAD = doc["NORAD"];
-
+  ModemInfo &m = status.modeminfo;
   int16_t state = 0;
 
   if (m.modem_mode == "LoRa")
   {
-    m.frequency = doc["freq"];
-    m.bw = doc["bw"];
-    m.sf = doc["sf"];
-    m.cr = doc["cr"];
-    m.sw = doc["sw"];
-    m.power = doc["pwr"];
-    m.preambleLength = doc["pl"];
-    m.gain = doc["gain"];
-    m.crc = doc["crc"];
-    m.fldro = doc["fldro"];
-
     if (board.L_SX127X)
     {
-      state = ((SX1278*)lora)->begin(m.frequency, m.bw, m.sf, m.cr, m.sw, m.power,m.preambleLength,m.gain);
+      state = ((SX1278 *)lora)->begin(m.frequency + status.modeminfo.freqOffset, m.bw, m.sf, m.cr, m.sw, m.power, m.preambleLength, m.gain);
       if (m.fldro == 2)
         ((SX1278*)lora)->autoLDRO();
       else
@@ -134,7 +109,7 @@ int16_t Radio::begin()
     }
     else
     {
-      state = ((SX1268*)lora)->begin(m.frequency, m.bw, m.sf, m.cr, m.sw, m.power, m.preambleLength, board.L_TCXO_V);
+      state = ((SX1268 *)lora)->begin(m.frequency + status.modeminfo.freqOffset, m.bw, m.sf, m.cr, m.sw, m.power, m.preambleLength, board.L_TCXO_V);
       if (m.fldro == 2)
         ((SX1268*)lora)->autoLDRO();
       else
@@ -145,41 +120,26 @@ int16_t Radio::begin()
   }
   else 
   {
-    m.frequency = doc["freq"];
-    m.bw = doc["bw"];
-    m.bitrate = doc["br"];
-    m.freqDev = doc["fd"];
-    m.power = doc["pwr"];
-    m.preambleLength = doc["pl"];
-    m.OOK = doc["ook"];
-    uint8_t swSize = doc["fsw"].size();
-    for (int i=0; i<8; i++) 
+    if (ConfigManager::getInstance().getBoardConfig().L_SX127X)
     {
-      if (i < swSize)
-        m.fsw[i] = doc["fsw"][i];
-      else
-        m.fsw[i] = 0;
+      state = ((SX1278 *)lora)->beginFSK(m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, (m.OOK != 255));
+      ((SX1278 *)lora)->setDataShaping(m.OOK);
+      ((SX1278 *)lora)->startReceive();
+      ((SX1278 *)lora)->setDio0Action(setFlag);
+      ((SX1278 *)lora)->setSyncWord(m.fsw, m.swSize);
     }
-    
-
-    if (ConfigManager::getInstance().getBoardConfig().L_SX127X) {
-      state = ((SX1278*)lora)->beginFSK(m.frequency, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, (m.OOK != 255));
-      ((SX1278*)lora)->setDataShaping(m.OOK);
-      ((SX1278*)lora)->startReceive();
-      ((SX1278*)lora)->setDio0Action(setFlag);
-      ((SX1278*)lora)->setSyncWord(m.fsw, swSize);
-
-    } else {
-      state = ((SX1268*)lora)->beginFSK(m.frequency, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
-      ((SX1268*)lora)->setDataShaping(m.OOK);
-      ((SX1268*)lora)->startReceive();
-      ((SX1268*)lora)->setDio1Action(setFlag);
-      state = ((SX1268*)lora)->setSyncWord(m.fsw, swSize);
+    else
+    {
+      state = ((SX1268 *)lora)->beginFSK(m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
+      ((SX1268 *)lora)->setDataShaping(m.OOK);
+      ((SX1268 *)lora)->startReceive();
+      ((SX1268 *)lora)->setDio1Action(setFlag);
+      state = ((SX1268 *)lora)->setSyncWord(m.fsw, m.swSize);
     }
   }
 
   // registers
-  JsonArray regs = doc.as<JsonArray>();
+  /*JsonArray regs = doc.as<JsonArray>();
   for (int i=0; i<regs.size(); i++) {
     JsonObject reg = regs[i];
     uint16_t regValue = reg["ref"];
@@ -189,24 +149,12 @@ int16_t Radio::begin()
       state = ((SX1278*)lora)->_mod->SPIsetRegValue((regValue>>8)&0x0F, regValue&0x0F, (regMask>>16)&0x0F, (regMask>>8)&0x0F, regMask&0x0F);
    // else
    //   state = ((SX1268*)lora)->_mod->SPIsetRegValue((regValue>>8)&0x0F, regValue&0x0F, (regMask>>16)&0x0F, (regMask>>8)&0x0F, regMask&0x0F);
-  }
-  
-  
-  // packets Filter    
-  uint8_t filterSize = doc["filter"].size();
-    for (int i=0; i<8; i++) 
-    {
-      if (i < filterSize)
-        status.modeminfo.filter[i] = doc["filter"][i];
-      else
-        status.modeminfo.filter[i] = 0;
-    }
-  
+  }*/
 
   if (state == ERR_NONE)
   {
-    Log::console(PSTR("success!"));
-  } 
+    //Log::console(PSTR("success!"));
+  }
   else
   {
     Log::console(PSTR("failed, code %d"), state);
@@ -228,14 +176,14 @@ int16_t Radio::begin()
   // start listening for LoRa packets
   Log::console(PSTR("[SX12x8] Starting to listen to %s"), m.satellite);
   if (board.L_SX127X)
-    state = ((SX1278*)lora)->startReceive();
+    state = ((SX1278 *)lora)->startReceive();
   else
-    state = ((SX1268*)lora)->startReceive();
+    state = ((SX1268 *)lora)->startReceive();
 
   if (state == ERR_NONE)
   {
-    Log::console(PSTR("success!"));
-  } 
+    //Log::console(PSTR("success!"));
+  }
   else
   {
     Log::console(PSTR("failed, code %d\nGo to the config panel (%s) and check if the board selected matches your hardware."), state, WiFi.localIP().toString());
@@ -377,10 +325,11 @@ uint8_t Radio::listen()
   {
     // read optional data
     Log::console(PSTR("Packet (%u bytes):"), respLen);
-    uint16_t buffSize = respLen*2+1;
-    if (buffSize > 255) buffSize = 255;
-    char* byteStr = new char[buffSize];
-    for(int i = 0; i < respLen; i++)
+    uint16_t buffSize = respLen * 2 + 1;
+    if (buffSize > 255)
+      buffSize = 255;
+    char *byteStr = new char[buffSize];
+    for (int i = 0; i < respLen; i++)
     {
       sprintf(byteStr + i*2 % (buffSize-1), "%02x", respFrame[i]);
       if (i*2 % buffSize == buffSize-3 || i == respLen-1)
@@ -394,14 +343,16 @@ uint8_t Radio::listen()
       bool filter_flag = false;
       uint8_t filter_size = status.modeminfo.filter[0];
       uint8_t filter_ini = status.modeminfo.filter[1];
-   
-  	  for (uint8_t filter_pos=0; filter_pos<filter_size;filter_pos++)
-	      {
-	        if (status.modeminfo.filter[2+filter_pos] != respFrame[filter_ini+filter_pos]) filter_flag= true;
-  	      }	
 
-        // if the msg start with tiny (test packet) remove filter 
-      if (respFrame[0]==0x54 && respFrame[1]==0x69 && respFrame[2]==0x6e && respFrame[3]==0x79) filter_flag=false;
+      for (uint8_t filter_pos = 0; filter_pos < filter_size; filter_pos++)
+      {
+        if (status.modeminfo.filter[2 + filter_pos] != respFrame[filter_ini + filter_pos])
+          filter_flag = true;
+      }
+
+      // if the msg start with tiny (test packet) remove filter
+      if (respFrame[0] == 0x54 && respFrame[1] == 0x69 && respFrame[2] == 0x6e && respFrame[3] == 0x79)
+        filter_flag = false;
 
       if (filter_flag)
         {
@@ -420,9 +371,10 @@ uint8_t Radio::listen()
   }
   else if (state == ERR_CRC_MISMATCH) 
   {
-         // if filter is active, filter the CRC errors
-    if (status.modeminfo.filter[0]==0) {
-         // packet was received, but is malformed
+    // if filter is active, filter the CRC errors
+    if (status.modeminfo.filter[0] == 0)
+    {
+      // packet was received, but is malformed
       status.lastPacketInfo.crc_error = true;
       String error_encoded = base64::encode("Error_CRC");
       MQTT_Client::getInstance().sendRx(error_encoded, noisyInterrupt);
@@ -449,13 +401,22 @@ uint8_t Radio::listen()
     // store time of the last packet received:
     timeinfo = localtime (&currenttime);
     String thisTime = "";
-    if (timeinfo->tm_hour < 10){ thisTime=thisTime + " ";} // add leading space if required
-    thisTime = String (timeinfo->tm_hour) + ":";
-    if (timeinfo->tm_min < 10) { thisTime = thisTime + "0"; } // add leading zero if required
-    thisTime = thisTime + String (timeinfo->tm_min) + ":";
-    if (timeinfo->tm_sec < 10) { thisTime = thisTime + "0"; } // add leading zero if required
-    thisTime = thisTime + String (timeinfo->tm_sec);
-    
+    if (timeinfo->tm_hour < 10)
+    {
+      thisTime = thisTime + " ";
+    } // add leading space if required
+    thisTime = String(timeinfo->tm_hour) + ":";
+    if (timeinfo->tm_min < 10)
+    {
+      thisTime = thisTime + "0";
+    } // add leading zero if required
+    thisTime = thisTime + String(timeinfo->tm_min) + ":";
+    if (timeinfo->tm_sec < 10)
+    {
+      thisTime = thisTime + "0";
+    } // add leading zero if required
+    thisTime = thisTime + String(timeinfo->tm_sec);
+
     status.lastPacketInfo.time = thisTime;
   }
 
@@ -511,15 +472,15 @@ int16_t Radio::remote_freq(char* payload, size_t payload_len)
   int16_t state = 0;
   if (ConfigManager::getInstance().getBoardConfig().L_SX127X) 
   {
-    ((SX1278*)lora)->sleep();   // sleep mandatory if FastHop isn't ON.
-    state = ((SX1278*)lora)->setFrequency(frequency);
-    ((SX1278*)lora)->startReceive();
-  }      
-  else 
+    ((SX1278 *)lora)->sleep(); // sleep mandatory if FastHop isn't ON.
+    state = ((SX1278 *)lora)->setFrequency(frequency + status.modeminfo.freqOffset);
+    ((SX1278 *)lora)->startReceive();
+  }
+  else
   {
-    ((SX1268*)lora)->sleep();
-    state = ((SX1268*)lora)->setFrequency(frequency);
-    ((SX1268*)lora)->startReceive();
+    ((SX1268 *)lora)->sleep();
+    state = ((SX1268 *)lora)->setFrequency(frequency + status.modeminfo.freqOffset);
+    ((SX1268 *)lora)->startReceive();
   }
  
   readState(state);
@@ -670,7 +631,8 @@ int16_t Radio::remote_fldro(char* payload, size_t payload_len)
 
   readState(state);
 
-  if (state == ERR_NONE) {
+  if (state == ERR_NONE)
+  {
     if (ldro)
       status.modeminfo.fldro=true; 
     else 
@@ -753,16 +715,16 @@ int16_t Radio::remote_begin_lora(char* payload, size_t payload_len)
   int16_t state = 0;
   if (ConfigManager::getInstance().getBoardConfig().L_SX127X)
   {
-    ((SX1278*)lora)->sleep();   // sleep mandatory if FastHop isn't ON.
-    state = ((SX1278*)lora)->begin(freq, bw, sf, cr, syncWord78, power, preambleLength, gain);
-    ((SX1278*)lora)->startReceive();
-    ((SX1278*)lora)->setDio0Action(setFlag);
+    ((SX1278 *)lora)->sleep(); // sleep mandatory if FastHop isn't ON.
+    state = ((SX1278 *)lora)->begin(freq + status.modeminfo.freqOffset, bw, sf, cr, syncWord78, power, preambleLength, gain);
+    ((SX1278 *)lora)->startReceive();
+    ((SX1278 *)lora)->setDio0Action(setFlag);
   }
   else
   {
-    state = ((SX1268*)lora)->begin(freq, bw, sf, cr, syncWord68, power, preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
-    ((SX1268*)lora)->startReceive();
-    ((SX1268*)lora)->setDio1Action(setFlag);
+    state = ((SX1268 *)lora)->begin(freq + status.modeminfo.freqOffset, bw, sf, cr, syncWord68, power, preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
+    ((SX1268 *)lora)->startReceive();
+    ((SX1268 *)lora)->setDio1Action(setFlag);
   }
   
   readState(state);
@@ -797,17 +759,19 @@ int16_t Radio::remote_begin_fsk(char* payload, size_t payload_len)
   Log::console(PSTR("Set Current limit: %u\nSet Preamble Length: %u\nOOK Modulation %s\nSet datashaping %u"), currentlimit, preambleLength, (ook != 255) ? F("ON") : F("OFF"), ook);
 
   int16_t state = 0;
-  if (ConfigManager::getInstance().getBoardConfig().L_SX127X) {
-    state = ((SX1278*)lora)->beginFSK(freq, br, freqDev, rxBw, power, preambleLength, (ook != 255));
-    ((SX1278*)lora)->setDataShaping(ook);
-    ((SX1278*)lora)->startReceive();
-    ((SX1278*)lora)->setDio0Action(setFlag);
-
-  } else {
-    state = ((SX1268*)lora)->beginFSK(freq, br, freqDev, rxBw, power, preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
-    ((SX1268*)lora)->setDataShaping(ook);
-    ((SX1268*)lora)->startReceive();
-    ((SX1268*)lora)->setDio1Action(setFlag);
+  if (ConfigManager::getInstance().getBoardConfig().L_SX127X)
+  {
+    state = ((SX1278 *)lora)->beginFSK(freq + status.modeminfo.freqOffset, br, freqDev, rxBw, power, preambleLength, (ook != 255));
+    ((SX1278 *)lora)->setDataShaping(ook);
+    ((SX1278 *)lora)->startReceive();
+    ((SX1278 *)lora)->setDio0Action(setFlag);
+  }
+  else
+  {
+    state = ((SX1268 *)lora)->beginFSK(freq + status.modeminfo.freqOffset, br, freqDev, rxBw, power, preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
+    ((SX1268 *)lora)->setDataShaping(ook);
+    ((SX1268 *)lora)->startReceive();
+    ((SX1268 *)lora)->setDio1Action(setFlag);
   }
   readState(state);
   
@@ -888,12 +852,16 @@ int16_t Radio::remote_fsw(char* payload, size_t payload_len)
   uint8_t syncWord[synnwordsize];
 
   Serial.println("");
-  Serial.print(F("Set SyncWord Size ")); Serial.print(synnwordsize); Serial.print(F("-> "));
+  Serial.print(F("Set SyncWord Size "));
+  Serial.print(synnwordsize);
+  Serial.print(F("-> "));
 
   for (uint8_t words=0; words<synnwordsize;words++)
   {
-    syncWord[words]=doc[words+1];
-    Serial.print(F(" 0x"));Serial.print(syncWord[words],HEX);Serial.print(F(", "));
+    syncWord[words] = doc[words + 1];
+    Serial.print(F(" 0x"));
+    Serial.print(syncWord[words], HEX);
+    Serial.print(F(", "));
   }
 
   int16_t state = 0;

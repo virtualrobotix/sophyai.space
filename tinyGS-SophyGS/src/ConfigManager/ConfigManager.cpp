@@ -21,44 +21,38 @@
 #include "../Mqtt/MQTT_Client.h"
 #include "../Logger/Logger.h"
 #include "../Radio/Radio.h"
-#define ARDUINOJSON_USE_LONG_LONG 1
-#define SOPHY
 #include "ArduinoJson.h"
 #if ARDUINOJSON_USE_LONG_LONG == 0 && !PLATFORMIO
 #error "Using Arduino IDE is not recommended, please follow this guide https://github.com/G4lile0/tinyGS/wiki/Arduino-IDE or edit /ArduinoJson/src/ArduinoJson/Configuration.hpp and amend to #define ARDUINOJSON_USE_LONG_LONG 1 around line 68"
 #endif
 
 ConfigManager::ConfigManager()
-: IotWebConf2(thingName, &dnsServer, &server, initialApPassword, configVersion)
-, server(80)
-, gsConfigHtmlFormatProvider(*this)
-, boards({
-  //OLED_add, OLED_SDA,  OLED_SCL, OLED_RST, PROG_BUTTON, BOARD_LED, L_SX127X?, L_NSS, L_DI00, L_DI01, L_BUSSY, L_RST,  L_MISO, L_MOSI, L_SCK, L_TCXO_V, BOARD
-  {      0x3c,        4,        15,       16,           0,        25,      1,    18,     26,     12,      0,    14,      19,     27,     5,     0.0f, "433Mhz HELTEC WiFi LoRA 32 V1" }, // @4m1g0
-  {      0x3c,        4,        15,       16,           0,        25,      1,    18,     26,     12,      0,    14,      19,     27,     5,     0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V1" }, 
-  {      0x3c,        4,        15,       16,           0,        25,      1,    18,     26,     35,      0,    14,      19,     27,     5,     0.0f, "433Mhz HELTEC WiFi LoRA 32 V2" }, // @4m1g0
-  {      0x3c,        4,        15,       16,           0,        25,      1,    18,     26,     35,      0,    14,      19,     27,     5,     0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V2" }, 
-  {      0x3c,        4,        15,       16,           0,         2,      1,    18,     26,      0,      0,    14,      19,     27,     5,     0.0f, "433Mhz  TTGO LoRa 32 v1"        }, // @g4lile0
-  {      0x3c,        4,        15,       16,           0,         2,      1,    18,     26,      0,      0,    14,      19,     27,     5,     0.0f, "868-915Mhz TTGO LoRa 32 v1"        }, // 
-  {      0x3c,       21,        22,       16,           0,        22,      1,    18,     26,     33,      0,    14,      19,     27,     5,     0.0f, "433 Mhz TTGO LoRA 32 v2"        }, // @TCRobotics
-  {      0x3c,       21,        22,       16,           0,        22,      1,    18,     26,     33,      0,    14,      19,     27,     5,     0.0f, "868-915Mhz TTGO LoRA 32 v2"        }, // 
-  {      0x3c,       21,        22,       16,          39,        22,      1,    18,     26,     33,     32,    14,      19,     27,     5,     0.0f, "433Mhz T-BEAM + OLED"        },
-  {      0x3c,       21,        22,       16,          39,        22,      1,    18,     26,     33,     32,    14,      19,     27,     5,     0.0f, "868-915Mhz T-BEAM + OLED"        }, 
-  {      0x3c,       21,        22,       16,           0,        25,      0,     5,      0,     27,     26,    14,      19,     23,    18,     0.0f, "Custom ESP32 Wroom + SX126x (Crystal)"  }, // @4m1g0, @lillefyr
-  {      0x3c,       21,        22,       16,           0,        25,      0,    18,      0,     33,     32,    14,      19,     27,     5,     0.0f, "TTGO LoRa 32 V2 Modified with module SX126x (crystal)"  },// @TCRobotics
-  {      0x3c,       21,        22,       16,           0,        25,      0,     5,      0,      2,     13,    26,      19,     23,    18,     1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 2, 26, 13)"  }, // @sdey76
-  {      0x3c,       21,        22,       16,           0,        25,      0,     5,      0,     26,     12,    14,      19,     23,    18,     1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 26, 14, 12)"  }, // @imants
-  {      0x3c,       21,        22,       16,          38,        22,      1,    18,     26,     33,      0,    14,      19,     27,     5,     0.0f, "T-BEAM V1.0 + OLED"     }, // @fafu
-  {      0x3c,       21,        22,       16,           0,         2,      0,     5,      0,     34,     32,    14,      19,     27,    18,     1.6f, "433Mhz FOSSA 1W Ground Station"  }, // @jgromes
-  {      0x3c,       21,        22,       16,           0,         2,      0,     5,      0,     34,     32,    14,      19,     27,    18,     1.6f, "868-915Mhz FOSSA 1W Ground Station"  }, // @jgromes
-  })
+    : IotWebConf2(thingName, &dnsServer, &server, initialApPassword, configVersion), server(80), gsConfigHtmlFormatProvider(*this), boards({
+                                                                                                                                        //OLED_add, OLED_SDA,  OLED_SCL, OLED_RST, PROG_BUTTON, BOARD_LED, L_SX127X?, L_NSS, L_DI00, L_DI01, L_BUSSY, L_RST,  L_MISO, L_MOSI, L_SCK, L_TCXO_V, BOARD
+                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 12, 0, 14, 19, 27, 5, 0.0f, "433Mhz HELTEC WiFi LoRA 32 V1"}, // @4m1g0
+                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 12, 0, 14, 19, 27, 5, 0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V1"},
+                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 35, 0, 14, 19, 27, 5, 0.0f, "433Mhz HELTEC WiFi LoRA 32 V2"}, // @4m1g0
+                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 35, 0, 14, 19, 27, 5, 0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V2"},
+                                                                                                                                        {0x3c, 4, 15, 16, 0, 2, 1, 18, 26, 0, 0, 14, 19, 27, 5, 0.0f, "433Mhz  TTGO LoRa 32 v1"},       // @g4lile0
+                                                                                                                                        {0x3c, 4, 15, 16, 0, 2, 1, 18, 26, 0, 0, 14, 19, 27, 5, 0.0f, "868-915Mhz TTGO LoRa 32 v1"},    //
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "433 Mhz TTGO LoRA 32 v2"},    // @TCRobotics
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "868-915Mhz TTGO LoRA 32 v2"}, //
+                                                                                                                                        {0x3c, 21, 22, 16, 39, 22, 1, 18, 26, 33, 32, 14, 19, 27, 5, 0.0f, "433Mhz T-BEAM + OLED"},
+                                                                                                                                        {0x3c, 21, 22, 16, 39, 22, 1, 18, 26, 33, 32, 14, 19, 27, 5, 0.0f, "868-915Mhz T-BEAM + OLED"},
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 27, 26, 14, 19, 23, 18, 0.0f, "Custom ESP32 Wroom + SX126x (Crystal)"},                       // @4m1g0, @lillefyr
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 18, 0, 33, 32, 14, 19, 27, 5, 0.0f, "TTGO LoRa 32 V2 Modified with module SX126x (crystal)"},       // @TCRobotics
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 2, 13, 26, 19, 23, 18, 1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 2, 26, 13)"},   // @sdey76
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 26, 12, 14, 19, 23, 18, 1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 26, 14, 12)"}, // @imants
+                                                                                                                                        {0x3c, 21, 22, 16, 38, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "T-BEAM V1.0 + OLED"},                                         // @fafu
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 2, 0, 5, 0, 34, 32, 14, 19, 27, 18, 1.6f, "433Mhz FOSSA 1W Ground Station"},                               // @jgromes
+                                                                                                                                        {0x3c, 21, 22, 16, 0, 2, 0, 5, 0, 34, 32, 14, 19, 27, 18, 1.6f, "868-915Mhz FOSSA 1W Ground Station"},                           // @jgromes
+                                                                                                                                    })
 {
-  server.on(ROOT_URL, [this]{ handleRoot(); });
-  server.on(CONFIG_URL, [this]{ handleConfig(); });
-  server.on(DASHBOARD_URL, [this]{ handleDashboard(); });
-  server.on(BOARDSTATUS_URL, [this]{ handleDashboard(); });
-  server.on(RESTART_URL, [this]{ handleRestart(); });
-  server.on(REFRESH_CONSOLE_URL, [this]{ handleRefreshConsole(); });
+  server.on(ROOT_URL, [this] { handleRoot(); });
+  server.on(CONFIG_URL, [this] { handleConfig(); });
+  server.on(DASHBOARD_URL, [this] { handleDashboard(); });
+  server.on(RESTART_URL, [this] { handleRestart(); });
+  server.on(REFRESH_CONSOLE_URL, [this] { handleRefreshConsole(); });
   setupUpdateServer(
     [this](const char* updatePath) { httpUpdater.setup(&server, updatePath); },
     [this](const char* userName, char* password) { httpUpdater.updateCredentials(userName, password); });
@@ -122,7 +116,6 @@ void ConfigManager::handleRoot()
   s += FPSTR(IOTWEBCONF_HTML_BODY_INNER);
   s += String(FPSTR(LOGO)) + "<br />";
   s += "<button onclick=\"window.location.href='" + String(DASHBOARD_URL) + "';\">Station dashboard</button><br /><br />";
-  s += "<button onclick=\"window.location.href='" + String(BOARDSTATUS_URL) + "';\">Board (ESP) Status</button><br /><br />";
   s += "<button onclick=\"window.location.href='" + String(CONFIG_URL) + "';\">Configure parameters</button><br /><br />";
   s += "<button onclick=\"window.location.href='" + String(UPDATE_URL) + "';\">Upload new version</button><br /><br />";
   s += "<button onclick=\"window.location.href='" + String(RESTART_URL) + "';\">Restart Station</button><br /><br />";
@@ -149,28 +142,6 @@ void ConfigManager::handleDashboard()
 
   // uint64_t time = millis(); // TODO: add current time
   String s = String(FPSTR(IOTWEBCONF_HTML_HEAD));
-
-  // default value for Ethernet / MQTT 
-  String str_discon = String(FPSTR("NOT CONNECTED"));
-
-/* DonC 
-  #ifdef SOPHY
-  
-  // String(getTestMode()?"ENABLED":"DISABLED")
-
-    // convert char* to str for if 
-    String str_getMqttServer_Sophy;
-    std::string str_getMqttServer_Sophy(getMqttServer_Sophy());
-
-    if  (str_getMqttServer_Sophy == "192.168.0.17") // "localhost")
-    {
-      str_discon =  String(FPSTR("NOT CONNECTED"));
-    }else{
-      str_discon = "DISABLED";
-    }
-  #endif 
-*/
-
   s += "<style>" + String(FPSTR(IOTWEBCONF_HTML_STYLE_INNER)) + "</style>";
   s += "<style>" + String(FPSTR(IOTWEBCONF_DASHBOARD_STYLE_INNER)) + "</style>";
   s += "<script>" + String(FPSTR(IOTWEBCONF_CONSOLE_SCRIPT)) + "</script>";
@@ -180,6 +151,7 @@ void ConfigManager::handleDashboard()
   s += F("</table></div><div class=\"card\"><h3>Groundstation Status</h3><table>");
   s += "<tr><td>Name </td><td>" + String(getThingName()) + "</td></tr>";
   s += "<tr><td>Version </td><td>" + String(status.version) + "</td></tr>";
+  s += "<tr><td>WiFi </td><td>" + String(WiFi.isConnected() ? "<span class='G'>CONNECTED</span>" : "<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>TinyGS MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>SophyAI MQTT Server </td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>"+str_discon+"</span>") + "</td></tr>";
   //s += "<tr><td>MQTT Server local</td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
@@ -236,10 +208,12 @@ void ConfigManager::handleRefreshConsole()
   uint32_t counter = 0; 
 
   String svalue = server.arg("c1");
-  if (svalue.length()) {
+  if (svalue.length())
+  {
     Log::console(PSTR("COMMAND: %s"), svalue.c_str());
 
-    if (strcmp(svalue.c_str(), "p") == 0) {
+    if (strcmp(svalue.c_str(), "p") == 0)
+    {
       if (!getAllowTx())
       {
         Log::console(PSTR("Radio transmission is not allowed by config! Check your config on the web panel and make sure transmission is allowed by local regulations"));
@@ -270,7 +244,10 @@ void ConfigManager::handleRefreshConsole()
   char stmp[8];
   String s = server.arg("c2");
   strlcpy(stmp, s.c_str(), sizeof(stmp));
-  if (strlen(stmp)) { counter = atoi(stmp); }
+  if (strlen(stmp))
+  {
+    counter = atoi(stmp);
+  }
   server.client().flush();
   server.sendHeader(F("Cache-Control"), F("no-cache, no-store, must-revalidate"));
   server.sendHeader(F("Pragma"), F("no-cache"));
@@ -278,24 +255,31 @@ void ConfigManager::handleRefreshConsole()
   server.setContentLength(CONTENT_LENGTH_UNKNOWN);
   server.send(200, F("text/plain"), "");
   server.sendContent(String((uint8_t)Log::getLogIdx()) + "\n");
-  if (counter != Log::getLogIdx()) {
-    if (!counter) {
+  if (counter != Log::getLogIdx())
+  {
+    if (!counter)
+    {
       counter = Log::getLogIdx();
     }
-    do {
-      char* tmp;
+    do
+    {
+      char *tmp;
       size_t len;
       Log::getLog(counter, &tmp, &len);
-      if (len) {
-        char stemp[len +1];
+      if (len)
+      {
+        char stemp[len + 1];
         memcpy(stemp, tmp, len);
-        stemp[len-1] = '\n';
+        stemp[len - 1] = '\n';
         stemp[len] = '\0';
         server.sendContent(stemp);
       }
       counter++;
       counter &= 0xFF;
-      if (!counter) { counter++; }  // Skip log index 0 as it is not allowed
+      if (!counter)
+      {
+        counter++;
+      } // Skip log index 0 as it is not allowed
     } while (counter != Log::getLogIdx());
   }
 
@@ -421,12 +405,15 @@ boolean ConfigManager::init()
   setApTimeoutMs(atoi(AP_TIMEOUT_MS));
 
   // no board selected
-  if (!strcmp(board, "")){
+  if (!strcmp(board, ""))
+  {
     boardDetection();
   }
 
   if (strlen(advancedConfig))
     parseAdvancedConf();
+
+  parseModemStartup();
 
   strcpy(savedThingName, this->getThingName());
   return validConfig;
@@ -499,13 +486,16 @@ void ConfigManager::configSavedCallback()
     ESP.restart();
   }
 
-  forceApMode(false);
+  if (!remoteSave)
+  {
+    forceApMode(false);
+    parseModemStartup();
+    MQTT_Client::getInstance().scheduleRestart();
+  }
 
   parseAdvancedConf();
-  MQTT_Client::getInstance().scheduleRestart();
-  
-  if (Radio::getInstance().isReady())
-    Radio::getInstance().begin();
+
+  remoteSave = false;
 }
 
 void ConfigManager::parseAdvancedConf()
@@ -536,4 +526,68 @@ void ConfigManager::parseAdvancedConf()
   {
     advancedConf.lowPower = doc["lowPower"];
   }
+}
+
+void ConfigManager::parseModemStartup()
+{
+  size_t size = JSON_ARRAY_SIZE(10) + 10 * JSON_OBJECT_SIZE(2) + JSON_OBJECT_SIZE(16) + JSON_ARRAY_SIZE(8) + JSON_ARRAY_SIZE(8) + 64;
+  DynamicJsonDocument doc(size);
+  DeserializationError error = deserializeJson(doc, (const char *)modemStartup);
+
+  if (error.code() != DeserializationError::Ok || !doc.containsKey("mode"))
+  {
+    Log::console(PSTR("ERROR: Your modem config is invalid. Resetting to default"));
+    resetModemConfig();
+    return;
+  }
+
+  ModemInfo &m = status.modeminfo;
+  m.modem_mode = doc["mode"].as<String>();
+  strcpy(m.satellite, doc["sat"].as<char *>());
+  m.NORAD = doc["NORAD"];
+
+  if (m.modem_mode == "LoRa")
+  {
+    m.frequency = doc["freq"];
+    m.bw = doc["bw"];
+    m.sf = doc["sf"];
+    m.cr = doc["cr"];
+    m.sw = doc["sw"];
+    m.power = doc["pwr"];
+    m.preambleLength = doc["pl"];
+    m.gain = doc["gain"];
+    m.crc = doc["crc"];
+    m.fldro = doc["fldro"];
+  }
+  else
+  {
+    m.frequency = doc["freq"];
+    m.bw = doc["bw"];
+    m.bitrate = doc["br"];
+    m.freqDev = doc["fd"];
+    m.power = doc["pwr"];
+    m.preambleLength = doc["pl"];
+    m.OOK = doc["ook"];
+    m.swSize = doc["fsw"].size();
+    for (int i = 0; i < 8; i++)
+    {
+      if (i < m.swSize)
+        m.fsw[i] = doc["fsw"][i];
+      else
+        m.fsw[i] = 0;
+    }
+  }
+
+  // packets Filter
+  uint8_t filterSize = doc["filter"].size();
+  for (int i = 0; i < 8; i++)
+  {
+    if (i < filterSize)
+      status.modeminfo.filter[i] = doc["filter"][i];
+    else
+      status.modeminfo.filter[i] = 0;
+  }
+
+  if (Radio::getInstance().isReady())
+    Radio::getInstance().begin();
 }
