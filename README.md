@@ -106,6 +106,7 @@ The main TinyGS developer team is:
 # Sophyai.space Team
 - [Roberto Iu2IOL](https://github.com/virtualrobotix)
 - [Iw2LSI](https://github.com/iw2lsi)
+- [KanyonKris](https://github.com/KanyonKris)
 
 # Contributors SophyAIGS
 Join us at our Discord channel this is the link : https://discord.gg/ZvaRrRuTFC we need arduino developer , and Radio Ham with regular licence for try the connection (RTX) with satellite in our network , and user for recive the radio packet from lora satellite around the globe.
