@@ -79,11 +79,11 @@ void MQTT_Client_Fees::reconnect()
   char clientId[13];
   sprintf(clientId, "%04X%08X",(uint16_t)(chipId>>32), (uint32_t)chipId);
 
-  Log::console(PSTR("Attempting local MQTT connection..."));
-  Log::console(PSTR("If local MQTT reconnect is taking more time than expected, \n         connect to the config panel on the ip: %s to review the local MQTT connection credentials."), WiFi.localIP().toString().c_str());
+  Log::console(PSTR("Attempting SophyAI MQTT connection..."));
+  Log::console(PSTR("If SophyAI MQTT reconnect is taking more time than expected, \n         connect to the config panel on the ip: %s to review the SophyAI MQTT connection credentials."), WiFi.localIP().toString().c_str());
   if (connect(clientId, configManager.getMqttUser_Sophy(), configManager.getMqttPass_Sophy(), buildTopic(teleTopic, topicStatus).c_str(), 2, false, "0")) {
     yield();
-    Log::console(PSTR("Connected to local MQTT!"));
+    Log::console(PSTR("Connected to SophyAI MQTT!"));
     status_sophy.mqtt_connected = true;
     subscribeToAll();
     sendWelcome();

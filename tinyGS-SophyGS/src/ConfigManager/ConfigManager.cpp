@@ -27,26 +27,27 @@
 #endif
 
 ConfigManager::ConfigManager()
-    : IotWebConf2(thingName, &dnsServer, &server, initialApPassword, configVersion), server(80), gsConfigHtmlFormatProvider(*this), boards({
-                                                                                                                                        //OLED_add, OLED_SDA,  OLED_SCL, OLED_RST, PROG_BUTTON, BOARD_LED, L_SX127X?, L_NSS, L_DI00, L_DI01, L_BUSSY, L_RST,  L_MISO, L_MOSI, L_SCK, L_TCXO_V, BOARD
-                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 12, 0, 14, 19, 27, 5, 0.0f, "433Mhz HELTEC WiFi LoRA 32 V1"}, // @4m1g0
-                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 12, 0, 14, 19, 27, 5, 0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V1"},
-                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 35, 0, 14, 19, 27, 5, 0.0f, "433Mhz HELTEC WiFi LoRA 32 V2"}, // @4m1g0
-                                                                                                                                        {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 35, 0, 14, 19, 27, 5, 0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V2"},
-                                                                                                                                        {0x3c, 4, 15, 16, 0, 2, 1, 18, 26, 0, 0, 14, 19, 27, 5, 0.0f, "433Mhz  TTGO LoRa 32 v1"},       // @g4lile0
-                                                                                                                                        {0x3c, 4, 15, 16, 0, 2, 1, 18, 26, 0, 0, 14, 19, 27, 5, 0.0f, "868-915Mhz TTGO LoRa 32 v1"},    //
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "433 Mhz TTGO LoRA 32 v2"},    // @TCRobotics
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "868-915Mhz TTGO LoRA 32 v2"}, //
-                                                                                                                                        {0x3c, 21, 22, 16, 39, 22, 1, 18, 26, 33, 32, 14, 19, 27, 5, 0.0f, "433Mhz T-BEAM + OLED"},
-                                                                                                                                        {0x3c, 21, 22, 16, 39, 22, 1, 18, 26, 33, 32, 14, 19, 27, 5, 0.0f, "868-915Mhz T-BEAM + OLED"},
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 27, 26, 14, 19, 23, 18, 0.0f, "Custom ESP32 Wroom + SX126x (Crystal)"},                       // @4m1g0, @lillefyr
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 18, 0, 33, 32, 14, 19, 27, 5, 0.0f, "TTGO LoRa 32 V2 Modified with module SX126x (crystal)"},       // @TCRobotics
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 2, 13, 26, 19, 23, 18, 1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 2, 26, 13)"},   // @sdey76
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 26, 12, 14, 19, 23, 18, 1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 26, 14, 12)"}, // @imants
-                                                                                                                                        {0x3c, 21, 22, 16, 38, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "T-BEAM V1.0 + OLED"},                                         // @fafu
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 2, 0, 5, 0, 34, 32, 14, 19, 27, 18, 1.6f, "433Mhz FOSSA 1W Ground Station"},                               // @jgromes
-                                                                                                                                        {0x3c, 21, 22, 16, 0, 2, 0, 5, 0, 34, 32, 14, 19, 27, 18, 1.6f, "868-915Mhz FOSSA 1W Ground Station"},                           // @jgromes
-                                                                                                                                    })
+  : IotWebConf2(thingName, &dnsServer, &server, initialApPassword, configVersion), server(80), gsConfigHtmlFormatProvider(*this), boards
+  ({
+    //OLED_add, OLED_SDA,  OLED_SCL, OLED_RST, PROG_BUTTON, BOARD_LED, L_SX127X?, L_NSS, L_DI00, L_DI01, L_BUSSY, L_RST,  L_MISO, L_MOSI, L_SCK, L_TCXO_V, BOARD
+    {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 12, 0, 14, 19, 27, 5, 0.0f, "433Mhz HELTEC WiFi LoRA 32 V1"}, // @4m1g0
+    {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 12, 0, 14, 19, 27, 5, 0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V1"},
+    {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 35, 0, 14, 19, 27, 5, 0.0f, "433Mhz HELTEC WiFi LoRA 32 V2"}, // @4m1g0
+    {0x3c, 4, 15, 16, 0, 25, 1, 18, 26, 35, 0, 14, 19, 27, 5, 0.0f, "863-928Mhz HELTEC WiFi LoRA 32 V2"},
+    {0x3c, 4, 15, 16, 0, 2, 1, 18, 26, 0, 0, 14, 19, 27, 5, 0.0f, "433Mhz  TTGO LoRa 32 v1"},       // @g4lile0
+    {0x3c, 4, 15, 16, 0, 2, 1, 18, 26, 0, 0, 14, 19, 27, 5, 0.0f, "868-915Mhz TTGO LoRa 32 v1"},    //
+    {0x3c, 21, 22, 16, 0, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "433 Mhz TTGO LoRA 32 v2"},    // @TCRobotics
+    {0x3c, 21, 22, 16, 0, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "868-915Mhz TTGO LoRA 32 v2"}, //
+    {0x3c, 21, 22, 16, 39, 22, 1, 18, 26, 33, 32, 14, 19, 27, 5, 0.0f, "433Mhz T-BEAM + OLED"},
+    {0x3c, 21, 22, 16, 39, 22, 1, 18, 26, 33, 32, 14, 19, 27, 5, 0.0f, "868-915Mhz T-BEAM + OLED"},
+    {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 27, 26, 14, 19, 23, 18, 0.0f, "Custom ESP32 Wroom + SX126x (Crystal)"},                       // @4m1g0, @lillefyr
+    {0x3c, 21, 22, 16, 0, 25, 0, 18, 0, 33, 32, 14, 19, 27, 5, 0.0f, "TTGO LoRa 32 V2 Modified with module SX126x (crystal)"},       // @TCRobotics
+    {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 2, 13, 26, 19, 23, 18, 1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 2, 26, 13)"},   // @sdey76
+    {0x3c, 21, 22, 16, 0, 25, 0, 5, 0, 26, 12, 14, 19, 23, 18, 1.6f, "Custom ESP32 Wroom + SX126x DRF1268T (TCX0) (5, 26, 14, 12)"}, // @imants
+    {0x3c, 21, 22, 16, 38, 22, 1, 18, 26, 33, 0, 14, 19, 27, 5, 0.0f, "T-BEAM V1.0 + OLED"},                                         // @fafu
+    {0x3c, 21, 22, 16, 0, 2, 0, 5, 0, 34, 32, 14, 19, 27, 18, 1.6f, "433Mhz FOSSA 1W Ground Station"},                               // @jgromes
+    {0x3c, 21, 22, 16, 0, 2, 0, 5, 0, 34, 32, 14, 19, 27, 18, 1.6f, "868-915Mhz FOSSA 1W Ground Station"},                           // @jgromes
+  })
 {
   server.on(ROOT_URL, [this] { handleRoot(); });
   server.on(CONFIG_URL, [this] { handleConfig(); });
@@ -151,10 +152,11 @@ void ConfigManager::handleDashboard()
   s += F("</table></div><div class=\"card\"><h3>Groundstation Status</h3><table>");
   s += "<tr><td>Name </td><td>" + String(getThingName()) + "</td></tr>";
   s += "<tr><td>Version </td><td>" + String(status.version) + "</td></tr>";
-  s += "<tr><td>MQTT Server </td><td>" + String(status.mqtt_connected ? "<span class='G'>CONNECTED</span>" : "<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>WiFi </td><td>" + String(WiFi.isConnected() ? "<span class='G'>CONNECTED</span>" : "<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
-  s += "<tr><td>Radio </td><td>" + String(Radio::getInstance().isReady() ? "<span class='G'>READY</span>" : "<span class='R'>NOT READY</span>") + "</td></tr>";
-  s += "<tr><td>Test Mode </td><td>" + String(getTestMode() ? "ENABLED" : "DISABLED") + "</td></tr>";
+  s += "<tr><td>TinyGS MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  s += "<tr><td>SophyAI MQTT Server </td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  s += "<tr><td>Radio </td><td>" + String(Radio::getInstance().isReady()?"<span class='G'>READY</span>":"<span class='R'>NOT READY</span>") + "</td></tr>";
+  s += "<tr><td>Test Mode </td><td>" + String(getTestMode()?"ENABLED":"DISABLED") + "</td></tr>";
   //s += "<tr><td>Uptime </td><td>" + // process and update in js + "</td></tr>";
   s += F("</table></div>");
   s += F("<div class=\"card\"><h3>Modem Configuration</h3><table>");
@@ -469,8 +471,8 @@ void ConfigManager::boardDetection()
 
 void ConfigManager::printConfig()
 {
-  Log::console(PSTR("MQTT Port: %u\nMQTT Server: %s\nMQTT USER: %s\nMQTT Pass: %s\nLatitude: %f\nLongitude: %f"), getMqttPort(), getMqttServer(), getMqttUser(), getMqttPass(), getLatitude(), getLongitude());
-  Log::console(PSTR("SOPHY MQTT Port: %u\nSOPHY MQTT Server: %s\nSophy MQTT USER: %s\nSOPHY MQTT Pass: %s"), getMqttPort_Sophy(), getMqttServer_Sophy(), getMqttUser_Sophy(), getMqttPass_Sophy());
+  Log::console(PSTR("TinyGS MQTT Port: %u\nTinyGS MQTT Server: %s\nTinyGS MQTT USER: %s\nTinyGS MQTT Pass: %s\nLatitude: %f\nLongitude: %f"), getMqttPort(), getMqttServer(), getMqttUser(), getMqttPass(), getLatitude(), getLongitude());
+  Log::console(PSTR("SophyAI MQTT Port: %u\nSophyAI MQTT Server: %s\nSophyAI MQTT USER: %s\nSophyAI MQTT Pass: %s"), getMqttPort_Sophy(), getMqttServer_Sophy(), getMqttUser_Sophy(), getMqttPass_Sophy());
   Log::console(PSTR("tz: %s\nboard: %u --> %s\nOLED Bright: %u\nTX %s"),getTZ(), getBoard(), boards[getBoard()].BOARD.c_str(), getOledBright(), getAllowTx() ? "Enable" : "Disable");
   Log::console(PSTR("Remote Tune %\nSend telemetry to third party %s"), getRemoteTune() ? "Allowed" : "Blocked", getTelemetry3rd() ? "Allowed" : "Blocked"); 
   Log::console(PSTR("Test mode %s\nAuto Update %s"), getTestMode()  ? "Enable" : "Disable", getAutoUpdate()  ? "Enable" : "Disable");
