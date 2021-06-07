@@ -8,12 +8,12 @@
 
         MqttUrl.Text = "rp.lasernavigation.it"
         MqttPort.Text = "6016"
-        MqttUser.Text = "satellite"
-        MqttPassword.Text = ""
+        MqttUser.Text = "YOUR USER"
+        MqttPassword.Text = "YOUR PASSWORD"
 
-        mqtt_tx_topic.Text = "sophyaispace/user0031/GPAP01/cmnd/txB64"
+        mqtt_tx_topic.Text = "sophyaispace/YOURUSER/YOURSTATIONNAME/cmnd/txB64"
         mqtt_tx_payload.Text = "SGVsbG8gU3BhY2UgISEh"
-        MqttTopicRx.Text = "sophyaispace/user0030/console/global_rx"
+        MqttTopicRx.Text = "sophyaispace/YOURUSER/YOURSTATIONNAME/rx"
     End Sub
 
     Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
