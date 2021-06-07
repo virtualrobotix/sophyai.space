@@ -161,7 +161,7 @@ void MQTT_Client::sendWelcome()
   doc["test"] = configManager.getTestMode();
   doc["tele3d"] = configManager.getTelemetry3rd();
   doc["time"] = now;
-  doc["version"] = status.version;
+  doc["version"] = "21021701";//status.version; // PUT LAST VALID VERSION IN TINYGS
   doc["git_version"] = status.git_version;
   doc["sat"] = status.modeminfo.satellite;
   doc["autoUpdate"] = configManager.getAutoUpdate();

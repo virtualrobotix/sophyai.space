@@ -63,6 +63,7 @@
     - Arduino IDE is NOT recommended, please use Platformio: https://github.com/G4lile0/tinyGS/wiki/Platformio
 
 **************************************************************************/
+//#define TINYGS
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -71,7 +72,9 @@
 #endif
 #include "src/ConfigManager/ConfigManager.h"
 #include "src/Display/Display.h"
+#ifdef TINYGS
 #include "src/Mqtt/MQTT_Client.h"
+#endif 
 #include "src/Mqtt/MQTT_Client_Fees.h"
 #include "src/Status.h"
 #include "src/Radio/Radio.h"
@@ -145,6 +148,8 @@ char         acBuffer[20];            // Buffer for ASCII time
 int          aiSatFP[32][2];          // Array for storing the satellite footprint map coordinates
 int          aiSunFP[32][2];          // Array for storing the sunlight footprint map coordinates
 
+
+
 /* End Arduino P13*/
 #if  RADIOLIB_VERSION_MAJOR != (0x04) || RADIOLIB_VERSION_MINOR != (0x02) || RADIOLIB_VERSION_PATCH != (0x01) || RADIOLIB_VERSION_EXTRA != (0x00)
 #error "You are not using the correct version of RadioLib please copy TinyGS/lib/RadioLib on Arduino/libraries"
@@ -156,8 +161,12 @@ int          aiSunFP[32][2];          // Array for storing the sunlight footprin
 #endif
 #endif
 
+
+
 ConfigManager& configManager = ConfigManager::getInstance();
+#ifdef TINYGS
 MQTT_Client& mqtt = MQTT_Client::getInstance();
+#endif 
 MQTT_Client_Fees& mqtt_sophygs = MQTT_Client_Fees::getInstance();
  
 Radio& radio = Radio::getInstance();
@@ -301,7 +310,9 @@ void setup()
   displayInit();
   displayShowInitialCredits();
   configManager.delay(1000);
+  #ifdef TINYGS
   mqtt.begin();
+  #endif 
   mqtt_sophygs.begin();
  
 
@@ -360,7 +371,9 @@ void loop() {
 
   // connected
   check_azel(10000);
+  #ifdef TINYGS
   mqtt.loop();
+  #endif 
   mqtt_sophygs.loop();
   OTA::loop();
   if (configManager.getOledBright() != 0) displayUpdate();
