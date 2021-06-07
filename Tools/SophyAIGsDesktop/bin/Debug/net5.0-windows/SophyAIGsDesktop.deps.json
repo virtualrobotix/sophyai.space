@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "SophyAIGsDesktop/1.0.0": {
+        "dependencies": {
+          "MQTTnet": "3.0.15"
+        },
+        "runtime": {
+          "SophyAIGsDesktop.dll": {}
+        }
+      },
+      "MQTTnet/3.0.15": {
+        "runtime": {
+          "lib/net5.0/MQTTnet.dll": {
+            "assemblyVersion": "3.0.15.0",
+            "fileVersion": "3.0.15.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SophyAIGsDesktop/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MQTTnet/3.0.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-It8ZtqJdFXQNQabV1ZaOgtlWyk922/uFLChq2EgIDypd5zUIE8z72O10k0gYM4Zq9LLYl34Ex0kcu0uxu+PA+g==",
+      "path": "mqttnet/3.0.15",
+      "hashPath": "mqttnet.3.0.15.nupkg.sha512"
+    }
+  }
+}
