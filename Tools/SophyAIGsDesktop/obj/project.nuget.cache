@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qV2iHQnht5LY11U3ed+UW8YSOxWKqJ7boSWa7envJj7DQAvi2bGcb6EaAbj1BDnpCovRjMrFohjicXOcf9lNJA==",
+  "dgSpecHash": "rRGgzcViBLQpsGI0c2x1Ld7n9Bt3zNGePRQrJFV7FCUkyqpXBiW0uhxzp7hCS7SWbb9WhOCVPEW65r6mffJrNw==",
   "success": true,
-  "projectFilePath": "D:\\Users\\SophyAIDEV\\source\\repos\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj",
+  "projectFilePath": "D:\\Lavoro\\Progetti 2021\\sophyai.space\\Tools\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj",
   "expectedPackageFiles": [
     "C:\\Users\\SophyAIDEV\\.nuget\\packages\\mqttnet\\3.0.15\\mqttnet.3.0.15.nupkg.sha512"
   ],

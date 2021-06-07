@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\SophyAIDEV\\source\\repos\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj": {}
+    "D:\\Lavoro\\Progetti 2021\\sophyai.space\\Tools\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj": {}
   },
   "projects": {
-    "D:\\Users\\SophyAIDEV\\source\\repos\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj": {
+    "D:\\Lavoro\\Progetti 2021\\sophyai.space\\Tools\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\SophyAIDEV\\source\\repos\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj",
+        "projectUniqueName": "D:\\Lavoro\\Progetti 2021\\sophyai.space\\Tools\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj",
         "projectName": "SophyAIGsDesktop",
-        "projectPath": "D:\\Users\\SophyAIDEV\\source\\repos\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj",
+        "projectPath": "D:\\Lavoro\\Progetti 2021\\sophyai.space\\Tools\\SophyAIGsDesktop\\SophyAIGsDesktop.vbproj",
         "packagesPath": "C:\\Users\\SophyAIDEV\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\SophyAIDEV\\source\\repos\\SophyAIGsDesktop\\obj\\",
+        "outputPath": "D:\\Lavoro\\Progetti 2021\\sophyai.space\\Tools\\SophyAIGsDesktop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SophyAIDEV\\AppData\\Roaming\\NuGet\\NuGet.Config",

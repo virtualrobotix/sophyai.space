@@ -40,7 +40,7 @@ Namespace My
             mqClient.DisconnectAsync().Wait()
         End Sub
         Sub mmqt_start()
-            REM Connect("SophyAISpace", "rp.lasernavigation.it", "satellite", "Satellite").Wait()
+
 
         End Sub
         Function mtt_publish(topic, payload) As Boolean
