@@ -63,7 +63,7 @@
     - Arduino IDE is NOT recommended, please use Platformio: https://github.com/G4lile0/tinyGS/wiki/Platformio
 
 **************************************************************************/
-//#define TINYGS
+#define TINYGS
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
