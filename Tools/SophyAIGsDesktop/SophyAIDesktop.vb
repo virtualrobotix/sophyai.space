@@ -14,6 +14,9 @@ Partial Class MqttBox
         End Try
     End Sub
 
+    Friend WithEvents Label10 As Label
+    Friend WithEvents StationName As TextBox
+
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
 
@@ -48,6 +51,8 @@ Partial Class MqttBox
         Me.Button1 = New System.Windows.Forms.Button()
         Me.inizio = New System.Windows.Forms.Label()
         Me.fine = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.StationName = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Connect
@@ -256,11 +261,30 @@ Partial Class MqttBox
         Me.fine.TabIndex = 23
         Me.fine.Text = "0"
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(589, 127)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(100, 20)
+        Me.Label10.TabIndex = 24
+        Me.Label10.Text = "Station Name"
+        '
+        'StationName
+        '
+        Me.StationName.Location = New System.Drawing.Point(589, 150)
+        Me.StationName.Name = "StationName"
+        Me.StationName.Size = New System.Drawing.Size(125, 27)
+        Me.StationName.TabIndex = 25
+        Me.StationName.Text = "Iu2IOL"
+        '
         'MqttBox
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(756, 589)
+        Me.Controls.Add(Me.StationName)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.fine)
         Me.Controls.Add(Me.inizio)
         Me.Controls.Add(Me.Button1)
@@ -317,5 +341,21 @@ Partial Class MqttBox
     Friend WithEvents Button1 As Button
     Friend WithEvents inizio As Label
     Friend WithEvents fine As Label
+
+    Private Sub Label10_Click(sender As Object, e As EventArgs) Handles Label10.Click
+
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles StationName.TextChanged
+
+    End Sub
+
+    Private Sub mqtt_tx_topic_TextChanged(sender As Object, e As EventArgs) Handles mqtt_tx_topic.TextChanged
+
+    End Sub
+
+    Private Sub mqtt_tx_topic_Click(sender As Object, e As EventArgs) Handles mqtt_tx_topic.Click
+        mqtt_tx_topic.Text = "sophyaispace/" + Me.MqttUser.Text + "/" + Me.StationName.Text
+    End Sub
 End Class
 
