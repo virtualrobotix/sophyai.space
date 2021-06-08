@@ -118,6 +118,7 @@ That kind of work will be in future available for research lab , university , ha
 The actual architecture of  TinyGS technology from our point of view is not usable for develop a opensource realtime communication protocol with opensource satellite in the space , ma vision is quite different respect of what actually did in tinyGS project .One of big limit of actual TinyGS architecture is that it don’t support realtime comunication and complex protocol . Our target is to support mavlink protocol in realtime wiht this new revision of gs.  So i start the fork and share my work with the community.
 In sophyai.space network tecnology we add : 
 •    The support for realtime comunication with the node of network that decide to join to different experiment.
+•    Local antenna tracking on gs with support of servo or serial protocol (WIP).
 •    A small desktop app for interconnect a sat operator or virtual sat operator ground station to the network for inject payload in the network and for recived directly reply for gs around the world . For my point of view a sat operator is equivalent of pilot of drone with his ground station app nothing else. So could be an ham group that decide to send in space or in air by a ballon its cubesat experiment and want control around the world .
 •    A new prototype back end able to manage a small group of realtime gs for doing experiment. 
 Work in progess:
