@@ -1,0 +1,3706 @@
+[
+    {
+        "id": "3928ed20.c3ac32",
+        "type": "tab",
+        "label": "TLE  , MQTT E LOG",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "188e0510.29f8bb",
+        "type": "tab",
+        "label": "Decode Message , MAP ",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9500b41d.e4dcf8",
+        "type": "tab",
+        "label": "Decode Message KSY",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "b287ba7c.599188",
+        "type": "tab",
+        "label": "Discord Bot",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "db15a8a.453c158",
+        "type": "tab",
+        "label": "Telegram BOT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c7131850.1ff038",
+        "type": "tab",
+        "label": "Global Console",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "55b2880c.ad24d8",
+        "type": "tab",
+        "label": "manage influxdb",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a18b20ba.92688",
+        "type": "tab",
+        "label": "GIT",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "43167b9e.7745e4",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "sophyai-space-central-controller-mqtt",
+        "port": "1883",
+        "tls": "e5e0249c.3a1d78",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "e5e0249c.3a1d78",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "mosq-ca.crt",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "f7c978a5.f5fb28",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "b9098def.6ce48",
+        "type": "ui_tab",
+        "name": "Registration Form",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "df1af2cb.b5d6b",
+        "type": "ui_group",
+        "name": "User Registration",
+        "tab": "b9098def.6ce48",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": true
+    },
+    {
+        "id": "a781942b.f8a858",
+        "type": "mqtt-broker",
+        "name": "Mediaprot",
+        "broker": "mqtt.multiprotexion.eu",
+        "port": "1883",
+        "clientid": "SophyAISpace",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": false,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6037be42.4468e",
+        "type": "influxdb",
+        "hostname": "influxdb",
+        "port": "8086",
+        "protocol": "http",
+        "database": "sophyai",
+        "name": "",
+        "usetls": false,
+        "tls": "e5e0249c.3a1d78",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "eeb221fb.ab27f",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "test",
+        "name": "test",
+        "usetls": true,
+        "tls": "d50d0c9f.31e858",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "d50d0c9f.31e858",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false
+    },
+    {
+        "id": "11b218df.5387a7",
+        "type": "telegram bot",
+        "botname": "sophyai.bot",
+        "usernames": "",
+        "chatids": "",
+        "baseapiurl": "",
+        "updatemode": "polling",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "f447acb2.dc37d",
+        "type": "discord-token",
+        "name": "Discord BOT SophyAI.Space"
+    },
+    {
+        "id": "3a5bd848.8de328",
+        "type": "chatbot-discord-node",
+        "botname": "Sophygs",
+        "usernames": "sophygs",
+        "clientId": "",
+        "store": "",
+        "log": "",
+        "debug": false
+    },
+    {
+        "id": "7ff8a859.fd4d28",
+        "type": "mui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "m-base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "m-page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "m-page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "m-page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "m-group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "m-group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "m-group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "m-widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "m-widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "m-widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "a0c52cc5.50cd7",
+        "type": "mqtt in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "43167b9e.7745e4",
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "f798567f.d81db8",
+                "42608a77.a4f294"
+            ]
+        ]
+    },
+    {
+        "id": "f798567f.d81db8",
+        "type": "debug",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 350,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "9fc1d0a2.38fe7",
+        "type": "mqtt out",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "43167b9e.7745e4",
+        "x": 830,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "394157d7.e9bff8",
+        "type": "inject",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "tle/sat_position/",
+        "payload": "{\"tle\":\"2021-022R\\n47947U 21022R   21090.95649367 -.00000212  00000-0 -10103-4 0  9995\\n47947  97.5620 354.6623 0017173 205.9883 213.1208 15.06493771  1275\"}",
+        "payloadType": "json",
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "607e5b4c.8bc9a4",
+                "7ccd89f0.7f8158",
+                "6c02558e.c321dc"
+            ]
+        ]
+    },
+    {
+        "id": "607e5b4c.8bc9a4",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "get TLE position FEES",
+        "func": "const jspredict = global.get(\"jspredict\");\n\n//tle=msg.payload.tle;\n//var tle=\"2021-022AK\\n1 48041U 21022AK  21111.22834664  .00001991  00000-0  13898-3 0  9997\\n2 48041  97.5627  14.5584 0016718 132.6933 347.0891 15.06393376  3235\"\n\nvar tle=\"OBJECT AL\\n1 48082U 21022AL  21114.15389910  .00002956  00000-0  20395-3 0  9998\\n2 48082  97.5625  17.4313 0017331 124.4755  12.9113 15.06444099  3406\"\n\n//var tle = '0 LEMUR-2 JEROEN\\n1 40934U 15052E   15306.10048119  .00001740  00000-0  15647-3 0  9990\\n2 40934   6.0033 141.2190 0010344 133.6141 226.4604 14.76056230  5130';\nqthlat =45;\nqthlon =10;\nqth = [qthlat,qthlon,.1];\nd = new Date(); \nvar timenow = d.getTime();\n\nif (global.get(\"tle_fees\") == undefined) {\n  global.set(\"tle_fees\",0);\n}\n\nconst ret = jspredict.observe(tle , qth,timenow);\nret.time=timenow;\n//ret.radiomode={\"mode\":\"LoRa\",\"freq\":437.2,\"bw\":125,\"sf\":9,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":6,\"gain\":0,\"crc\":true,\"fldro\":0,\"sat\":\"FEES\",\"NORAD\":99738};\n\n\nret.id = \"FEES\";\nret.norad =\"99738\"\nret.weblink= \"http://www.lasernavigation.it/the-cubesat-fees-flexible-experimental-embedded-satelliteproject-update/\"\nglobal.set(\"tle_fees\",ret);\n\nmsg.topic = msg.topic + ret.id \nmsg.payload = ret;\n\nmsg.payload.timenow=timenow;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "9fc1d0a2.38fe7",
+                "8f240a87.7b97c8"
+            ]
+        ]
+    },
+    {
+        "id": "42608a77.a4f294",
+        "type": "switch",
+        "z": "3928ed20.c3ac32",
+        "name": "Switch message type",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "tle",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            },
+            {
+                "t": "cont",
+                "v": "/rx",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "user0010",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "tele/welcome",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "tele/pingext",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "sophyaispace/user0030/console/",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "/query",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 8,
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [],
+            [
+                "a2772fc4.a05ba"
+            ],
+            [
+                "194d9c8b.560f63",
+                "3a01f8bf.b52998",
+                "24a4278c.319de8",
+                "7bdece35.91e23"
+            ],
+            [
+                "b51691b6.3ea59"
+            ],
+            [
+                "8de7283a.9be9e8"
+            ],
+            [
+                "8de7283a.9be9e8"
+            ],
+            [
+                "49e5b7e1.5dce38"
+            ],
+            [
+                "fe6ce5e.28a3d18"
+            ]
+        ]
+    },
+    {
+        "id": "864f0.b2150b108",
+        "type": "file",
+        "z": "3928ed20.c3ac32",
+        "name": "mqttlog",
+        "filename": "/data/mqttlogs/mqttlog.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 580,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a2772fc4.a05ba",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "Log full message",
+        "func": "\n\nconst p = msg.payload;\n\nmsg.payload = {\n  topic: msg.topic,\n  payload: p\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "864f0.b2150b108"
+            ]
+        ]
+    },
+    {
+        "id": "8671a1d6.9fc28",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/mqttlog.txt",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 1020,
+        "wires": [
+            [
+                "f5c3016.c05e"
+            ]
+        ]
+    },
+    {
+        "id": "b949723e.73fdc",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "f5c3016.c05e",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/mqttlogs/mqttlog.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 450,
+        "y": 1020,
+        "wires": [
+            [
+                "b949723e.73fdc"
+            ]
+        ]
+    },
+    {
+        "id": "6a99508c.96d31",
+        "type": "file",
+        "z": "3928ed20.c3ac32",
+        "name": "mqttrxtinygs",
+        "filename": "/data/mqttlogs/mqttrxtinygs.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 610,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fd28e1fb.0a6d4",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/mqttrxtopic.txt",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 940,
+        "wires": [
+            [
+                "6ce9e634.d4a958"
+            ]
+        ]
+    },
+    {
+        "id": "8be1f529.34d0f8",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "6ce9e634.d4a958",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/mqttlogs/mqttrxtopic.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 460,
+        "y": 940,
+        "wires": [
+            [
+                "8be1f529.34d0f8"
+            ]
+        ]
+    },
+    {
+        "id": "da58ec7a.c6c1",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/mqttrxtinygs.txt",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 980,
+        "wires": [
+            [
+                "598b513.1e253b"
+            ]
+        ]
+    },
+    {
+        "id": "56d1c1c1.6a5",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 690,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "598b513.1e253b",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/mqttlogs/mqttrxtinygs.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 470,
+        "y": 980,
+        "wires": [
+            [
+                "56d1c1c1.6a5"
+            ]
+        ]
+    },
+    {
+        "id": "7afd3cd7.419fa4",
+        "type": "worldmap",
+        "z": "188e0510.29f8bb",
+        "name": "sophyai.space",
+        "lat": "45",
+        "lon": "9",
+        "zoom": "10",
+        "layer": "OSM",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "deg",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "x": 820,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "8de7283a.9be9e8",
+        "type": "link out",
+        "z": "3928ed20.c3ac32",
+        "name": "welcome_msg",
+        "links": [
+            "a71869c8.12f258"
+        ],
+        "x": 395,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "a71869c8.12f258",
+        "type": "link in",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "links": [
+            "8de7283a.9be9e8"
+        ],
+        "x": 96,
+        "y": 140.0000057220459,
+        "wires": [
+            [
+                "5d2ecb6a.5d9354"
+            ]
+        ]
+    },
+    {
+        "id": "b88e8bd6.2fdf48",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "TLE DEBUG",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 431,
+        "y": 80.0000057220459,
+        "wires": []
+    },
+    {
+        "id": "5d2ecb6a.5d9354",
+        "type": "json",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 191,
+        "y": 140.0000057220459,
+        "wires": [
+            [
+                "6fcb6ac6.52fac4",
+                "d1e5878d.98e768"
+            ]
+        ]
+    },
+    {
+        "id": "6fcb6ac6.52fac4",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "TelemWelcome-PingExt",
+        "func": "//msg.payload = { \"name\":\"SophyGS\", \"lat\":51.05, \"lon\":-1.35 }\n\nlat = msg.payload.station_location[0];\nlon = msg.payload.station_location[1];\n//msg.payload=\"lat:\"+lat+\"lon:\"+lon+\"\\n\\r\";\n//msg.payload.station=msg.payload.stationname;\nmsg.payload = {\"userid\":msg.payload.userid,\"name\":msg.payload.mac,\"station\":msg.payload.stationname ,\"lat\":msg.payload.station_location[0], \"lon\":msg.payload.station_location[1],\"icon\":\"http://52.4.237.162:1880/antenna0.ico\", \"modem_conf\":msg.payload.modem_conf,\"remoteTune\":msg.payload.remoteTune }\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "6f5e382c.d4bdd8",
+                "cb2abc8c.67b9f"
+            ]
+        ]
+    },
+    {
+        "id": "8f240a87.7b97c8",
+        "type": "link out",
+        "z": "3928ed20.c3ac32",
+        "name": "tle_msg",
+        "links": [
+            "1df30503.a6470b"
+        ],
+        "x": 675,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "1df30503.a6470b",
+        "type": "link in",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "links": [
+            "8f240a87.7b97c8",
+            "33944b4a.624a44"
+        ],
+        "x": 96,
+        "y": 40.0000057220459,
+        "wires": [
+            [
+                "2d8cd9ec.52a546",
+                "b88e8bd6.2fdf48"
+            ]
+        ]
+    },
+    {
+        "id": "2d8cd9ec.52a546",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "tle->map",
+        "func": "lat=msg.payload.latitude;\nlon=msg.payload.longitude;\nmsg.payload.name=msg.payload.id\nmsg.payload.lat=lat;\nmsg.payload.lon=lon;\nif (msg.payload.id==\"ISS\")\nmsg.payload.icon=\"https://img.pngio.com/spacecraft-icons-science-mission-directorate-iss-png-300_230.png\"\nelse\nmsg.payload.icon=\"http://52.4.237.162:1880/sat.ico\";\nmsg.payload.weblink=msg.payload.weblink;\nmsg.payload.radius=(msg.payload.footprint*1000)/2.5;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 40,
+        "wires": [
+            [
+                "7afd3cd7.419fa4"
+            ]
+        ]
+    },
+    {
+        "id": "7ccd89f0.7f8158",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "get TLE position Norbi",
+        "func": "const jspredict = global.get(\"jspredict\");\n\nvar tle=\"ISS (ZARYA)\\n1 25544U 98067A   21118.16173946  .00003561  00000-0  72858-4 0  9999\\n2 25544  51.6435 230.1592 0002604 287.5143 139.5958 15.48959262280843\"\n\nvar tle=\"NORBI\\n1 46494U 20068J   21113.93521449  .00000441  00000-0  36756-4 0  9998\\n2 46494  97.6906  51.8082 0016189 265.3172  94.6200 15.03563656 31141\"\n\nif (global.get(\"tle_norbi\") == undefined) {\n  global.set(\"tle_norbi\",0);\n}\nqthlat =45;\nqthlon =10;\nqth = [qthlat,qthlon,.1];\nd = new Date(); \nvar timenow = d.getTime();\n            \n//TLE FEES\n//var tle=\"2021-022AK\\n1 48041U 21022AK  21111.22834664  .00001991  00000-0  13898-3 0  9997\\n2 48041  97.5627  14.5584 0016718 132.6933 347.0891 15.06393376  3235\"\n\n//var tle = '0 LEMUR-2 JEROEN\\n1 40934U 15052E   15306.10048119  .00001740  00000-0  15647-3 0  9990\\n2 40934   6.0033 141.2190 0010344 133.6141 226.4604 14.76056230  5130';\nconst ret = jspredict.observe(tle , null);\n//ret.radiomode = {\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}\nret.time=timenow;\nret.id = \"Norbi\";\nret.noard =\"46494\"\nret.weblink =\"https://tinygs.com/satellite/Norbi\"; \nret.icon =\"\";\nmsg.topic = msg.topic + ret.id \nmsg.payload = ret;\nglobal.set(\"tle_norbi\",ret);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 40,
+        "wires": [
+            [
+                "8f240a87.7b97c8",
+                "9fc1d0a2.38fe7"
+            ]
+        ]
+    },
+    {
+        "id": "d1e5878d.98e768",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "WelcomePingExt",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 690,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6f5e382c.d4bdd8",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "Check Distance FEES",
+        "func": "// CAMBIO SAT FEES\n/* Topic TinyGS : tinygs/309965706/IU2IOL_FEES/cmnd/begin Payload: {\"mode\"\n:\"LoRa\",\"freq\":437.2,\"bw\":125,\"sf\":9,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":6,\"gai\nn\":0,\"crc\":true,\"fldro\":0,\"sat\":\"FEES\",\"NORAD\":99738}\n*/\n\n// CAMBIO SAT NORBI\n/*\n09:39:54 Topic TinyGS : tinygs/309965706/IU2IOL_FEES/cmnd/begin Payload: {\"mode\"\n:\"LoRa\",\"freq\":436.703,\"bw\":250,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"\ngain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}\n\n09:39:54 success!\n09:39:54 [SX12x8] Starting to listen to Norbi\n09:39:54 success!\n09:39:54 topic TINY: tinygs/309965706/IU2IOL_FEES/stat/begin\n09:39:54 Topic TinyGS : tinygs/309965706/IU2IOL_FEES/cmnd/remoteTune Payload: 0 \n\n09:39:54 Set Remote Tune to OFF\n09:39:54 success!\n09:39:54 [SX12x8] Starting to listen to Norbi\n09:39:54 success!\n09:39:54 topic TINY: tinygs/309965706/IU2IOL_FEES/stat/remoteTune\n09:40:02 topic TINY: tinygs/309965706/IU2IOL_FEES/tele/welcome\n09:40:04 topic FEES: sophyaispace/user0000/IU2IOL_FEES/tele/pingext\n09:40:20 Topic TinyGS : tinygs/309965706/IU2IOL_FEES/cmnd/sat_pos_oled Payload: \n[98,50]\n*/\n/*\nPer attivare e disattivare il remote tune : \n09:41:59 Topic TinyGS : tinygs/309965706/IU2IOL_FEES/cmnd/remoteTune Payload: 1 \n*/\nconst jspredict = global.get(\"jspredict\");\n\nvar tle=[\"OBJECT AL\\n1 48082U 21022AL  21114.15389910  .00002956  00000-0  20395-3 0  9998\\n2 48082  97.5625  17.4313 0017331 124.4755  12.9113 15.06444099  3406\",\n         \"NORBI\\n1 46494U 20068J   21113.93521449  .00000441  00000-0  36756-4 0  9998\\n2 46494  97.6906  51.8082 0016189 265.3172  94.6200 15.03563656 31141\"]\nvar tle_name=[\"FEES\",\"Norbi\"];\nvar tle_radio=[ {\"mode\":\"LoRa\",\"freq\":437.2,\"bw\":125,\"sf\":9,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":6,\"gain\":0,\"crc\":true,\"fldro\":0,\"sat\":\"FEES\",\"NORAD\":99738},{\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}];\nvar pred_transit;\nvar pred_observ;\nvar i;\n\nqthlat =msg.payload.lat;\nqthlon =msg.payload.lon;\nqth = [qthlat,qthlon,.1];\nd = new Date(); \nvar timenow = d.getTime();\ntimeend=timenow + 22200000000;  \nvar near_id=0;\nvar near_val=10000000000000000000000000000000000000000.0;\nif (msg.payload.modem_conf != \"\")\n{\nvar obj_sat = JSON.parse(msg.payload.modem_conf);\n}\nfor (i=0;i<2;i++)\n{\ntle_ints=tle[i];\npred_transit_init=jspredict.transits( tle_ints, qth, timenow, timeend, 5, 4);\n//msg.payload.pred_transit_init= pred_transit_init;\nif(pred_transit_init)\ntimestart=(pred_transit_init[0].start-timenow)/1000;\n//var timestart = 1000000000000 /// ERA UN BLOCCO !!!\ntimestart=timestart/60; // Minuti al prossimo passaggio.\nif (i ===0) msg.payload.next_fees_pass=timestart;\n            else\n            msg.payload.next_norbi_pass=timestart;\n//near_id=1;\nif (timestart < near_val) \n            {\n            near_val=timestart;\n            near_id=i;\n            sat_gs=obj_sat.sat;\n            sat_tle=tle_radio[i].sat;\n            msg.payload.sat_gs_check = obj_sat.sat;\n            msg.payload.sat_tle_check = sat_tle;\n            if (msg.payload.remoteTune==true) {\n                        if(sat_gs == sat_tle)\n                            msg.payload.mqtt_tx=\"\";\n                            else\n                            {\n                            msg.payload.mqtt_tx=tle_radio[i];\n                            }\n                        }\n            }\n}\n    \n    tle_int=tle[near_id];\n    pred_transit = jspredict.transits(tle_int , qth, timenow, timeend, 5, 4);\n    pred_observ = jspredict.observe(tle_int , qth);\n    if (pred_observ.rangeSat < 5000)\n        {\n        msg.payload.radius=1000000;\n        msg.payload.fillColor = \"#FF0000\";\n        msg.payload.in_range_sat=tle_name[near_id];\n        }\n        else\n        {\n        msg.payload.radius=1;\n        msg.payload.in_range_sat=\"\"\n        }\n     msg.payload.id = tle_name[near_id];\n\nmsg.payload.timestart=timestart;\nmsg.payload.near_val=near_val;\nmsg.payload.altitude=pred_observ.altitude;\nmsg.payload.footprint=pred_observ.footprint;\nmsg.payload.sunlit=pred_observ.sunlit;\nmsg.payload.eclipseDepth=pred_observ.eclipseDepth;\nmsg.payload.azimuth=pred_observ.azimuth;\nmsg.payload.elevation=pred_observ.elevation;\nmsg.payload.rangeSat=pred_observ.rangeSat;\nmsg.payload.doppler=pred_observ.doppler;\n\n\nmsg.payload.name =msg.payload.name;\nmsg.payload.weblink=\"http://52.4.237.162:1880/mqttrxtopic.txt\"\n//msg.payload.weblink=\"http://52.4.237.162:1880/rx-\"+msg.payload.userid+\"-\"+msg.payload.station+\".txt\";\n//msg.payload.weblink= \"http://www.lasernavigation.it/the-cubesat-fees-flexible-experimental-embedded-satelliteproject-update/\"\nmsg.topic = msg.topic + msg.payload.id \n//msg.payload = pred_observ;\nif(pred_transit_init)\ntimestart=(pred_transit[0].start-timenow)/1000;\ntimestart=timestart/60; // Minuti al prossimo passaggio.\nmsg.payload.next_transit_min= timestart;\nmsg.payload.next_transit_ore=timestart/60;\n\nmsg.payload.max_elevation=pred_transit[0].maxElevation;\nmsg.payload.max_azimuth=pred_transit[0].maxAzimuth;\nduration = pred_transit[0].duration; \nduration = duration/1000/60;\nmsg.payload.modem_conf=\"\";\nmsg.payload.heading=msg.payload.azimuth,\n//msg.payload = pred_transit;\nmsg.topic=\"sophyaispace/\"+msg.payload.userid+\"/\"+msg.payload.station+\"/cmnd/begin\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 240,
+        "wires": [
+            [
+                "cb2abc8c.67b9f",
+                "7afd3cd7.419fa4",
+                "248fecb2.09b9d4",
+                "a73d2dfa.2bbd5"
+            ]
+        ]
+    },
+    {
+        "id": "cb2abc8c.67b9f",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "tle_observation",
+        "active": false,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "194d9c8b.560f63",
+        "type": "link out",
+        "z": "3928ed20.c3ac32",
+        "name": "Telm_RX",
+        "links": [
+            "215de3f1.677ebc",
+            "2bb923cd.c3aa0c",
+            "54ef8669.aaff28"
+        ],
+        "x": 435,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "215de3f1.677ebc",
+        "type": "link in",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "links": [
+            "194d9c8b.560f63"
+        ],
+        "x": 95,
+        "y": 220,
+        "wires": [
+            [
+                "9196baac.dbe878"
+            ]
+        ]
+    },
+    {
+        "id": "3769d762.2250a8",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "TelemRXDecode",
+        "func": "\nlat = msg.payload.station_location[0];\nlon = msg.payload.station_location[1];\n\nif (msg.payload.satellite == \"Norbi\")\n{\nsat_last = global.get(\"tle_norbi\",0);\nsat_last.stationname=msg.payload.stationname;\nglobal.set(\"tle_norbi_last\",sat_last)\n}\nif (msg.payload.satellite == \"FEES\")\n{\nsat_last.stationname=msg.payload.stationname;\nsat_last = global.get(\"tle_fees\",0);\nglobal.set(\"tle_fees_last\",sat_last)\n}\n\n//msg.payload=\"lat:\"+lat+\"lon:\"+lon+\"\\n\\r\";\nmsg.payload = { \"stationname\":msg.payload.stationname,\"sat_last\":sat_last,\"name\":msg.payload.mac, \"lat\":msg.payload.station_location[0], \"lon\":msg.payload.station_location[1],\"icon\":\"http://52.4.237.162:1880/antenna0.ico\" }\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 300,
+        "wires": [
+            [
+                "c244d39b.f451d",
+                "4ceefab2.2a52e4",
+                "535f364c.ba3f18",
+                "4b0efa72.7cc3d4",
+                "bbf30750.3d8318"
+            ]
+        ]
+    },
+    {
+        "id": "9196baac.dbe878",
+        "type": "json",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 150,
+        "y": 320,
+        "wires": [
+            [
+                "3769d762.2250a8",
+                "535f364c.ba3f18",
+                "4b0efa72.7cc3d4"
+            ]
+        ]
+    },
+    {
+        "id": "c244d39b.f451d",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "Last Satellite Report",
+        "func": "\n\nmsg.payload={\"stationname\":msg.payload.stationname,\"time\":msg.payload.sat_last.time,\"icon\":\"http://52.4.237.162:1880/sat.ico\",\"name\":msg.payload.sat_last.id+\":\"+msg.payload.sat_last.time,\"lon\":msg.payload.sat_last.longitude,\"lat\":msg.payload.sat_last.latitude,\"fillColor\":\"#00FF00\",\"rx\":\"ok\",\"radius\":\"1000000\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 440,
+        "wires": [
+            [
+                "7afd3cd7.419fa4",
+                "4b0efa72.7cc3d4"
+            ]
+        ]
+    },
+    {
+        "id": "535f364c.ba3f18",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d83da6d6.342c98",
+        "type": "link out",
+        "z": "188e0510.29f8bb",
+        "name": "Mqtt_In",
+        "links": [
+            "25214055.ad262"
+        ],
+        "x": 1075,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "25214055.ad262",
+        "type": "link in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "links": [
+            "d83da6d6.342c98"
+        ],
+        "x": 735,
+        "y": 140,
+        "wires": [
+            [
+                "9fc1d0a2.38fe7"
+            ]
+        ]
+    },
+    {
+        "id": "248fecb2.09b9d4",
+        "type": "switch",
+        "z": "188e0510.29f8bb",
+        "name": "Check MQTT_TX",
+        "property": "payload.mqtt_tx",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 240,
+        "wires": [
+            [
+                "f90f4c3e.a0e1a"
+            ]
+        ]
+    },
+    {
+        "id": "f90f4c3e.a0e1a",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "func": "msg.payload=msg.payload.mqtt_tx;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 320,
+        "wires": [
+            [
+                "2a2c8f08.a05e5",
+                "d83da6d6.342c98"
+            ]
+        ]
+    },
+    {
+        "id": "2a2c8f08.a05e5",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3a01f8bf.b52998",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "Log msg full rx",
+        "func": "return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 380,
+        "wires": [
+            [
+                "c1bb8556.634df8",
+                "ca3665e2.ef3d18",
+                "68e104c5.dfee2c",
+                "ea4a6ffd.c56e7"
+            ]
+        ]
+    },
+    {
+        "id": "c1bb8556.634df8",
+        "type": "file",
+        "z": "3928ed20.c3ac32",
+        "name": "mqttrxtopic",
+        "filename": "/data/mqttlogs/mqttrxtopic.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 850,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c02558e.c321dc",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "get TLE position ISS",
+        "func": "const jspredict = global.get(\"jspredict\");\n\nvar tle=\"ISS (ZARYA)\\n1 25544U 98067A   21118.16173946  .00003561  00000-0  72858-4 0  9999\\n2 25544  51.6435 230.1592 0002604 287.5143 139.5958 15.48959262280843\"\n\n//var tle=\"NORBI\\n1 46494U 20068J   21113.93521449  .00000441  00000-0  36756-4 0  9998\\n2 46494  97.6906  51.8082 0016189 265.3172  94.6200 15.03563656 31141\"\n            \n//TLE FEES\n//var tle=\"2021-022AK\\n1 48041U 21022AK  21111.22834664  .00001991  00000-0  13898-3 0  9997\\n2 48041  97.5627  14.5584 0016718 132.6933 347.0891 15.06393376  3235\"\n\n//var tle = '0 LEMUR-2 JEROEN\\n1 40934U 15052E   15306.10048119  .00001740  00000-0  15647-3 0  9990\\n2 40934   6.0033 141.2190 0010344 133.6141 226.4604 14.76056230  5130';\nconst ret = jspredict.observe(tle , null);\n//ret.radiomode = {\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}\nret.id = \"ISS\";\nret.noard =\"25544\"\nret.weblink =\"https://it.wikipedia.org/wiki/Stazione_Spaziale_Internazionale\"; \nret.icon =\"\";\nmsg.topic = msg.topic + ret.id \nmsg.payload = ret;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 120,
+        "wires": [
+            [
+                "8f240a87.7b97c8",
+                "9fc1d0a2.38fe7"
+            ]
+        ]
+    },
+    {
+        "id": "4872932b.868f7c",
+        "type": "debug",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "404ca932.638798",
+        "type": "inject",
+        "z": "3928ed20.c3ac32",
+        "name": "rx_debug_inject_Norbi",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "sophyaispace/rx-DEBUG",
+        "payload": "{\"station_location\":[45.65,8.86],\"userid\":\"user0001\",\"stationname\":\"IW2DZX_2\",\"mac\":\"248A7F60A124\",\"mode\":\"LoRa\",\"frequency\":436.703,\"satellite\":\"Norbi\",\"sf\":10,\"cr\":5,\"bw\":250,\"rssi\":-119.5,\"snr\":-13.5,\"frequency_error\":-6218.056,\"unix_GS_time\":1619569663,\"usec_time\":1619569663025776,\"time_offset\":-0.00117,\"crc_error\":false,\"data\":\"jv////8KBgHJhAkAAAAA8Q8AACiEcmgbKEJSSyBNVyBWRVI6MDJfMTIAAAAAAAAOAADsBwAAAAIWAArTCoMA1AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABv8P2ySIAhTNw4MAAwAAAAAsQEhBhASDQBgEHcgyhU=\",\"NORAD\":46494,\"test\":false,\"noisy\":false}",
+        "payloadType": "str",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "f72801da.2b089",
+                "194d9c8b.560f63",
+                "a2772fc4.a05ba",
+                "dce7c81f.5352a8",
+                "24a4278c.319de8"
+            ]
+        ]
+    },
+    {
+        "id": "f72801da.2b089",
+        "type": "json",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 550,
+        "y": 440,
+        "wires": [
+            [
+                "4872932b.868f7c"
+            ]
+        ]
+    },
+    {
+        "id": "2c5e8f76.5a0ba",
+        "type": "ui_form",
+        "z": "3928ed20.c3ac32",
+        "name": "registration_form",
+        "label": "User Registration",
+        "group": "df1af2cb.b5d6b",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "user",
+                "value": "user",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "password",
+                "value": "password",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "passowrd_check",
+                "value": "password_check",
+                "type": "password",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "e.mail",
+                "value": "email",
+                "type": "email",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "user": "",
+            "password": "",
+            "password_check": "",
+            "email": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "topic",
+        "topicType": "msg",
+        "splitLayout": "",
+        "x": 230,
+        "y": 900,
+        "wires": [
+            [
+                "93752259.f2f9a"
+            ]
+        ]
+    },
+    {
+        "id": "93752259.f2f9a",
+        "type": "file",
+        "z": "3928ed20.c3ac32",
+        "name": "mqttrxtopic",
+        "filename": "/data/mqttlogs/user.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 490,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a73d2dfa.2bbd5",
+        "type": "switch",
+        "z": "188e0510.29f8bb",
+        "name": "Check SAT_IN RANGE",
+        "property": "payload.in_range_sat",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 690,
+        "y": 500,
+        "wires": [
+            [
+                "6ff41abd.93c644",
+                "778bdbc.4341624"
+            ]
+        ]
+    },
+    {
+        "id": "6ff41abd.93c644",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "main console",
+        "func": "msg.topic=\"sophyaispace/console/in_range_sat/\"+msg.payload.in_range_sat+\"/status/\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 500,
+        "wires": [
+            [
+                "d83da6d6.342c98"
+            ]
+        ]
+    },
+    {
+        "id": "aaca2ec.92962d",
+        "type": "catch",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 110,
+        "y": 440,
+        "wires": [
+            [
+                "6f5e382c.d4bdd8"
+            ]
+        ]
+    },
+    {
+        "id": "ca3665e2.ef3d18",
+        "type": "mqtt out",
+        "z": "3928ed20.c3ac32",
+        "name": "SophyaMSG",
+        "topic": "",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a781942b.f8a858",
+        "x": 990,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4e6d31.b72f12d",
+        "type": "mqtt out",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "broker": "43167b9e.7745e4",
+        "x": 770,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "b905f289.fa1e5",
+        "type": "inject",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "tle/sat_position/",
+        "payload": "{\"tle\":\"2021-022R\\n47947U 21022R   21090.95649367 -.00000212  00000-0 -10103-4 0  9995\\n47947  97.5620 354.6623 0017173 205.9883 213.1208 15.06493771  1275\"}",
+        "payloadType": "json",
+        "x": 110,
+        "y": 780,
+        "wires": [
+            [
+                "2e5b1d2e.f36112",
+                "dbad038c.e909",
+                "34340d12.dd51f2"
+            ]
+        ]
+    },
+    {
+        "id": "2e5b1d2e.f36112",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "get TLE position FEES",
+        "func": "const jspredict = global.get(\"jspredict\");\n\n//tle=msg.payload.tle;\n//var tle=\"2021-022AK\\n1 48041U 21022AK  21111.22834664  .00001991  00000-0  13898-3 0  9997\\n2 48041  97.5627  14.5584 0016718 132.6933 347.0891 15.06393376  3235\"\n\nvar tle=\"OBJECT AL\\n1 48082U 21022AL  21114.15389910  .00002956  00000-0  20395-3 0  9998\\n2 48082  97.5625  17.4313 0017331 124.4755  12.9113 15.06444099  3406\"\n\n//var tle = '0 LEMUR-2 JEROEN\\n1 40934U 15052E   15306.10048119  .00001740  00000-0  15647-3 0  9990\\n2 40934   6.0033 141.2190 0010344 133.6141 226.4604 14.76056230  5130';\nqthlat =45;\nqthlon =10;\nqth = [qthlat,qthlon,.1];\nd = new Date(); \nvar timenow = d.getTime();\n\nif (global.get(\"timefut\") == undefined) {\n  global.set(\"timefut\",0);\n}\ntf=global.get(\"timefut\");\ntf=tf+100000*4;\nif (tf>9000000)tf=0;\ntimenow=timenow+tf;\nglobal.set(\"timefut\",tf); \nconst ret = jspredict.observe(tle , qth,timenow);\n\n//ret.radiomode={\"mode\":\"LoRa\",\"freq\":437.2,\"bw\":125,\"sf\":9,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":6,\"gain\":0,\"crc\":true,\"fldro\":0,\"sat\":\"FEES\",\"NORAD\":99738};\n\n\nret.id = \"FEES-PREDICT\";\nret.norad =\"99738\"\nret.weblink= \"http://www.lasernavigation.it/the-cubesat-fees-flexible-experimental-embedded-satelliteproject-update/\"\nmsg.topic = msg.topic + ret.id \nmsg.payload = ret;\nmsg.payload.tf=tf;\nmsg.payload.timenow=timenow;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 780,
+        "wires": [
+            [
+                "4e6d31.b72f12d",
+                "eda34ee9.0fafa"
+            ]
+        ]
+    },
+    {
+        "id": "dbad038c.e909",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "d": true,
+        "name": "get TLE position Norbi",
+        "func": "const jspredict = global.get(\"jspredict\");\n\nvar tle=\"ISS (ZARYA)\\n1 25544U 98067A   21118.16173946  .00003561  00000-0  72858-4 0  9999\\n2 25544  51.6435 230.1592 0002604 287.5143 139.5958 15.48959262280843\"\n\nvar tle=\"NORBI\\n1 46494U 20068J   21113.93521449  .00000441  00000-0  36756-4 0  9998\\n2 46494  97.6906  51.8082 0016189 265.3172  94.6200 15.03563656 31141\"\n            \n//TLE FEES\n//var tle=\"2021-022AK\\n1 48041U 21022AK  21111.22834664  .00001991  00000-0  13898-3 0  9997\\n2 48041  97.5627  14.5584 0016718 132.6933 347.0891 15.06393376  3235\"\n\n//var tle = '0 LEMUR-2 JEROEN\\n1 40934U 15052E   15306.10048119  .00001740  00000-0  15647-3 0  9990\\n2 40934   6.0033 141.2190 0010344 133.6141 226.4604 14.76056230  5130';\nconst ret = jspredict.observe(tle , null);\n//ret.radiomode = {\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}\nret.id = \"Norbi\";\nret.noard =\"46494\"\nret.weblink =\"https://tinygs.com/satellite/Norbi\"; \nret.icon =\"\";\nmsg.topic = msg.topic + ret.id \nmsg.payload = ret;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 740,
+        "wires": [
+            [
+                "4e6d31.b72f12d",
+                "eda34ee9.0fafa"
+            ]
+        ]
+    },
+    {
+        "id": "34340d12.dd51f2",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "d": true,
+        "name": "get TLE position ISS",
+        "func": "const jspredict = global.get(\"jspredict\");\n\nvar tle=\"ISS (ZARYA)\\n1 25544U 98067A   21118.16173946  .00003561  00000-0  72858-4 0  9999\\n2 25544  51.6435 230.1592 0002604 287.5143 139.5958 15.48959262280843\"\n\n//var tle=\"NORBI\\n1 46494U 20068J   21113.93521449  .00000441  00000-0  36756-4 0  9998\\n2 46494  97.6906  51.8082 0016189 265.3172  94.6200 15.03563656 31141\"\n            \n//TLE FEES\n//var tle=\"2021-022AK\\n1 48041U 21022AK  21111.22834664  .00001991  00000-0  13898-3 0  9997\\n2 48041  97.5627  14.5584 0016718 132.6933 347.0891 15.06393376  3235\"\n\n//var tle = '0 LEMUR-2 JEROEN\\n1 40934U 15052E   15306.10048119  .00001740  00000-0  15647-3 0  9990\\n2 40934   6.0033 141.2190 0010344 133.6141 226.4604 14.76056230  5130';\nconst ret = jspredict.observe(tle , null);\n//ret.radiomode = {\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}\nret.id = \"ISS\";\nret.noard =\"25544\"\nret.weblink =\"https://it.wikipedia.org/wiki/Stazione_Spaziale_Internazionale\"; \nret.icon =\"\";\nmsg.topic = msg.topic + ret.id \nmsg.payload = ret;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 820,
+        "wires": [
+            [
+                "4e6d31.b72f12d",
+                "eda34ee9.0fafa"
+            ]
+        ]
+    },
+    {
+        "id": "bd78ea1e.818fb8",
+        "type": "worldmap",
+        "z": "3928ed20.c3ac32",
+        "name": "sophyai.space",
+        "lat": "45",
+        "lon": "9",
+        "zoom": "10",
+        "layer": "OSM",
+        "cluster": "",
+        "maxage": "",
+        "usermenu": "show",
+        "layers": "hide",
+        "panit": "false",
+        "panlock": "false",
+        "zoomlock": "false",
+        "hiderightclick": "false",
+        "coords": "deg",
+        "showgrid": "false",
+        "allowFileDrop": "false",
+        "path": "/worldmap",
+        "x": 920,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "eda34ee9.0fafa",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "tle->map",
+        "func": "lat=msg.payload.latitude;\nlon=msg.payload.longitude;\nmsg.payload.name=msg.payload.id\nmsg.payload.lat=lat;\nmsg.payload.lon=lon;\nif (msg.payload.id==\"ISS\")\nmsg.payload.icon=\"https://img.pngio.com/spacecraft-icons-science-mission-directorate-iss-png-300_230.png\"\nelse\nmsg.payload.icon=\"http://52.4.237.162:1880/sat.ico\";\nmsg.payload.weblink=msg.payload.weblink;\nmsg.payload.fillColor=\"#000000\";\nmsg.payload.iconColor=\"#00FF00\";\nmsg.payload.tooltip=1;\nmsg.payload.radius=(msg.payload.footprint*1000)/2.5;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 820,
+        "wires": [
+            [
+                "bd78ea1e.818fb8"
+            ]
+        ]
+    },
+    {
+        "id": "4ceefab2.2a52e4",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "Last confirmed RX",
+        "func": "\nmsg.payload.rx=\"OK\"\nmsg.payload={\"name\":msg.payload.name,\"fillColor\":\"#00FF00\",\"rx\":\"ok\",\"radius\":\"1000000\"}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 380,
+        "wires": [
+            [
+                "7afd3cd7.419fa4",
+                "535f364c.ba3f18"
+            ]
+        ]
+    },
+    {
+        "id": "4b0efa72.7cc3d4",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "3e22ac75.a2b824",
+        "type": "inject",
+        "z": "3928ed20.c3ac32",
+        "name": "Inject RX TinyGS",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "sophyaispace/rx-DEBUG",
+        "payload": "{\"topic\":\"tinygs/user0010/fees/\",\"payload\":\"{\\\"raw\\\":\\\"AP7lL7AH1BEAvTkAAAEAAAAA+QcTDNsIJQAlABsAIgAkAM4AOAEmADwAKABItCo=\\\",\\\"time\\\":1620337906254,\\\"satPos\\\":{\\\"lat\\\":24.4945288857959,\\\"lng\\\":20.48718243403437,\\\"alt\\\":547.3247803327195},\\\"sunLit\\\":false,\\\"eclipseDepth\\\":25.115164535987336,\\\"parsed\\\":{\\\"header\\\":{\\\"magic\\\":[0,254,229],\\\"frameId\\\":45103},\\\"payload\\\":{\\\"timestamp\\\":1168391,\\\"unknown2\\\":14781,\\\"unknown3\\\":1,\\\"unknown4\\\":0,\\\"unknown5\\\":2041,\\\"vacd2v5\\\":3091,\\\"vbat\\\":2267,\\\"vsol\\\":37,\\\"unknown6\\\":37,\\\"unknown7\\\":27,\\\"unknown8\\\":34,\\\"unknown9\\\":36,\\\"iload\\\":206,\\\"icharger\\\":312,\\\"unknown10\\\":38,\\\"unknown11\\\":60,\\\"unknown12\\\":40,\\\"unknown13\\\":72,\\\"unknown14\\\":10932,\\\"vSol\\\":0.05985118084762212,\\\"tinygsTxPower\\\":500,\\\"tinygsSolarVoltage\\\":59.851180847622125,\\\"iCharger\\\":0.0420575865415723,\\\"tinygsChargeCurrent\\\":42.0575865415723,\\\"iLoad\\\":0.16661274668392104,\\\"coefficient\\\":0.0008087997411840828,\\\"tinygsLoadCurrent\\\":166.61274668392105,\\\"vBat\\\":3.6670980265286315,\\\"tinygsTimestamp\\\":1168391,\\\"tinygsBatVoltage\\\":3667.0980265286316},\\\"telemetry\\\":true}}\"}",
+        "payloadType": "str",
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "b51691b6.3ea59"
+            ]
+        ]
+    },
+    {
+        "id": "68e104c5.dfee2c",
+        "type": "debug",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "dce7c81f.5352a8",
+        "type": "json",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 430,
+        "y": 520,
+        "wires": [
+            [
+                "3a01f8bf.b52998"
+            ]
+        ]
+    },
+    {
+        "id": "f717358b.731018",
+        "type": "debug",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "f6b00580.28ee28",
+        "type": "function",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "func": "const KaitaiStructCompiler = global.get(\"KaitaiStructCompiler\");\n\n//const payload = JSON.parse(msg.payload.data);\nconst topic = msg.payload.topic;\n\nmsg.topic = topic;\n//msg.payload = payload;\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 160,
+        "wires": [
+            [
+                "800460f8.242a5",
+                "56ea8d5c.9a8224"
+            ]
+        ]
+    },
+    {
+        "id": "28bd7862.1ed8e8",
+        "type": "inject",
+        "z": "9500b41d.e4dcf8",
+        "name": "test stringa",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload.satellte",
+                "v": "\"Fees\"",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "SendRX",
+        "payload": "{\"station_location\":[59.729,30.042],\"userid\":\"user0005\",\"stationname\":\"R1LB_GS\",\"mac\":\"489E97910250\",\"mode\":\"LoRa\",\"frequency\":436.703,\"satellite\":\"Norbi\",\"sf\":10,\"cr\":5,\"bw\":250,\"rssi\":0,\"snr\":0,\"frequency_error\":0,\"unix_GS_time\":1620806777,\"usec_time\":1620806777172053,\"time_offset\":0,\"crc_error\":false,\"data\":\"AP7lL7DFzxIAfzoAAAEAAAAA+QcVDOII+QBpAW4BWQE4AagB8AFpAXEBigFwrVA=\",\"NORAD\":46494,\"test\":false,\"noisy\":false}",
+        "payloadType": "str",
+        "x": 220,
+        "y": 160,
+        "wires": [
+            [
+                "bc27cdac.b581b"
+            ]
+        ]
+    },
+    {
+        "id": "bc27cdac.b581b",
+        "type": "json",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": true,
+        "x": 360,
+        "y": 160,
+        "wires": [
+            [
+                "f6b00580.28ee28"
+            ]
+        ]
+    },
+    {
+        "id": "2ac5ad52.e3fc52",
+        "type": "debug",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "56ea8d5c.9a8224",
+        "type": "debug",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "b51691b6.3ea59",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "func": "//const KaitaiStructCompiler = global.get(\"KaitaiStructCompiler\");\nconst p = msg.payload;\n\nmsg.payload = {\n  topic: msg.topic,\n  payload: p\n};\n\n/*\nreturn msg;\nconst payload = JSON.parse(msg.payload.payload);\nconst topic = msg.payload.topic;\n\nmsg.topic = topic;\nmsg.payload = payload;\n\n*/\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 620,
+        "wires": [
+            [
+                "6a99508c.96d31",
+                "f717358b.731018"
+            ]
+        ]
+    },
+    {
+        "id": "80032e41.fbfb5",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/antenna0.ico",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 1080,
+        "wires": [
+            [
+                "3f117e28.a1fa82"
+            ]
+        ]
+    },
+    {
+        "id": "ace2c03b.3d6fe",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "image/x-icon"
+        },
+        "x": 690,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "3f117e28.a1fa82",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/images/antenna0.ico",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 480,
+        "y": 1080,
+        "wires": [
+            [
+                "ace2c03b.3d6fe"
+            ]
+        ]
+    },
+    {
+        "id": "5f68fddf.d20da4",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/sat.ico",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 230,
+        "y": 1160,
+        "wires": [
+            [
+                "e1fa8884.bccac8"
+            ]
+        ]
+    },
+    {
+        "id": "fcdd4612.0f18b8",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "image/x-icon"
+        },
+        "x": 690,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "e1fa8884.bccac8",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/images/sat.ico",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 460,
+        "y": 1160,
+        "wires": [
+            [
+                "fcdd4612.0f18b8"
+            ]
+        ]
+    },
+    {
+        "id": "800460f8.242a5",
+        "type": "function",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "func": "if (msg.payload.satellite == \"Norbi\")msg.payload.satellite=\"Norby\";\nelse\nmsg.payload.satellite=\"Fees\";\nconst m = {\n    format: msg.payload.satellite,\n    payload: msg.payload.data // \"jv////8KBgHJ0j8AAAAA8Q8AAGDSRW0uKEJSSyBNVyBWRVI6MDJfMTIAAAAAAAAOAADsBwAAAAISAADlCo0ADAYAAIIgIAFgT5tXANFdugE3OBoBQW0uKB0A7P/W/zoAAAAAAAAACQQEDw8PDw8PAAIFv/yyYAgmMA4MAAwAAEgEVBbqDAYJBQBgEL8fuRs=\"\n};\nmsg.payload = m;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "2ac5ad52.e3fc52",
+                "217d539a.f1125c",
+                "490d3819.e9bc98"
+            ]
+        ]
+    },
+    {
+        "id": "b4ec655c.b17e38",
+        "type": "http request",
+        "z": "9500b41d.e4dcf8",
+        "name": "DECODE NORBI",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://sophyai-space-central-controller-decoder:8080/decode",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 950,
+        "y": 420,
+        "wires": [
+            [
+                "490d3819.e9bc98",
+                "4e2d3db9.c44014",
+                "16a4b60c.5fa5da",
+                "3b10cf8b.08066"
+            ]
+        ]
+    },
+    {
+        "id": "490d3819.e9bc98",
+        "type": "debug",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "5cdad6f1.272278",
+        "type": "inject",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 220,
+        "y": 320,
+        "wires": [
+            [
+                "f6b00580.28ee28"
+            ]
+        ]
+    },
+    {
+        "id": "4e2d3db9.c44014",
+        "type": "file",
+        "z": "9500b41d.e4dcf8",
+        "name": "mqttdecode",
+        "filename": "/data/mqttlogs/satdecode.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1170,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2bb923cd.c3aa0c",
+        "type": "link in",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "links": [
+            "194d9c8b.560f63"
+        ],
+        "x": 165,
+        "y": 400,
+        "wires": [
+            [
+                "bc27cdac.b581b"
+            ]
+        ]
+    },
+    {
+        "id": "bbf30750.3d8318",
+        "type": "link out",
+        "z": "188e0510.29f8bb",
+        "name": "TelemRXDecode",
+        "links": [
+            "510de90f.2a0e98"
+        ],
+        "x": 715,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "24a4278c.319de8",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "re tx to global console",
+        "func": "msg.topic=\"sophyaispace/console/global_rx\";\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 320,
+        "wires": [
+            [
+                "9fc1d0a2.38fe7"
+            ]
+        ]
+    },
+    {
+        "id": "d539cdd3.ffe718",
+        "type": "inject",
+        "z": "a18b20ba.92688",
+        "name": "PUSH",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "4787b4de.6b8924"
+            ]
+        ]
+    },
+    {
+        "id": "ed3202c8.98e4d",
+        "type": "debug",
+        "z": "a18b20ba.92688",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "4787b4de.6b8924",
+        "type": "exec",
+        "z": "a18b20ba.92688",
+        "command": "cd /data/projects/Sophyai_Space_Flow && git push",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 410,
+        "y": 140,
+        "wires": [
+            [
+                "ed3202c8.98e4d"
+            ],
+            [
+                "ed3202c8.98e4d"
+            ],
+            [
+                "ed3202c8.98e4d"
+            ]
+        ]
+    },
+    {
+        "id": "415edd61.367c04",
+        "type": "inject",
+        "z": "a18b20ba.92688",
+        "name": "PULL",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 280,
+        "wires": [
+            [
+                "edb54e78.6d579"
+            ]
+        ]
+    },
+    {
+        "id": "90c67d82.5a87",
+        "type": "debug",
+        "z": "a18b20ba.92688",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 690,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "edb54e78.6d579",
+        "type": "exec",
+        "z": "a18b20ba.92688",
+        "command": "cd /data/projects/Sophyai_Space_Flow && git pull",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "",
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "90c67d82.5a87"
+            ],
+            [
+                "90c67d82.5a87"
+            ],
+            [
+                "90c67d82.5a87"
+            ]
+        ]
+    },
+    {
+        "id": "78e411e4.96829",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/antenna0.png",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 1240,
+        "wires": [
+            [
+                "db88e4a6.fffe68"
+            ]
+        ]
+    },
+    {
+        "id": "f00172a6.96b9e",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "content-type": "image/png"
+        },
+        "x": 690,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "db88e4a6.fffe68",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/images/antenna0.png",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 480,
+        "y": 1240,
+        "wires": [
+            [
+                "f00172a6.96b9e"
+            ]
+        ]
+    },
+    {
+        "id": "1d483563.43eddb",
+        "type": "worldmap in",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "path": "/worldmap",
+        "events": "all",
+        "x": 130,
+        "y": 640,
+        "wires": [
+            [
+                "e34ea72e.f8aaa8"
+            ]
+        ]
+    },
+    {
+        "id": "e34ea72e.f8aaa8",
+        "type": "debug",
+        "z": "188e0510.29f8bb",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 290,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "eba69085.9d5",
+        "type": "debug",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "87a27435.42ba48",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "name": "message from sat raw",
+        "func": "\n\nmsg.channel =  {\n    \"type\": \"text\",\n    \"deleted\": false,\n    \"id\": \"844179750317588480\",\n    \"name\": \"bot-telemetry\",\n    \"position\": 18,\n    \"parentID\": \"838704722784813076\",\n    \"permissionOverwrites\": {},\n    \"topic\": null,\n    \"nsfw\": false,\n    \"lastMessageID\": \"844196587071733861\",\n    \"lastPinTimestamp\": null,\n    \"rateLimitPerUser\": 0,\n    \"guild\": {\n        \"members\": {},\n        \"channels\": {},\n        \"roles\": {},\n        \"presences\": {},\n        \"deleted\": false,\n        \"available\": true,\n        \"id\": \"838704721162141716\",\n        \"name\": \"sophyai.space network\",\n        \"icon\": \"545119319545d67128524153349cb704\",\n        \"splash\": null,\n        \"region\": \"europe\",\n        \"memberCount\": 53,\n        \"large\": false,\n        \"features\": [\n            \"NEWS\",\n            \"COMMERCE\"\n        ],\n        \"applicationID\": null,\n        \"afkTimeout\": 300,\n        \"afkChannelID\": null,\n        \"systemChannelID\": \"838704722784813078\",\n        \"verificationLevel\": 2,\n        \"explicitContentFilter\": 0,\n        \"mfaLevel\": 0,\n        \"joinedTimestamp\": 1621335263125,\n        \"defaultMessageNotifications\": \"ALL\",\n        \"systemChannelFlags\": 0,\n        \"premiumTier\": 0,\n        \"premiumSubscriptionCount\": 0,\n        \"banner\": null,\n        \"description\": null,\n        \"maximumMembers\": 100000,\n        \"vanityURLCode\": null,\n        \"rulesChannelID\": null,\n        \"publicUpdatesChannelID\": null,\n        \"ownerID\": \"407682248368848896\",\n        \"_rawVoiceStates\": {},\n        \"emojis\": {}\n    },\n    \"messages\": {},\n    \"_typing\": {}\n};\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 240,
+        "wires": [
+            [
+                "18293b56.ebdb55",
+                "54ef163c.8e27b8"
+            ]
+        ]
+    },
+    {
+        "id": "f931c58b.e39818",
+        "type": "inject",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "channel",
+                "v": "{\"type\":\"text\",\"deleted\":false,\"id\":\"844179750317588480\",\"name\":\"bot-test\",\"position\":18,\"parentID\":\"838704722784813076\",\"permissionOverwrites\":{},\"topic\":null,\"nsfw\":false,\"lastMessageID\":\"844196587071733861\",\"lastPinTimestamp\":null,\"rateLimitPerUser\":0,\"guild\":{\"members\":{},\"channels\":{},\"roles\":{},\"presences\":{},\"deleted\":false,\"available\":true,\"id\":\"838704721162141716\",\"name\":\"sophyai.space network\",\"icon\":\"545119319545d67128524153349cb704\",\"splash\":null,\"region\":\"europe\",\"memberCount\":53,\"large\":false,\"features\":[\"NEWS\",\"COMMERCE\"],\"applicationID\":null,\"afkTimeout\":300,\"afkChannelID\":null,\"systemChannelID\":\"838704722784813078\",\"verificationLevel\":2,\"explicitContentFilter\":0,\"mfaLevel\":0,\"joinedTimestamp\":1621335263125,\"defaultMessageNotifications\":\"ALL\",\"systemChannelFlags\":0,\"premiumTier\":0,\"premiumSubscriptionCount\":0,\"banner\":null,\"description\":null,\"maximumMembers\":100000,\"vanityURLCode\":null,\"rulesChannelID\":null,\"publicUpdatesChannelID\":null,\"ownerID\":\"407682248368848896\",\"_rawVoiceStates\":{},\"emojis\":{}},\"messages\":{},\"_typing\":{}}",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 380,
+        "wires": [
+            [
+                "87a27435.42ba48"
+            ]
+        ]
+    },
+    {
+        "id": "510de90f.2a0e98",
+        "type": "link in",
+        "z": "b287ba7c.599188",
+        "name": "Inject_discord",
+        "links": [
+            "bbf30750.3d8318",
+            "ea4a6ffd.c56e7",
+            "ecacb967.d804a8",
+            "9f3e0b62.abcf18"
+        ],
+        "x": 35,
+        "y": 240,
+        "wires": [
+            [
+                "eba69085.9d5",
+                "bba68cc4.0e0b9",
+                "12f8f4a0.1f999b",
+                "49eee27e.fe704c"
+            ]
+        ]
+    },
+    {
+        "id": "ea4a6ffd.c56e7",
+        "type": "link out",
+        "z": "3928ed20.c3ac32",
+        "name": "rx_topic_link",
+        "links": [
+            "510de90f.2a0e98"
+        ],
+        "x": 935,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "71987e97.9c9c2",
+        "type": "inject",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 470,
+        "y": 100,
+        "wires": [
+            [
+                "87a27435.42ba48"
+            ]
+        ]
+    },
+    {
+        "id": "ad702294.1023c",
+        "type": "switch",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "help",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "select",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "beer",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 250,
+        "y": 560,
+        "wires": [
+            [
+                "9300a2aa.d7ed5"
+            ],
+            [
+                "7a857f8b.1c99b"
+            ],
+            [
+                "e2300b8e.71cf08"
+            ]
+        ]
+    },
+    {
+        "id": "9300a2aa.d7ed5",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "name": "bot getting started",
+        "func": "msg.payload=\"more info available in #getting-started\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 500,
+        "wires": [
+            [
+                "54ef163c.8e27b8"
+            ]
+        ]
+    },
+    {
+        "id": "e2300b8e.71cf08",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "name": "bot beer",
+        "func": "msg.payload=\"Great Idea beer for all !!! ;) \"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 640,
+        "wires": [
+            [
+                "54ef163c.8e27b8"
+            ]
+        ]
+    },
+    {
+        "id": "6f35e4.d3739a1c",
+        "type": "link out",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "links": [
+            "fa6bd6d1.5a7fa8"
+        ],
+        "x": 1195,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "59d7bff8.450ba",
+        "type": "debug",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 410,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "532cf396.2f4b5c",
+        "type": "function",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "func": "msg.payload.content =\"Abbiamo diverse opzioni /ciao /miao /zao\"\nmsg.payload.type=\"message\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 460,
+        "wires": [
+            [
+                "565711bf.8fc3d",
+                "59d7bff8.450ba"
+            ]
+        ]
+    },
+    {
+        "id": "bba68cc4.0e0b9",
+        "type": "debug",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 150,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "12f8f4a0.1f999b",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "name": "Decode RX RAW",
+        "func": "d = new Date(msg.payload.usec_time / 1000.0); \nmsg.payload.fulldate = d.toString(); \nconst header=\"----------------------------------------------------------\\n\"\nconst header2=\"................... REALTIME ............................\\n\"\nconst dashlink=\"dashboard: http://sophyai.space:1880/worldmap/\\n\"\nconst fdate=msg.payload.fulldate+\"\\n\";\n//const fdate=\"\";\nconst pos =\"lat:\"+msg.payload.station_location[0]+\" Lon:\"+msg.payload.station_location[1]+\"\\n\";\nconst station=\"**Station ID:\"+msg.payload.stationname+\"\\n**\";\nconst rssi=\"rssi:\"+msg.payload.rssi + \" snr:\"+msg.payload.snr+\"\\n\"\nconst sat=\"satellite:\"+msg.payload.satellite+\"\\n\";\nconst data=\"raw b64 format:\\n\"+msg.payload.data+\"\\n\";\nmsg.payload = header+dashlink+header+station+fdate+sat+pos+rssi+data+header2;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "87a27435.42ba48"
+            ]
+        ]
+    },
+    {
+        "id": "7c8197eb.1c9338",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "name": "message from sat ksy",
+        "func": "\n\nmsg.channel =  {\n    \"type\": \"text\",\n    \"deleted\": false,\n    \"id\": \"844179750317588480\",\n    \"name\": \"bot-test\",\n    \"position\": 18,\n    \"parentID\": \"838704722784813076\",\n    \"permissionOverwrites\": {},\n    \"topic\": null,\n    \"nsfw\": false,\n    \"lastMessageID\": \"844196587071733861\",\n    \"lastPinTimestamp\": null,\n    \"rateLimitPerUser\": 0,\n    \"guild\": {\n        \"members\": {},\n        \"channels\": {},\n        \"roles\": {},\n        \"presences\": {},\n        \"deleted\": false,\n        \"available\": true,\n        \"id\": \"838704721162141716\",\n        \"name\": \"sophyai.space network\",\n        \"icon\": \"545119319545d67128524153349cb704\",\n        \"splash\": null,\n        \"region\": \"europe\",\n        \"memberCount\": 53,\n        \"large\": false,\n        \"features\": [\n            \"NEWS\",\n            \"COMMERCE\"\n        ],\n        \"applicationID\": null,\n        \"afkTimeout\": 300,\n        \"afkChannelID\": null,\n        \"systemChannelID\": \"838704722784813078\",\n        \"verificationLevel\": 2,\n        \"explicitContentFilter\": 0,\n        \"mfaLevel\": 0,\n        \"joinedTimestamp\": 1621335263125,\n        \"defaultMessageNotifications\": \"ALL\",\n        \"systemChannelFlags\": 0,\n        \"premiumTier\": 0,\n        \"premiumSubscriptionCount\": 0,\n        \"banner\": null,\n        \"description\": null,\n        \"maximumMembers\": 100000,\n        \"vanityURLCode\": null,\n        \"rulesChannelID\": null,\n        \"publicUpdatesChannelID\": null,\n        \"ownerID\": \"407682248368848896\",\n        \"_rawVoiceStates\": {},\n        \"emojis\": {}\n    },\n    \"messages\": {},\n    \"_typing\": {}\n};\n\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 320,
+        "wires": [
+            [
+                "18293b56.ebdb55"
+            ]
+        ]
+    },
+    {
+        "id": "fa6bd6d1.5a7fa8",
+        "type": "link in",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "links": [
+            "6f35e4.d3739a1c",
+            "e7da2540.9124e8"
+        ],
+        "x": 55,
+        "y": 320,
+        "wires": [
+            [
+                "7c8197eb.1c9338"
+            ]
+        ]
+    },
+    {
+        "id": "16a4b60c.5fa5da",
+        "type": "function",
+        "z": "9500b41d.e4dcf8",
+        "name": "Decode KSY Decode",
+        "func": "/*\n\nmsg.payload.payload.tinygsLoadPower\nmsg.payload.payload.tinygsSolarPower\nmsg.payload.payload.tinygsChargePower\n\n\n\nmsg.payload.payload.tinygsMainVoltage\nmsg.payload.payload.tinygsBatCap \n\nmsg.payload.payload.tinygsTxTemp \nmsg.payload.payload.tinygsTemp \n\nmsg.payload.payload.tinygsTxPower\nmsg.payload.payload.tinygsLat\nmsg.payload.payload.tinygsLng\nmsg.payload.payload.tinygsAlt\n*/\n\nconst header=\"-----------------------------------------------------\\n\"\nconst header2=\".....................................................\\n\"\n\n//const fdate=msg.payload.fulldate+\"\\n\";\nconst format=\"**Sat Decode:Norbi**\\n\"\nconst pos =\"lat:\"+msg.payload.payload.tinygsLat+\" Lon:\"+msg.payload.payload.tinygsLng+\"\\n\";\nconst alt =\"alt:\"+msg.payload.payload.tinygsAlt+\"\\n\";\nconst txpower =\"tx Power:\"+msg.payload.payload.tinygsTxPower + \" mw \"+msg.payload.payload.tinygsTxTemp+\"°C\\n\";\nconst temp = \"temp:\"+msg.payload.payload.tinygsTemp+\"°C\\n\"\nconst voltage = \"Main Voltage: \"+msg.payload.payload.tinygsMainVoltage+\" mv \"+msg.payload.payload.tinygsBatCap+\" mA\\n\" \nconst current = \"Load Power: \"+msg.payload.payload.tinygsLoadPower + \" mA\\n\"\nconst solarcurrent = \"Solar power: \"+msg.payload.payload.tinygsSolarPower+ \" mA\\n\"\nconst chargecurrent = \"Charge Curremt: \"+msg.payload.payload.tinygsChargePower+ \" mA\\n\"\n\n//const station=\"Station ID:\"+msg.payload.stationname+\"\\n\";\n//const rssi=\"rssi:\"+msg.payload.rssi + \" snr:\"+msg.payload.snr+\"\\n\"\n//const sat=\"satellite:\"+msg.payload.satellite+\"\\n\";\n//const data=\"raw:\"+msg.payload.data+\"\\n\";\n//msg.payload = header+station+fdate+sat+pos+rssi+data+header;\nmsg.payload = header2+format+pos+alt+txpower+temp+voltage+current+solarcurrent+chargecurrent+header;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1000,
+        "y": 500,
+        "wires": [
+            [
+                "6f35e4.d3739a1c"
+            ]
+        ]
+    },
+    {
+        "id": "217d539a.f1125c",
+        "type": "switch",
+        "z": "9500b41d.e4dcf8",
+        "name": "Selection KSY",
+        "property": "payload.format",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Norby",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Fees",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 700,
+        "y": 400,
+        "wires": [
+            [
+                "b4ec655c.b17e38",
+                "490d3819.e9bc98"
+            ],
+            [
+                "4d405424.75721c",
+                "1ade68f8.273687"
+            ]
+        ]
+    },
+    {
+        "id": "4d405424.75721c",
+        "type": "http request",
+        "z": "9500b41d.e4dcf8",
+        "name": "DECODE FEES",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://sophyai-space-central-controller-decoder:8080/decode",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 960,
+        "y": 620,
+        "wires": [
+            [
+                "aa62d1a.1ffd63",
+                "255d6391.1cdd2c",
+                "42123173.6ba64",
+                "1ade68f8.273687"
+            ]
+        ]
+    },
+    {
+        "id": "aa62d1a.1ffd63",
+        "type": "file",
+        "z": "9500b41d.e4dcf8",
+        "name": "mqttdecode",
+        "filename": "/data/mqttlogs/satdecode.txt",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 1170,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e7da2540.9124e8",
+        "type": "link out",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "links": [
+            "fa6bd6d1.5a7fa8"
+        ],
+        "x": 1215,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "255d6391.1cdd2c",
+        "type": "function",
+        "z": "9500b41d.e4dcf8",
+        "name": "Decode KSY Decode",
+        "func": "/*\n\nmsg.payload.payload.tinygsLoadPower\nmsg.payload.payload.tinygsSolarPower\nmsg.payload.payload.tinygsChargePower\n\n\n\nmsg.payload.payload.tinygsMainVoltage\nmsg.payload.payload.tinygsBatCap \n\nmsg.payload.payload.tinygsTxTemp \nmsg.payload.payload.tinygsTemp \n\nmsg.payload.payload.tinygsTxPower\nmsg.payload.payload.tinygsLat\nmsg.payload.payload.tinygsLng\nmsg.payload.payload.tinygsAlt\n*/\n\nconst header=\"-----------------------------------------------------\\n\"\n//const fdate=msg.payload.fulldate+\"\\n\";\nconst format=\"Sat Decode:Fees\\n\"\nconst pos =\"lat:\"+msg.payload.payload.tinygsLat+\" Lon:\"+msg.payload.payload.tinygsLng+\"\\n\";\nconst alt =\"alt:\"+msg.payload.payload.tinygsAlt+\"\\n\";\nconst txpower =\"tx Power:\"+msg.payload.payload.tinygsTxPower + \" mw \"+msg.payload.payload.tinygsTxTemp+\"°C\\n\";\nconst temp = \"temp:\"+msg.payload.payload.tinygsTemp+\"°C\\n\"\nconst voltage = \"Main Voltage: \"+msg.payload.payload.tinygsMainVoltage+\" mv \"+msg.payload.payload.tinygsBatCap+\" mA\\n\" \nconst current = \"Load Power: \"+msg.payload.payload.tinygsLoadPower + \" mA\\n\"\nconst solarcurrent = \"Solar power: \"+msg.payload.payload.tinygsSolarPower+ \" mA\\n\"\nconst chargecurrent = \"Charge Curremt: \"+msg.payload.payload.tinygsChargePower+ \" mA\\n\"\n\n//const station=\"Station ID:\"+msg.payload.stationname+\"\\n\";\n//const rssi=\"rssi:\"+msg.payload.rssi + \" snr:\"+msg.payload.snr+\"\\n\"\n//const sat=\"satellite:\"+msg.payload.satellite+\"\\n\";\n//const data=\"raw:\"+msg.payload.data+\"\\n\";\n//msg.payload = header+station+fdate+sat+pos+rssi+data+header;\nmsg.payload = header+format+pos+alt+txpower+temp+voltage+current+solarcurrent+chargecurrent+header;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 700,
+        "wires": [
+            [
+                "e7da2540.9124e8"
+            ]
+        ]
+    },
+    {
+        "id": "ef45ec18.aebac",
+        "type": "http in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "url": "/satdecode.txt",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 1380,
+        "wires": [
+            [
+                "923c3e9e.0f0f9"
+            ]
+        ]
+    },
+    {
+        "id": "923c3e9e.0f0f9",
+        "type": "file in",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "filename": "/data/mqttlogs/satdecode.txt",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "x": 500,
+        "y": 1380,
+        "wires": [
+            [
+                "ea5dc92e.5dec98"
+            ]
+        ]
+    },
+    {
+        "id": "ea5dc92e.5dec98",
+        "type": "http response",
+        "z": "3928ed20.c3ac32",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "778bdbc.4341624",
+        "type": "function",
+        "z": "188e0510.29f8bb",
+        "name": "GP Project Console",
+        "func": "msg.topic=\"sophyaispace/user0030/console/in_range_sat/\"+msg.payload.in_range_sat+\"/status/\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 950,
+        "y": 580,
+        "wires": [
+            [
+                "d83da6d6.342c98"
+            ]
+        ]
+    },
+    {
+        "id": "49eee27e.fe704c",
+        "type": "json",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "12f8f4a0.1f999b"
+            ]
+        ]
+    },
+    {
+        "id": "18293b56.ebdb55",
+        "type": "link out",
+        "z": "b287ba7c.599188",
+        "name": "BOT OUTPUT",
+        "links": [
+            "6850fbf9.78fa14"
+        ],
+        "x": 765,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "6850fbf9.78fa14",
+        "type": "link in",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "links": [
+            "18293b56.ebdb55"
+        ],
+        "x": 455,
+        "y": 320,
+        "wires": [
+            [
+                "cc86c6ad.176d88"
+            ]
+        ]
+    },
+    {
+        "id": "cc86c6ad.176d88",
+        "type": "function",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "func": "message=msg.payload;\nmsg.payload={\"type\":\"message\",\"chatId\":495340661,\"content\":message};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 340,
+        "wires": [
+            [
+                "565711bf.8fc3d",
+                "59d7bff8.450ba"
+            ]
+        ]
+    },
+    {
+        "id": "7bdece35.91e23",
+        "type": "function",
+        "z": "3928ed20.c3ac32",
+        "name": "re tx global console GP Project",
+        "func": "msg.topic=\"sophyaispace/user0030/console/global_rx\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 280,
+        "wires": [
+            [
+                "9fc1d0a2.38fe7"
+            ]
+        ]
+    },
+    {
+        "id": "ce4fd1eb.efef2",
+        "type": "inject",
+        "z": "3928ed20.c3ac32",
+        "name": "rx_debug_inject_FEES",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "sophyaispace/rx-DEBUG",
+        "payload": "{\"station_location\":[59.695,29.645],\"userid\":\"user0005\",\"stationname\":\"R1LB_WS\",\"mac\":\"04A3B93A7D80\",\"mode\":\"LoRa\",\"frequency\":436.703,\"satellite\":\"Norbi\",\"sf\":10,\"cr\":5,\"bw\":250,\"rssi\":0,\"snr\":0,\"frequency_error\":0,\"unix_GS_time\":1621495681,\"usec_time\":1621495681452459,\"time_offset\":0,\"crc_error\":false,\"data\":\"AP7lL7AsOhQA4TsAABcAAAAA+gcVDOsI+ADBAXcBUAFZAfABbwLfAawBawGmGLQ=\",\"NORAD\":46494,\"test\":false,\"noisy\":false}",
+        "payloadType": "str",
+        "x": 140,
+        "y": 460,
+        "wires": [
+            [
+                "a2772fc4.a05ba",
+                "24a4278c.319de8",
+                "dce7c81f.5352a8",
+                "f72801da.2b089",
+                "194d9c8b.560f63"
+            ]
+        ]
+    },
+    {
+        "id": "49e5b7e1.5dce38",
+        "type": "link out",
+        "z": "3928ed20.c3ac32",
+        "name": "Consolo030",
+        "links": [
+            "a1ebad31.ae5a7"
+        ],
+        "x": 545,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "a1ebad31.ae5a7",
+        "type": "link in",
+        "z": "c7131850.1ff038",
+        "name": "",
+        "links": [
+            "49e5b7e1.5dce38"
+        ],
+        "x": 195,
+        "y": 220,
+        "wires": [
+            [
+                "a8d15b5a.7468f8",
+                "4f3b13a8.b5744c"
+            ]
+        ]
+    },
+    {
+        "id": "a8d15b5a.7468f8",
+        "type": "function",
+        "z": "c7131850.1ff038",
+        "name": "",
+        "func": "topic=msg.topic;\nvar newtopic = topic.replace(\"sophyaispace/user0030/console/\",\"sophyaispace/\");\nmsg.topic=newtopic;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "9b01d9b7.3b78c8",
+                "4f3b13a8.b5744c"
+            ]
+        ]
+    },
+    {
+        "id": "9b01d9b7.3b78c8",
+        "type": "mqtt out",
+        "z": "c7131850.1ff038",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "43167b9e.7745e4",
+        "x": 570,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4f3b13a8.b5744c",
+        "type": "debug",
+        "z": "c7131850.1ff038",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 380,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a79ba87e.e00338",
+        "type": "influxdb out",
+        "z": "55b2880c.ad24d8",
+        "influxdb": "6037be42.4468e",
+        "name": "",
+        "measurement": "sat_data",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 890,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "39aa2ca9.804da4",
+        "type": "debug",
+        "z": "55b2880c.ad24d8",
+        "name": "Create DB ",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "262a3923.e7b216",
+        "type": "influxdb in",
+        "z": "55b2880c.ad24d8",
+        "influxdb": "6037be42.4468e",
+        "name": "",
+        "query": "show databases",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "my-org",
+        "x": 510,
+        "y": 400,
+        "wires": [
+            [
+                "39aa2ca9.804da4"
+            ]
+        ]
+    },
+    {
+        "id": "803d82f.ff80f8",
+        "type": "inject",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 400,
+        "wires": [
+            [
+                "262a3923.e7b216"
+            ]
+        ]
+    },
+    {
+        "id": "54ef8669.aaff28",
+        "type": "link in",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "links": [
+            "194d9c8b.560f63"
+        ],
+        "x": 325,
+        "y": 280,
+        "wires": [
+            [
+                "76348ed9.0efff"
+            ]
+        ]
+    },
+    {
+        "id": "8f03a629.d1f8b8",
+        "type": "influxdb in",
+        "z": "55b2880c.ad24d8",
+        "influxdb": "6037be42.4468e",
+        "name": "",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "my-org",
+        "x": 540,
+        "y": 480,
+        "wires": [
+            [
+                "9d808bac.0608f8"
+            ]
+        ]
+    },
+    {
+        "id": "7d3bc67a.1400a8",
+        "type": "inject",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 500,
+        "wires": [
+            [
+                "bd201688.b113c8"
+            ]
+        ]
+    },
+    {
+        "id": "362bde09.a67c92",
+        "type": "debug",
+        "z": "55b2880c.ad24d8",
+        "name": "Query in influxDB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5557d252.12bfbc",
+        "type": "debug",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "76348ed9.0efff",
+        "type": "json",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "property": "payload",
+        "action": "obj",
+        "pretty": true,
+        "x": 430,
+        "y": 280,
+        "wires": [
+            [
+                "c0603a94.d1e868",
+                "5557d252.12bfbc"
+            ]
+        ]
+    },
+    {
+        "id": "c0603a94.d1e868",
+        "type": "function",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "func": "msg.payload = { \"userid\":msg.payload.userid,\n\"stationname\":msg.payload.stationname,\n\"mac\":msg.payload.mac, \n\"lat\":msg.payload.station_location[0], \n\"lon\":msg.payload.station_location[1],\n\"Lora\":msg.payload.mode,\n\"frequency\":msg.payload.frequency,\n\"satellite\":msg.payload.satellite,\n\"sf\":msg.payload.sf,\n\"cr\":msg.payload.cr,\n\"bw\":msg.payload.bw,\n\"rssi\":msg.payload.rssi,\n\"snr\":msg.payload.snr,\n\"frequency_error\":msg.payload.frequency_error,\n\"unix_GS_time\":msg.payload.unix_GS_time,\n\"usec_time\":msg.payload.usec_time,\n\"time_offset\":msg.payload.time_offset,\n\"crc_error\":msg.payload.crc_error,\n\"data\":msg.payload.data,\n\"NORAD\":msg.payload.NORAD,\n\"test\":msg.payload.test,\n\"noisy\":msg.payload.noisy\n}\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 300,
+        "wires": [
+            [
+                "a79ba87e.e00338",
+                "5557d252.12bfbc"
+            ]
+        ]
+    },
+    {
+        "id": "3b10cf8b.08066",
+        "type": "influxdb out",
+        "z": "9500b41d.e4dcf8",
+        "d": true,
+        "influxdb": "6037be42.4468e",
+        "name": "",
+        "measurement": "sat_decode_norbi",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1080,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "42123173.6ba64",
+        "type": "influxdb out",
+        "z": "9500b41d.e4dcf8",
+        "d": true,
+        "influxdb": "6037be42.4468e",
+        "name": "",
+        "measurement": "sat_decode_fees",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "organisation",
+        "bucket": "bucket",
+        "x": 1070,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "d415ac75.76f0b",
+        "type": "telegram receiver",
+        "z": "db15a8a.453c158",
+        "name": "sophy telegram",
+        "bot": "11b218df.5387a7",
+        "saveDataDir": "",
+        "filterCommands": false,
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "59d7bff8.450ba"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "c2471161.73dc",
+        "type": "telegram command",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "command": "/help",
+        "bot": "11b218df.5387a7",
+        "strict": false,
+        "hasresponse": true,
+        "useregex": false,
+        "removeregexcommand": false,
+        "outputs": 2,
+        "x": 200,
+        "y": 420,
+        "wires": [
+            [
+                "532cf396.2f4b5c"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "fe2d42f6.da9bb",
+        "type": "telegram event",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "bot": "11b218df.5387a7",
+        "event": "callback_query",
+        "autoanswer": false,
+        "x": 230,
+        "y": 560,
+        "wires": [
+            [
+                "59d7bff8.450ba"
+            ]
+        ]
+    },
+    {
+        "id": "565711bf.8fc3d",
+        "type": "telegram sender",
+        "z": "db15a8a.453c158",
+        "name": "",
+        "bot": "11b218df.5387a7",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1ade68f8.273687",
+        "type": "debug",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "bd201688.b113c8",
+        "type": "function",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "func": "msg.query=\"select count(*) from sat_data where satellite='Norbi' and data != 'YAEAACLq' and data != 'RXJyb3JfQ1JD' \"\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 500,
+        "wires": [
+            [
+                "8f03a629.d1f8b8"
+            ]
+        ]
+    },
+    {
+        "id": "16ea9696.cc08d9",
+        "type": "discordMessage",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "token": "f447acb2.dc37d",
+        "x": 100,
+        "y": 480,
+        "wires": [
+            [
+                "ad702294.1023c"
+            ]
+        ]
+    },
+    {
+        "id": "54ef163c.8e27b8",
+        "type": "discordSendMessage",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "channel": "",
+        "token": "f447acb2.dc37d",
+        "x": 860,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "801928f5.45c378",
+        "type": "link in",
+        "z": "55b2880c.ad24d8",
+        "name": "query_input",
+        "links": [
+            "1c736c6c.3567c4"
+        ],
+        "x": 225,
+        "y": 580,
+        "wires": [
+            [
+                "8f03a629.d1f8b8",
+                "362bde09.a67c92"
+            ]
+        ]
+    },
+    {
+        "id": "1c736c6c.3567c4",
+        "type": "link out",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "links": [
+            "801928f5.45c378"
+        ],
+        "x": 555,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "7a857f8b.1c99b",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "d": true,
+        "name": "free query ",
+        "func": "msg.query=msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 560,
+        "wires": [
+            [
+                "1c736c6c.3567c4"
+            ]
+        ]
+    },
+    {
+        "id": "9d808bac.0608f8",
+        "type": "split",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "topic",
+        "x": 730,
+        "y": 540,
+        "wires": [
+            [
+                "362bde09.a67c92",
+                "56ed5bd5.c3e854"
+            ]
+        ]
+    },
+    {
+        "id": "9672fa48.a10c98",
+        "type": "function",
+        "z": "b287ba7c.599188",
+        "name": "Decode HISTORIC RAW FROM DB",
+        "func": "d = new Date(msg.payload.usec_time / 1000.0); \nmsg.payload.fulldate = d.toString(); \nconst header=\"---------------------------------------------------------\\n\"\nconst header2=\"................ FROM DATABASE .........................\\n\"\nconst dashlink=\"dashboard: http://sophyai.space:1880/worldmap/\\n\"\nconst fdate=msg.payload.fulldate+\"\\n\";\n//const fdate=\"\";\nconst pos =\"lat:\"+msg.payload.lat+\" Lon:\"+msg.payload.lon+\"\\n\";\nconst station=\"**Station ID:\"+msg.payload.stationname+\"\\n**\";\nconst rssi=\"rssi:\"+msg.payload.rssi + \" snr:\"+msg.payload.snr+\"\\n\"\nconst sat=\"satellite:\"+msg.payload.satellite+\"\\n\";\nconst data=\"raw b64 format:\\n\"+msg.payload.data+\"\\n\";\nmsg.payload = header+dashlink+header+station+fdate+sat+pos+rssi+data+header2;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "87a27435.42ba48"
+            ]
+        ]
+    },
+    {
+        "id": "de272d09.22e01",
+        "type": "link in",
+        "z": "b287ba7c.599188",
+        "name": "BOT_HISTORIC",
+        "links": [
+            "56ed5bd5.c3e854"
+        ],
+        "x": 265,
+        "y": 160,
+        "wires": [
+            [
+                "9672fa48.a10c98",
+                "4c0ff391.45f29c"
+            ]
+        ]
+    },
+    {
+        "id": "4c0ff391.45f29c",
+        "type": "json",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 370,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56ed5bd5.c3e854",
+        "type": "link out",
+        "z": "55b2880c.ad24d8",
+        "d": true,
+        "name": "",
+        "links": [
+            "de272d09.22e01"
+        ],
+        "x": 935,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "fe6ce5e.28a3d18",
+        "type": "link out",
+        "z": "3928ed20.c3ac32",
+        "name": "query",
+        "links": [
+            "5d116879.bc4fd8"
+        ],
+        "x": 405,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "5d116879.bc4fd8",
+        "type": "link in",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "links": [
+            "fe6ce5e.28a3d18"
+        ],
+        "x": 135,
+        "y": 640,
+        "wires": [
+            [
+                "f2d88318.93754"
+            ]
+        ]
+    },
+    {
+        "id": "3089eb81.e57604",
+        "type": "mqtt out",
+        "z": "55b2880c.ad24d8",
+        "name": "SophyaMSG",
+        "topic": "",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "a781942b.f8a858",
+        "x": 910,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "b9e41da9.a9cd4",
+        "type": "debug",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "f2d88318.93754",
+        "type": "function",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "func": "return msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 640,
+        "wires": [
+            [
+                "b9e41da9.a9cd4",
+                "f4237fb6.3ddbb",
+                "f301c8bd.1cab48"
+            ]
+        ]
+    },
+    {
+        "id": "f4237fb6.3ddbb",
+        "type": "influxdb in",
+        "z": "55b2880c.ad24d8",
+        "d": true,
+        "influxdb": "6037be42.4468e",
+        "name": "",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "my-org",
+        "x": 480,
+        "y": 720,
+        "wires": [
+            [
+                "52270921.a8a098"
+            ]
+        ]
+    },
+    {
+        "id": "52270921.a8a098",
+        "type": "debug",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "f57f0538.a44358",
+        "type": "catch",
+        "z": "b287ba7c.599188",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 60,
+        "y": 280,
+        "wires": [
+            [
+                "12f8f4a0.1f999b"
+            ]
+        ]
+    },
+    {
+        "id": "9724b1df.4f28b",
+        "type": "catch",
+        "z": "9500b41d.e4dcf8",
+        "name": "",
+        "scope": null,
+        "uncaught": false,
+        "x": 470,
+        "y": 720,
+        "wires": [
+            [
+                "4d405424.75721c"
+            ]
+        ]
+    },
+    {
+        "id": "f301c8bd.1cab48",
+        "type": "json",
+        "z": "55b2880c.ad24d8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 480,
+        "y": 680,
+        "wires": [
+            [
+                "3089eb81.e57604",
+                "52270921.a8a098"
+            ]
+        ]
+    }
+]
