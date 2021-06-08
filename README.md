@@ -127,7 +127,7 @@ Work in progess:
 
 **What mean realtime protocol to comunicate with satellite ?** 
 Realtime protocol is a protocol where you have less 1 second from request and reply of your packet to and from drone or cubesat. 
-What kind of feature need a realtime protocol : 
+What kind of feature could have a realtime protocol : 
 1)    Set and Get parameter to the sat. : On a drone we normally have around 250 parameter to get and set so we need a very fast protocol for get or set it .
 2)    Dowload from sat file , image , high res telemetry data . 
 3)    Uploading new firmware or batch of parameter . 
