@@ -104,7 +104,7 @@ The main TinyGS developer team is:
 - [Iw2LSI](https://github.com/iw2lsi)
 - [KanyonKris](https://github.com/KanyonKris)
 
-# Contributors SophyAIGS
+# Discord community of Sophyai.space project 
 Join us at our Discord channel this is the link : https://discord.gg/ZvaRrRuTFC we need arduino developer , and Radio Ham with regular licence for try the connection (RTX) with satellite in our network , and user for recive the radio packet from lora satellite around the globe.
 
 # Faq about Sophyai.space fork
@@ -121,7 +121,7 @@ In sophyai.space network tecnology we add :
 •    A small desktop app for interconnect a sat operator or virtual sat operator ground station to the network for inject payload in the network and for recived directly reply for gs around the world . For my point of view a sat operator is equivalent of pilot of drone with his ground station app nothing else. So could be an ham group that decide to send in space or in air by a ballon its cubesat experiment and want control around the world .
 •    A new prototype back end able to manage a small group of realtime gs for doing experiment. 
 Work in progess:
-•    a new mavlink protocol comaptibile with space enviroment. 
+•    a new mavlink protocol comaptibile with space enviroment. For more info about mavlink check here : http://mavlink.io/en/
 •    A simulator of ardupilot cubesat available for all the user that want to test it . 
 •    A new opensource hardware for design an education cubesat.
 
@@ -137,6 +137,14 @@ What kind of feature need a realtime protocol :
 **Why we continue to share data with tinyGS project on gs that use our custom firmware ?**
 When we add the realtime network support on tinygs code and release all code , patch ecc as in GPLv3 licence request we mantain the compatibility with tinygs for continue to send the data collected by our network to tinygs , too  … thats don’t happen viceversa for the internal backend architecture of tinygs.
 **lates update about sharing data with tinygs network: for reason that depend of tinygs network owner we stop to share the data with tinygs**.
+
+**About the ardupilot sat project**
+our teams support actively the development of ardupilot sat project .
+we are working on early version of simulator that will be online in the next weeks on our network.
+this is the link to ardupilot no profit organization for more info : https://ardupilot.org/ 
+
+**what is virtualrobotix**
+virtualrobotix is old brand of our drone community where in the past we develop some autopilot hardware like vrbrain that support opensource arudpilot firmware in its different revision.
 
 # License
 
