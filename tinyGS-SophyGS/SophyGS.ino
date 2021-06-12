@@ -63,7 +63,6 @@
     - Arduino IDE is NOT recommended, please use Platformio: https://github.com/G4lile0/tinyGS/wiki/Platformio
 
 **************************************************************************/
-//#define TINYGS
 
 #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
@@ -72,9 +71,6 @@
 #endif
 #include "src/ConfigManager/ConfigManager.h"
 #include "src/Display/Display.h"
-#ifdef TINYGS
-#include "src/Mqtt/MQTT_Client.h"
-#endif 
 #include "src/Mqtt/MQTT_Client_Fees.h"
 #include "src/Status.h"
 #include "src/Radio/Radio.h"
@@ -164,9 +160,7 @@ int          aiSunFP[32][2];          // Array for storing the sunlight footprin
 
 
 ConfigManager& configManager = ConfigManager::getInstance();
-#ifdef TINYGS
-MQTT_Client& mqtt = MQTT_Client::getInstance();
-#endif 
+
 MQTT_Client_Fees& mqtt_sophygs = MQTT_Client_Fees::getInstance();
  
 Radio& radio = Radio::getInstance();
@@ -293,7 +287,7 @@ void setup()
   Serial.begin(115200);
   delay(100);
 
-  Log::console(PSTR("TinyGS-SophyAI.space Version %d - %s"), status.version, status.git_version);
+  Log::console(PSTR("SophyAI.space Version %d - %s"), status.version, status.git_version);
   configManager.setWifiConnectionCallback(wifiConnected);
   configManager.setConfiguredCallback(configured);
   configManager.init();
@@ -310,16 +304,13 @@ void setup()
   displayInit();
   displayShowInitialCredits();
   configManager.delay(1000);
-  #ifdef TINYGS
-  mqtt.begin();
-  #endif 
   mqtt_sophygs.begin();
  
 
-  if (configManager.getOledBright() == 0)
-  {
-    displayTurnOff();
-  }
+  //if (configManager.getOledBright() == 0)
+  //{
+  //  displayTurnOff();
+  //}
 
   printControls();
 
@@ -371,9 +362,6 @@ void loop() {
 
   // connected
   check_azel(10000);
-  #ifdef TINYGS
-  mqtt.loop();
-  #endif 
   mqtt_sophygs.loop();
   OTA::loop();
   if (configManager.getOledBright() != 0) displayUpdate();

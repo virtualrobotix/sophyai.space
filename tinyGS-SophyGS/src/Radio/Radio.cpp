@@ -120,9 +120,13 @@ int16_t Radio::begin()
   }
   else 
   {
+    Log::console(PSTR("FSK INIZIA ORA\n"));
     if (ConfigManager::getInstance().getBoardConfig().L_SX127X)
     {
-      state = ((SX1278 *)lora)->beginFSK(m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, (m.OOK != 255));
+      Log::console(PSTR("SETTO UNA SX127X\n"));
+      Log::console("freQ:%f,bitrate:%f,freqDev%f,m.bw:%f\n,m.power%d,preamble:%d,mok%d\n",m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, (m.OOK != 255));
+      
+      state = ((SX1278 *)lora)->beginFSK(m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev);//, m.bw, m.power, m.preambleLength, (m.OOK != 255));
       ((SX1278 *)lora)->setDataShaping(m.OOK);
       ((SX1278 *)lora)->startReceive();
       ((SX1278 *)lora)->setDio0Action(setFlag);
@@ -130,7 +134,8 @@ int16_t Radio::begin()
     }
     else
     {
-      state = ((SX1268 *)lora)->beginFSK(m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev, m.bw, m.power, m.preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
+      Log::console(PSTR("SETTO UNA SX126X\n"));
+      state = ((SX1268 *)lora)->beginFSK(m.frequency + status.modeminfo.freqOffset, m.bitrate, m.freqDev);//, m.bw, m.power, m.preambleLength, ConfigManager::getInstance().getBoardConfig().L_TCXO_V);
       ((SX1268 *)lora)->setDataShaping(m.OOK);
       ((SX1268 *)lora)->startReceive();
       ((SX1268 *)lora)->setDio1Action(setFlag);
@@ -150,10 +155,10 @@ int16_t Radio::begin()
    // else
    //   state = ((SX1268*)lora)->_mod->SPIsetRegValue((regValue>>8)&0x0F, regValue&0x0F, (regMask>>16)&0x0F, (regMask>>8)&0x0F, regMask&0x0F);
   }*/
-
+state = ERR_NONE;
   if (state == ERR_NONE)
   {
-    //Log::console(PSTR("success!"));
+    Log::console(PSTR("success!"));
   }
   else
   {

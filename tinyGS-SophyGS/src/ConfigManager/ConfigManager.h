@@ -57,14 +57,14 @@ constexpr auto UPDATE_URL = "/firmware";
 constexpr auto RESTART_URL = "/restart";
 constexpr auto REFRESH_CONSOLE_URL = "/cs";
 
-const char TITLE_TEXT[] PROGMEM = "TinyGS Configuration";
+const char TITLE_TEXT[] PROGMEM = "SophyGS Configuration";
 
 
-constexpr auto thingName = "My TinyGS";
+constexpr auto thingName = "SophyGS";
 constexpr auto initialApPassword = "";
 constexpr auto configVersion = "0.05"; //max 4 chars
 
-#define MQTT_DEFAULT_SERVER "mqtt.tinygs.com"
+#define MQTT_DEFAULT_SERVER "mqtt.local.com"
 #define MQTT_DEFAULT_PORT  "8883"
 #define MODEM_DEFAULT "{\"mode\":\"LoRa\",\"freq\":436.703,\"bw\":250.0,\"sf\":10,\"cr\":5,\"sw\":18,\"pwr\":5,\"cl\":120,\"pl\":8,\"gain\":0,\"crc\":true,\"fldro\":1,\"sat\":\"Norbi\",\"NORAD\":46494}"
 
@@ -308,7 +308,14 @@ private:
   iotwebconf2::NumberParameter latitudeParam = iotwebconf2::NumberParameter("Latitude (3 decimals, will be public)", "lat", latitude, COORDINATE_LENGTH, NULL, "0.000", "required min='-180' max='180' step='0.001'");
   iotwebconf2::NumberParameter longitudeParam = iotwebconf2::NumberParameter("Longitude (3 decimals, will be public)", "lng", longitude, COORDINATE_LENGTH, NULL, "-0.000", "required min='-180' max='180' step='0.001'");
   iotwebconf2::SelectParameter tzParam = iotwebconf2::SelectParameter("Time Zone", "tz", tz, TZ_LENGTH, (char *)TZ_VALUES, (char *)TZ_NAMES, sizeof(TZ_VALUES) / TZ_LENGTH, TZ_NAME_LENGTH);
-
+#ifdef TINYGS
+// MQTT TINYGS
+  iotwebconf2::ParameterGroup groupMqtt = iotwebconf2::ParameterGroup("BACKUP MQTT" , "");
+  iotwebconf2::TextParameter mqttServerParam = iotwebconf2::TextParameter("Server address", "mqtt_server", mqttServer, MQTT_SERVER_LENGTH, MQTT_DEFAULT_SERVER, MQTT_DEFAULT_SERVER, "type=\"text\" maxlength=30");
+  iotwebconf2::NumberParameter mqttPortParam = iotwebconf2::NumberParameter("Server Port", "mqtt_port", mqttPort, MQTT_PORT_LENGTH, MQTT_DEFAULT_PORT, MQTT_DEFAULT_PORT, "min=\"0\" max=\"65536\" step=\"1\"");
+  iotwebconf2::TextParameter mqttUserParam = iotwebconf2::TextParameter("MQTT Username", "mqtt_user", mqttUser, MQTT_USER_LENGTH, NULL, NULL, "type=\"text\" maxlength=30");
+  iotwebconf2::TextParameter mqttPassParam = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass", mqttPass, MQTT_PASS_LENGTH, NULL, NULL, "type=\"text\" maxlength=30");
+#endif 
 #ifdef SOPHY
 // MQTT SophyAI
   iotwebconf2::ParameterGroup groupMqtt_Sophy = iotwebconf2::ParameterGroup("SophyAI MQTT" , "SophyAI MQTT (<a href='https://discord.com/channels/838704721162141716/839479426160525312'>get Username and Password</a>)");
@@ -317,14 +324,7 @@ private:
   iotwebconf2::TextParameter mqttUserParam_sophy = iotwebconf2::TextParameter("MQTT Username", "mqtt_user_sophy", mqttUser_sophy, MQTT_USER_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
   iotwebconf2::TextParameter mqttPassParam_sophy = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass_sophy", mqttPass_sophy, MQTT_PASS_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
 #endif 
-#ifdef TINYGS
-// MQTT TINYGS
-  iotwebconf2::ParameterGroup groupMqtt = iotwebconf2::ParameterGroup("BACKUP MQTT" , "");
-  iotwebconf2::TextParameter mqttServerParam = iotwebconf2::TextParameter("Server address", "mqtt_server", mqttServer, MQTT_SERVER_LENGTH, MQTT_DEFAULT_SERVER, MQTT_DEFAULT_SERVER, "required type=\"text\" maxlength=30");
-  iotwebconf2::NumberParameter mqttPortParam = iotwebconf2::NumberParameter("Server Port", "mqtt_port", mqttPort, MQTT_PORT_LENGTH, MQTT_DEFAULT_PORT, MQTT_DEFAULT_PORT, "required min=\"0\" max=\"65536\" step=\"1\"");
-  iotwebconf2::TextParameter mqttUserParam = iotwebconf2::TextParameter("MQTT Username", "mqtt_user", mqttUser, MQTT_USER_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
-  iotwebconf2::TextParameter mqttPassParam = iotwebconf2::TextParameter("MQTT Password", "mqtt_pass", mqttPass, MQTT_PASS_LENGTH, NULL, NULL, "required type=\"text\" maxlength=30");
-#endif 
+
   iotwebconf2::ParameterGroup groupBoardConfig = iotwebconf2::ParameterGroup("Board config" , "Board config");
   iotwebconf2::SelectParameter boardParam = iotwebconf2::SelectParameter("Board type", "board", board, BOARD_LENGTH, (char*)BOARD_VALUES, (char*)BOARD_NAMES, sizeof(BOARD_VALUES) / BOARD_LENGTH, BOARD_NAME_LENGTH);
   iotwebconf2::NumberParameter oledBrightParam = iotwebconf2::NumberParameter("OLED Bright", "oled_bright", oledBright, NUMBER_LEN, "100", "0..100", "min='0' max='100' step='1'");

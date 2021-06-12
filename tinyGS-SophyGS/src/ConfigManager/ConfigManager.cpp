@@ -153,7 +153,7 @@ void ConfigManager::handleDashboard()
   s += "<tr><td>Name </td><td>" + String(getThingName()) + "</td></tr>";
   s += "<tr><td>Version </td><td>" + String(status.version) + "</td></tr>";
   s += "<tr><td>WiFi </td><td>" + String(WiFi.isConnected() ? "<span class='G'>CONNECTED</span>" : "<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
-  s += "<tr><td>TinyGS MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
+  //s += "<tr><td>TinyGS MQTT Server </td><td>" + String(status.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>SophyAI MQTT Server </td><td>" + String(status_sophy.mqtt_connected?"<span class='G'>CONNECTED</span>":"<span class='R'>NOT CONNECTED</span>") + "</td></tr>";
   s += "<tr><td>Radio </td><td>" + String(Radio::getInstance().isReady()?"<span class='G'>READY</span>":"<span class='R'>NOT READY</span>") + "</td></tr>";
   s += "<tr><td>Test Mode </td><td>" + String(getTestMode()?"ENABLED":"DISABLED") + "</td></tr>";
