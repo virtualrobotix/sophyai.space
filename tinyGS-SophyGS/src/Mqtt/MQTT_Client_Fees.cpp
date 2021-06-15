@@ -181,7 +181,7 @@ void MQTT_Client_Fees::sendPingExt()
   JsonArray station_location = doc.createNestedArray("station_location");
   station_location.add(configManager.getLatitude());
   station_location.add(configManager.getLongitude());
-  //doc["version"] = status_sophy.version;
+  doc["version"] = status_sophy.version;
   //doc["git_version"] = status_sophy.git_version;
   //doc["board"] = configManager.getBoard();
   doc["mac"] = clientId;
