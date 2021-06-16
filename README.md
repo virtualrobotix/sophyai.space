@@ -1,9 +1,8 @@
 <p align="center">
-<img src="/doc/images/Sophyai.space-observation.png" width="400">
+<img src="/doc/images/SophyAI Final.jpg" width="400">
 </p>
-
 <p align="center">
-<img src="/doc/images/SophyAI Final.jpg" width="600">
+<img src="/doc/images/Sophyai.space-observation.png" width="600">
 </p>
 <p align="center">
 <img src="/doc/images/Sophyai.space-smart-dashboard.png" width="600">
