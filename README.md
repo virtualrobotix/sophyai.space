@@ -1,15 +1,16 @@
 <p align="center">
-<img src="/doc/images/Sophyai.space-smart-dashboard.png" width="400">
-</p>
-<p align="center">
 <img src="/doc/images/Sophyai.space-observation.png" width="400">
 </p>
+
 <p align="center">
-<img src="/doc/images/SophyAI Final.jpg" width="400">
+<img src="/doc/images/SophyAI Final.jpg" width="600">
+</p>
+<p align="center">
+<img src="/doc/images/Sophyai.space-smart-dashboard.png" width="600">
 </p>
 
 
-SophyGS is an open source firmware fork of TinyGS . It's connected to an open network of Ground Stations distributed around the world to rtx and operate LoRa satellites, weather probes and other flying objects, using cheap and versatile modules. Our revision of firmware connect TinyGS network and share info with this network and sophyai.space network that is a specific network for realtime rtx comunication with lora satellite as FEES cubesat.
+SophyGS is an open source firmware fork of TinyGS . It's connected to an open network of Ground Stations distributed around the world to rtx and operate LoRa satellites, weather probes and other flying objects, using cheap and versatile modules. Share info with  sophyai.space network that is a specific network for realtime rtx comunication with lora satellite as FEES cubesat and future mavlink based cubesat .
 
 # Hardware
 
@@ -58,14 +59,6 @@ Also the Ground stations can be remote configured automagically ([Auto Tuning](h
 
 Both systems are optional and you can opt-out at your Ground Station configuration, for example if you want to only support one specific satellite. But we recommend activating both to maintain the network health.
 
-# TinyGS Community
-
-We are using Telegram as the main communication channel for the project. There are also two channels where you can subscribe and be updated automátically whenever a new packet is received by the network from the Satellite.
-
-- [Main community chat](https://t.me/joinchat/DmYSElZahiJGwHX6jCzB3Q)
-- [Data channel](https://t.me/tinyGS_Telemetry) station status and received packets
-- [Test channel](https://t.me/TinyGS_Test) RX packets by groundstations in test mode
-
 # SophyAI.space GS History
 In 2016 we decide to develop our first cubesat . The name of cubesat is Fees . It derive of my experience 12 year of experience in Ardupilot drone. 
 Fees was launch in March 2021 . After some days in space we understand that 1 gs is not enought for control our satellite . So decide to implement our bi directional realtime global ground station . We start from idea of TinyGS project they did a great job , but we need a realtime network and reliable uplink around the world. 
@@ -79,9 +72,6 @@ You can contribute to by projects
 - Testing new released features and report issues
 - Contributing missing documentation for features and devices templates
 
-# TinyGS Documentation
-
-Check our [wiki](https://github.com/G4lile0/tinyGS/wiki)!
 
 # Project dependencies
 
@@ -96,16 +86,18 @@ This project relies on several third party libraries:
 - FailSafeMode
 - TinyGS 
 
-# TinyGS team
-The main TinyGS developer team is:
-- [4m1g0] (https://github.com/4m1g0)
-- [G4lile0] (https://github.com/G4lile0)
-- [gmag11] (https://github.com/gmag11)
-
 # Sophyai.space Team
 - [Roberto Iu2IOL](https://github.com/virtualrobotix)
 - [Iw2LSI](https://github.com/iw2lsi)
 - [KanyonKris](https://github.com/KanyonKris)
+
+
+# TinyGS team
+Thanks to TinyGS developer team for the work done on TinyGS client . Our first revision of client was a fork of tinyGS work:
+- [4m1g0] (https://github.com/4m1g0)
+- [G4lile0] (https://github.com/G4lile0)
+- [gmag11] (https://github.com/gmag11)
+
 
 # Discord community of Sophyai.space project 
 Join us at our Discord channel this is the link : https://discord.gg/ZvaRrRuTFC we need arduino developer , and Radio Ham with regular licence for try the connection (RTX) with satellite in our network , and user for recive the radio packet from lora satellite around the globe.
