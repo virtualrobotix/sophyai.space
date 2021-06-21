@@ -48,7 +48,7 @@ Check our wiki [configuration page](https://github.com/virtualrobotix/sophyai.sp
 # Main data website sophyai.space
 All data recived in realtime are share in our alfa version of DashBoard 
 
-[http://sophyai.space:1880/worldmap/](http://sophyai.space:1880/mui/)
+[http://sophyai.space:1880/mui/](http://sophyai.space:1880/mui/)
 
 # OTA update and Auto Tuning
 
